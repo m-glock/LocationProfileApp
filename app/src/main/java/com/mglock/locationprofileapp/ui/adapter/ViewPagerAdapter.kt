@@ -19,9 +19,9 @@ class ViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
 
     override fun createFragment(position: Int): Fragment {
         when (position) {
-            0 -> return ProfilesFragment()
-            1 -> return PlacesFragment()
+            0 -> return ActionsFragment()
+            1 -> return ProfilesFragment()
         }
-        return ActionsFragment()
+        return PlacesFragment()
     }
 }
