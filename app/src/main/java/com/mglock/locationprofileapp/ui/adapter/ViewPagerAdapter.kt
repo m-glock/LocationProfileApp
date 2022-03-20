@@ -1,4 +1,4 @@
-package com.mglock.locationprofileapp
+package com.mglock.locationprofileapp.ui.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

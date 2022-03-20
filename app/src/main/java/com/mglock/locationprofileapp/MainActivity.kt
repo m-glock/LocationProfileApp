@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.tabs.TabLayoutMediator
 import com.mglock.locationprofileapp.databinding.ActivityMainBinding
+import com.mglock.locationprofileapp.ui.adapter.ViewPagerAdapter
 
 class MainActivity : AppCompatActivity() {
 
