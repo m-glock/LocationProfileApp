@@ -8,5 +8,6 @@ import androidx.room.PrimaryKey
 data class SubAction(
     @PrimaryKey(autoGenerate = true) val uid: Long,
     val name: String,
+    val value: String, //TODO handle conversion
     @ColumnInfo(name="action_group_id") val actionGroupId: Long
 )
