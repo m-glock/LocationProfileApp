@@ -13,8 +13,8 @@ import com.mglock.locationprofileapp.database.entities.*
     ActionGroup::class,
     Place::class,
     Profile::class,
-    ProfileAction::class,
-    SubAction::class,
+    ProfileDetailAction::class,
+    DetailAction::class,
     Timeframe::class,
     TimeframeWeekday::class
 ], version = 1)
@@ -23,8 +23,8 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun actionGroupDao(): ActionGroupDao
     abstract fun placeDao(): PlaceDao
     abstract fun profileDao(): ProfileDao
-    abstract fun profileActionDao(): ProfileActionDao
-    abstract fun subActionDao(): SubActionDao
+    abstract fun profileDetailActionDao(): ProfileDetailActionDao
+    abstract fun detailActionDao(): DetailActionDao
     abstract fun timeframeDao(): TimeframeDao
     abstract fun timeframeWeekdayDao(): TimeframeWeekdayDao
 
@@ -48,7 +48,7 @@ abstract class AppDatabase : RoomDatabase() {
                         // insert the data on the IO Thread
                         ioThread {
                             getInstance(context).actionGroupDao().insertAll(*PREPOPULATE_ACTION_GROUP)
-                            getInstance(context).subActionDao().insertAll(*PREPOPULATE_SUB_ACTIONS)
+                            getInstance(context).detailActionDao().insertAll(*PREPOPULATE_DETAIL_ACTIONS)
                         }
                     }
                 })
@@ -65,10 +65,10 @@ abstract class AppDatabase : RoomDatabase() {
             ActionGroup(0, "Bluetooth", false)
         )
         //TODO figure out the important ones
-        private val PREPOPULATE_SUB_ACTIONS = arrayOf(
-            SubAction(0, "Volume on/off", 2),
-            SubAction(0, "Change Ringtone", 2),
-            SubAction(0, "Change Notification Tone", 2)
+        private val PREPOPULATE_DETAIL_ACTIONS = arrayOf(
+            DetailAction(0, "Volume on/off", 2),
+            DetailAction(0, "Change Ringtone", 2),
+            DetailAction(0, "Change Notification Tone", 2)
         )
     }
 }
