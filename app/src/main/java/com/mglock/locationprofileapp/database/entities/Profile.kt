@@ -1,10 +1,9 @@
-package com.mglock.databasetest.entities
+package com.mglock.locationprofileapp.database.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import java.sql.Blob
 
 @Entity(indices = [Index(value= ["name", "icon"], unique = true)])
 data class Profile(

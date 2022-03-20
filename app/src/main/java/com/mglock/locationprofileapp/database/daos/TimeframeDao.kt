@@ -1,10 +1,10 @@
-package com.mglock.databasetest.daos
+package com.mglock.locationprofileapp.database.daos
 
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import com.mglock.databasetest.entities.Timeframe
+import com.mglock.locationprofileapp.database.entities.Timeframe
 
 @Dao
 interface TimeframeDao {

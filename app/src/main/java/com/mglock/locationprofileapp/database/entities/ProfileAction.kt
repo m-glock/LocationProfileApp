@@ -1,4 +1,4 @@
-package com.mglock.databasetest.entities
+package com.mglock.locationprofileapp.database.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
