@@ -8,5 +8,5 @@ import androidx.room.PrimaryKey
 data class ActionGroup(
     @PrimaryKey(autoGenerate = true) val uid: Long,
     val title: String,
-    val active: Boolean
+    var active: Boolean
 )

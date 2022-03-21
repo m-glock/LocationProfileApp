@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import com.mglock.locationprofileapp.database.entities.ActionGroup
 
 @Dao
@@ -20,8 +21,8 @@ interface ActionGroupDao {
     @Query("SELECT * FROM action_group WHERE active LIKE 1")
     suspend fun getActive(): List<ActionGroup>
 
-    @Query("UPDATE action_group SET active = (:active) WHERE title LIKE (:title)")
-    suspend fun update(active: Boolean, title: String)
+    @Update
+    suspend fun update(actionGroup: ActionGroup)
 
     @Insert
     fun insertAll(vararg actionGroups: ActionGroup)

@@ -36,6 +36,14 @@ class ActionsFragment : Fragment() {
         return binding.root
     }
 
+    // called when the user switches to another tab
+    // update the database
+    override fun onPause() {
+        super.onPause()
+        mViewModel.updateActionGroup()
+    }
+
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

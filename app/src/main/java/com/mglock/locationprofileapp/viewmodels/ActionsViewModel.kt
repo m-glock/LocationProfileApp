@@ -24,4 +24,17 @@ class ActionsViewModel(app: Application): AndroidViewModel(app) {
             }
         }
     }
+
+    fun updateActionGroup(){
+        viewModelScope.launch {
+            try{
+                val db = AppDatabase.getInstance(getApplication())
+                _actionGroups.value?.forEach { actionGroup ->
+                    db.actionGroupDao().update(actionGroup)
+                }
+            } catch(e: Exception){
+                Log.e("Error", e.stackTraceToString())
+            }
+        }
+    }
 }

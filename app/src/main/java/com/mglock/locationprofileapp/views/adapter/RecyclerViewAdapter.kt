@@ -7,7 +7,6 @@ import android.widget.TextView
 import androidx.appcompat.widget.SwitchCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.mglock.locationprofileapp.R
-import com.mglock.locationprofileapp.database.AppDatabase
 import com.mglock.locationprofileapp.database.entities.ActionGroup
 
 class RecyclerViewAdapter(private val dataSet: List<ActionGroup>) :
@@ -16,14 +15,23 @@ class RecyclerViewAdapter(private val dataSet: List<ActionGroup>) :
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val textView: TextView = view.findViewById(R.id.textView)
         val switch: SwitchCompat = view.findViewById(R.id.actionSwitch)
+        var actionGroup: ActionGroup? = null
+
+        fun setValues(){
+            if(actionGroup != null){
+                textView.text = actionGroup!!.title
+                switch.isChecked = actionGroup!!.active
+            }
+        }
 
         init {
             // Define click listener for the ViewHolder's View.
-            switch.setOnCheckedChangeListener { compoundButton, isChecked ->
+            switch.setOnCheckedChangeListener { _, isChecked ->
                 if(isChecked){
-                    // TODO check for permissions and update database
+                    // TODO check for permissions
+                    actionGroup?.active = isChecked
                 } else {
-                    // TODO info and update database
+                    actionGroup?.active = isChecked
                 }
             }
         }
@@ -40,8 +48,8 @@ class RecyclerViewAdapter(private val dataSet: List<ActionGroup>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.textView.text = dataSet[position].title
-        holder.switch.isChecked = dataSet[position].active
+        holder.actionGroup = dataSet[position]
+        holder.setValues()
     }
 
     override fun getItemCount() = dataSet.size
