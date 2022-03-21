@@ -32,7 +32,7 @@ abstract class AppDatabase : RoomDatabase() {
     companion object {
         // For Singleton instantiation
         @Volatile private var INSTANCE: AppDatabase? = null
-        private const val DATABASE_NAME = "database_name"
+        private const val DATABASE_NAME = "database.db"
 
         fun getInstance(context: Context): AppDatabase =
             INSTANCE ?: synchronized(this) {
@@ -41,7 +41,7 @@ abstract class AppDatabase : RoomDatabase() {
 
         private fun buildDatabase(context: Context) =
             Room.databaseBuilder(context.applicationContext,
-                AppDatabase::class.java, "Example.db")
+                AppDatabase::class.java, DATABASE_NAME)
                 // prepopulate the database after onCreate was called
                 .addCallback(object : Callback() {
                     override fun onCreate(db: SupportSQLiteDatabase) {
