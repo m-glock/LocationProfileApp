@@ -18,6 +18,6 @@
     <color name="tabBackground">#F6EDD1</color>
 
     <!-- other -->
-    <color name="screenBackground">#FCFBF5</color>
+    <color name="screenBackground">#FAF9F9</color>
     <color name="error">#D65636</color>
 </resources>

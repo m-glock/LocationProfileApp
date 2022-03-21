@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.mglock.locationprofileapp.R
+import com.mglock.locationprofileapp.database.AppDatabase
+import com.mglock.locationprofileapp.databinding.FragmentActionsBinding
+import com.mglock.locationprofileapp.ui.adapter.RecyclerViewAdapter
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,6 +23,9 @@ class ActionsFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private var _binding: FragmentActionsBinding? = null
+    private val binding get(): FragmentActionsBinding = _binding!!
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,9 +38,22 @@ class ActionsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_actions, container, false)
+        _binding = FragmentActionsBinding.inflate(inflater, container, false)
+        val view = binding.root
+
+        val recyclerView = _binding!!.recyclerview
+        //TODO coroutine for DB access
+        val database = AppDatabase.getInstance(requireContext())
+        val actions = database.actionGroupDao().getAll()
+        recyclerView.adapter = RecyclerViewAdapter(actions)
+        return view
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     companion object {

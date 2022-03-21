@@ -10,4 +10,9 @@
         <item name="android:backgroundTint">?attr/colorPrimary</item>
         <item name="android:textColor">@color/textColorLight</item>
     </style>
+
+    <!-- switches -->
+    <style name="SwitchStyle" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated">@color/teal</item>
+    </style>
 </resources>
