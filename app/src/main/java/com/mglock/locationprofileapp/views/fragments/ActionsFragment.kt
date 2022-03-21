@@ -26,7 +26,6 @@ class ActionsFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         _binding = FragmentActionsBinding.inflate(inflater, container, false)
-        val view = binding.root
 
         // set the adapter for the recyclerview to display the list items
         val recyclerView = _binding!!.recyclerview
@@ -34,7 +33,7 @@ class ActionsFragment : Fragment() {
             recyclerView.adapter = RecyclerViewAdapter(actionGroups)
         }
 
-        return view
+        return binding.root
     }
 
     override fun onDestroyView() {
