@@ -20,17 +20,10 @@ class RecyclerViewAdapter(private val dataSet: List<ActionGroup>) :
         init {
             // Define click listener for the ViewHolder's View.
             switch.setOnCheckedChangeListener { compoundButton, isChecked ->
-                //TODO coroutines for DB access
                 if(isChecked){
-                    // TODO check for permissions
-                    val db = AppDatabase.getInstance(view.context)
-                    //val actionGroup = db.actionGroupDao().getByTitle(textView.text.toString())
-                    db.actionGroupDao().update(isChecked, textView.text.toString())
+                    // TODO check for permissions and update database
                 } else {
-                    // TODO nfo
-                    val db = AppDatabase.getInstance(view.context)
-                    //val actionGroup = db.actionGroupDao().getByTitle(textView.text.toString())
-                    db.actionGroupDao().update(isChecked, textView.text.toString())
+                    // TODO info and update database
                 }
             }
         }

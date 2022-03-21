@@ -1,10 +1,13 @@
 package com.mglock.locationprofileapp.viewmodels
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.mglock.locationprofileapp.database.AppDatabase
 import com.mglock.locationprofileapp.database.entities.ActionGroup
+import kotlinx.coroutines.launch
 
 class ActionsViewModel(app: Application): AndroidViewModel(app) {
 
@@ -12,7 +15,13 @@ class ActionsViewModel(app: Application): AndroidViewModel(app) {
     val actionGroups get() = _actionGroups
 
     init {
-        val db = AppDatabase.getInstance(getApplication())
-        _actionGroups.value = db.actionGroupDao().getAll()
+        viewModelScope.launch {
+            try{
+                val db = AppDatabase.getInstance(getApplication())
+                _actionGroups.value = db.actionGroupDao().getAll()
+            } catch(e: Exception){
+                Log.e("Error", e.stackTraceToString())
+            }
+        }
     }
 }
