@@ -1,4 +1,4 @@
-package com.mglock.locationprofileapp.ui.fragments
+package com.mglock.locationprofileapp.views.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.mglock.locationprofileapp.database.AppDatabase
 import com.mglock.locationprofileapp.databinding.FragmentActionsBinding
-import com.mglock.locationprofileapp.ui.adapter.RecyclerViewAdapter
+import com.mglock.locationprofileapp.views.adapter.RecyclerViewAdapter
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

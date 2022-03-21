@@ -1,12 +1,12 @@
-package com.mglock.locationprofileapp.ui.adapter
+package com.mglock.locationprofileapp.views.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.mglock.locationprofileapp.ui.fragments.ActionsFragment
-import com.mglock.locationprofileapp.ui.fragments.PlacesFragment
-import com.mglock.locationprofileapp.ui.fragments.ProfilesFragment
+import com.mglock.locationprofileapp.views.fragments.ActionsFragment
+import com.mglock.locationprofileapp.views.fragments.PlacesFragment
+import com.mglock.locationprofileapp.views.fragments.ProfilesFragment
 
 private const val NUM_TABS = 3
 

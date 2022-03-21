@@ -1,4 +1,4 @@
-package com.mglock.locationprofileapp.ui.adapter
+package com.mglock.locationprofileapp.views.adapter
 
 import android.view.LayoutInflater
 import android.view.View
