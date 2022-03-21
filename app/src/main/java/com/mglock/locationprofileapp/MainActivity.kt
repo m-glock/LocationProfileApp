@@ -22,13 +22,8 @@ class MainActivity : AppCompatActivity() {
         val adapter = ViewPagerAdapter(supportFragmentManager, lifecycle)
         viewPager.adapter = adapter
 
-        val tabTitles = arrayOf(
-            getString(R.string.tab_title_actions),
-            getString(R.string.tab_title_profiles),
-            getString(R.string.tab_title_places)
-        )
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-            tab.text = tabTitles[position]
+            tab.text = Constants.tabTitles[position]
         }.attach()
         viewPager.currentItem = 1
     }

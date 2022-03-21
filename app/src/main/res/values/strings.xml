@@ -1,10 +1,6 @@
 <resources>
     <string name="app_name">LocationProfileApp</string>
 
-    // Tab Titles
-    <string name="tab_title_actions">Actions</string>
-    <string name="tab_title_profiles">Profiles</string>
-    <string name="tab_title_places">Places</string>
     <string name="info_button_content_description">Info button</string>
     <string name="placeholder_string">Placeholder</string>
 </resources>

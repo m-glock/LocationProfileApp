@@ -6,6 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.mglock.locationprofileapp.Constants
 import com.mglock.locationprofileapp.database.daos.*
 import com.mglock.locationprofileapp.database.entities.*
 
@@ -54,16 +55,10 @@ abstract class AppDatabase : RoomDatabase() {
                 })
                 .build()
 
-        //TODO
-        private val PREPOPULATE_ACTION_GROUP = arrayOf(
-            ActionGroup(0, "Wi-Fi", false),
-            ActionGroup(0, "Volume", false),
-            ActionGroup(0, "Mobile Data", false),
-            ActionGroup(0, "Screen Brightness", false),
-            ActionGroup(0, "Notifications", false),
-            ActionGroup(0, "Location", false),
-            ActionGroup(0, "Bluetooth", false)
-        )
+        private val PREPOPULATE_ACTION_GROUP = Array(Constants.ActionGroupTitles.values().size){ position ->
+            ActionGroup(0, Constants.ActionGroupTitles.values()[position].title, false)
+        }
+
         //TODO figure out the important ones
         private val PREPOPULATE_DETAIL_ACTIONS = arrayOf(
             DetailAction(0, "Volume on/off", 2),
