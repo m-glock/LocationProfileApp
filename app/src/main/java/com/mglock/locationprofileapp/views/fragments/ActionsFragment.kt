@@ -46,6 +46,7 @@ class ActionsFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        mViewModel.updateActionGroup()
         _binding = null
     }
 }
