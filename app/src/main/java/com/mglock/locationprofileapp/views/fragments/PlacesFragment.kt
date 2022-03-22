@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import com.mglock.locationprofileapp.database.entities.Place
 import com.mglock.locationprofileapp.databinding.FragmentPlacesBinding
 import com.mglock.locationprofileapp.viewmodels.PlacesViewModel
+import com.mglock.locationprofileapp.views.adapter.RecyclerViewPlacesAdapter
 
 class PlacesFragment : Fragment() {
 
@@ -26,6 +28,16 @@ class PlacesFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         _binding = FragmentPlacesBinding.inflate(inflater, container, false)
+
+        // set the adapter for the recyclerview to display the list items
+        val recyclerView = _binding!!.recyclerViewPlaces
+        val places = listOf(
+            Place(0, "Zuhause", "Trojanstr. 2, 12437 Berlin", "324567", "76543", 5),
+            Place(0, "Uni", "Wilhelminenhofstraße 75A, 12459 Berlin", "324567", "76543", 5),
+            Place(0, "Arbeit", "Köpenicker Str. 9, 10997 Berlin", "324567", "76543", 5),
+        )
+        recyclerView.adapter = RecyclerViewPlacesAdapter(places)
+
         return binding.root
     }
 
