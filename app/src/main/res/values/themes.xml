@@ -24,5 +24,6 @@
 
         <!-- buttons -->
         <item name="android:buttonStyle">@style/ButtonStyle</item>
+        <item name="floatingActionButtonStyle">@style/FloatingActionButtonStyle</item>
     </style>
 </resources>

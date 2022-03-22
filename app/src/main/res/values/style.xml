@@ -11,6 +11,11 @@
         <item name="android:textColor">@color/textColorLight</item>
     </style>
 
+    <style name="FloatingActionButtonStyle" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="backgroundTint">?attr/colorPrimaryDark</item>
+        <item name="tint">?attr/colorOnPrimary</item>
+    </style>
+
     <!-- switches -->
     <style name="SwitchStyle" parent="Theme.AppCompat.Light">
         <item name="colorControlActivated">@color/teal</item>

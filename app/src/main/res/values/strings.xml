@@ -3,4 +3,6 @@
 
     <string name="info_button_content_description">Info button</string>
     <string name="placeholder_string">Placeholder</string>
+    <string name="add_place_content_description">Add a new place</string>
+    <string name="add_profile_content_description">Add a new profile</string>
 </resources>
