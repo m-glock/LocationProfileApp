@@ -5,4 +5,7 @@
     <string name="placeholder_string">Placeholder</string>
     <string name="add_place_content_description">Add a new place</string>
     <string name="add_profile_content_description">Add a new profile</string>
+    <string name="currently_active_profile_content_description">Mark currently active profile</string>
+    <string name="profile_details_button_content_description">Expand detail info about Profile</string>
+    <string name="activate_profile_label">Active</string>
 </resources>
