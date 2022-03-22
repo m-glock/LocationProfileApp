@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mglock.locationprofileapp.R
 import com.mglock.locationprofileapp.database.entities.ActionGroup
 
-class RecyclerViewAdapter(private val dataSet: List<ActionGroup>) :
-    RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
+class RecyclerViewActionsAdapter(private val dataSet: List<ActionGroup>) :
+    RecyclerView.Adapter<RecyclerViewActionsAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val textView: TextView = view.findViewById(R.id.textView)
