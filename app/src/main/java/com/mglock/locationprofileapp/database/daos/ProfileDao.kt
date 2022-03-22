@@ -6,7 +6,7 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Transaction
 import com.mglock.locationprofileapp.database.entities.Profile
-import com.mglock.locationprofileapp.database.entities.ProfileWithRelations
+import com.mglock.locationprofileapp.database.entities.relations.ProfileWithRelations
 
 @Dao
 interface ProfileDao {

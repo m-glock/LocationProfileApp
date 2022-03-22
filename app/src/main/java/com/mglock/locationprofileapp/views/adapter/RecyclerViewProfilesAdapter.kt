@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.mglock.locationprofileapp.R
-import com.mglock.locationprofileapp.database.entities.ProfileWithRelations
+import com.mglock.locationprofileapp.database.entities.relations.ProfileWithRelations
 import com.mglock.locationprofileapp.databinding.ListTileProfilesBinding
 
 class RecyclerViewProfilesAdapter(private val dataSet: List<ProfileWithRelations>) :

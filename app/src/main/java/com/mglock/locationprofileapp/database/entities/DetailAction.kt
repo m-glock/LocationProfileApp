@@ -6,7 +6,12 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "detail_action")
 data class DetailAction(
-    @PrimaryKey(autoGenerate = true) val uid: Long,
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name="detail_action_uid")
+    val detailActionUID: Long,
+
     val name: String,
-    @ColumnInfo(name="action_group_id") val actionGroupId: Long
+
+    @ColumnInfo(name="action_group_id")
+    val actionGroupId: Long
 )
