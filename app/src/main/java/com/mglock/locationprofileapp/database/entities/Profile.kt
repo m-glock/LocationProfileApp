@@ -7,9 +7,17 @@ import androidx.room.PrimaryKey
 
 @Entity(indices = [Index(value= ["title"], unique = true)])
 data class Profile(
-    @PrimaryKey(autoGenerate = true) val uid: Long,
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "profile_uid")
+    val profileUID: Long,
+
     val title: String,
-    @ColumnInfo(name="place_id") val placeId: Long,
-    @ColumnInfo(name="timeframe_id") val timeframeId: Long,
+
+    @ColumnInfo(name="place_id")
+    val placeId: Long?,
+
+    @ColumnInfo(name="timeframe_id")
+    val timeframeId: Long?,
+
     var active: Boolean
 )

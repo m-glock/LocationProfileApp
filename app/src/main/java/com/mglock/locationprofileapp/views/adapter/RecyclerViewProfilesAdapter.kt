@@ -7,10 +7,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.mglock.locationprofileapp.R
-import com.mglock.locationprofileapp.database.entities.Profile
+import com.mglock.locationprofileapp.database.entities.ProfileWithRelations
 import com.mglock.locationprofileapp.databinding.ListTileProfilesBinding
 
-class RecyclerViewProfilesAdapter(private val dataSet: List<Profile>) :
+class RecyclerViewProfilesAdapter(private val dataSet: List<ProfileWithRelations>) :
     RecyclerView.Adapter<RecyclerViewProfilesAdapter.ViewHolder>() {
 
     class ViewHolder(itemBinding: ListTileProfilesBinding) : RecyclerView.ViewHolder(itemBinding.root) {
@@ -20,13 +20,13 @@ class RecyclerViewProfilesAdapter(private val dataSet: List<Profile>) :
         private var profilePlaceText: TextView = itemBinding.profilePlaceText
         private var profileActionText: TextView = itemBinding.profileActionText
 
-        lateinit var profile: Profile
+        lateinit var profileWithRelations: ProfileWithRelations
 
         fun setValues(){
-            activeProfileCheck.visibility = if(profile.active) View.VISIBLE else View.INVISIBLE
-            profileTitle.text = profile.title
+            activeProfileCheck.visibility = if(profileWithRelations.profile.active) View.VISIBLE else View.INVISIBLE
+            profileTitle.text = profileWithRelations.profile.title
             profileTimeText.text = "-" // TODO profile.timeframe
-            profilePlaceText.text = "Home" // TODO profile.place
+            profilePlaceText.text = profileWithRelations.place?.title ?: "-"
             profileActionText.text = "Bluetooth on, Volume 7/11" // TODO profile.actions
         }
 
@@ -53,7 +53,7 @@ class RecyclerViewProfilesAdapter(private val dataSet: List<Profile>) :
                     } else {
                         "Activate"
                     }
-                profile.active = !profile.active //TODO update in RecyclerView
+                profileWithRelations.profile.active = !profileWithRelations.profile.active //TODO update in RecyclerView
             }
 
             itemBinding.editProfileButton.setOnClickListener {
@@ -76,7 +76,7 @@ class RecyclerViewProfilesAdapter(private val dataSet: List<Profile>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.profile = dataSet[position]
+        holder.profileWithRelations = dataSet[position]
         holder.setValues()
     }
 

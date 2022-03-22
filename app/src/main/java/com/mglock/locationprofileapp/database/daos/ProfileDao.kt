@@ -4,14 +4,20 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Transaction
 import com.mglock.locationprofileapp.database.entities.Profile
+import com.mglock.locationprofileapp.database.entities.ProfileWithRelations
 
 @Dao
 interface ProfileDao {
     @Query("SELECT * FROM profile")
     fun getAll(): List<Profile>
 
-    @Query("SELECT * FROM profile WHERE uid IN (:profileIds)")
+    @Transaction
+    @Query("SELECT * FROM profile")
+    suspend fun getAllWithRelations(): List<ProfileWithRelations>
+
+    @Query("SELECT * FROM profile WHERE profile_uid IN (:profileIds)")
     fun getByIds(profileIds: IntArray): List<Profile>
 
     @Query("SELECT * FROM profile WHERE title LIKE (:title)")
