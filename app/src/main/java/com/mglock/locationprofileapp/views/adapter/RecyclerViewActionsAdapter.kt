@@ -1,20 +1,19 @@
 package com.mglock.locationprofileapp.views.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.widget.SwitchCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.mglock.locationprofileapp.R
 import com.mglock.locationprofileapp.database.entities.ActionGroup
+import com.mglock.locationprofileapp.databinding.ListTileActionsBinding
 
 class RecyclerViewActionsAdapter(private val dataSet: List<ActionGroup>) :
     RecyclerView.Adapter<RecyclerViewActionsAdapter.ViewHolder>() {
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val textView: TextView = view.findViewById(R.id.textView)
-        val switch: SwitchCompat = view.findViewById(R.id.actionSwitch)
+    class ViewHolder(itemBinding: ListTileActionsBinding) : RecyclerView.ViewHolder(itemBinding.root) {
+        val textView: TextView = itemBinding.textView
+        val switch: SwitchCompat = itemBinding.actionSwitch
         var actionGroup: ActionGroup? = null
 
         fun setValues(){
@@ -41,10 +40,9 @@ class RecyclerViewActionsAdapter(private val dataSet: List<ActionGroup>) :
         parent: ViewGroup,
         viewType: Int
     ): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.list_tile_actions, parent, false)
+        val itemBinding = ListTileActionsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
-        return ViewHolder(view)
+        return ViewHolder(itemBinding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

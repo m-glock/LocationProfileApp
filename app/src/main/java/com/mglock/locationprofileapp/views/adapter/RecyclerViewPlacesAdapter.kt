@@ -1,19 +1,18 @@
 package com.mglock.locationprofileapp.views.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.mglock.locationprofileapp.R
 import com.mglock.locationprofileapp.database.entities.Place
+import com.mglock.locationprofileapp.databinding.ListTilePlacesBinding
 
 class RecyclerViewPlacesAdapter(private val dataSet: List<Place>) :
     RecyclerView.Adapter<RecyclerViewPlacesAdapter.ViewHolder>() {
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val placeTitle: TextView = view.findViewById(R.id.placeTitle)
-        val placeAddress: TextView = view.findViewById(R.id.placeAddress)
+    class ViewHolder(itemBinding: ListTilePlacesBinding) : RecyclerView.ViewHolder(itemBinding.root) {
+        private val placeTitle: TextView = itemBinding.placeTitle
+        private val placeAddress: TextView = itemBinding.placeAddress
         var place: Place? = null
 
         fun setValues(){
@@ -32,10 +31,9 @@ class RecyclerViewPlacesAdapter(private val dataSet: List<Place>) :
         parent: ViewGroup,
         viewType: Int
     ): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.list_tile_places, parent, false)
+        val itemBinding = ListTilePlacesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
-        return ViewHolder(view)
+        return ViewHolder(itemBinding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
