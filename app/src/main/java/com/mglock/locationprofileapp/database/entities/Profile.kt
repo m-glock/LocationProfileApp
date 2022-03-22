@@ -5,12 +5,11 @@ import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
 
-@Entity(indices = [Index(value= ["name", "icon"], unique = true)])
+@Entity(indices = [Index(value= ["title"], unique = true)])
 data class Profile(
     @PrimaryKey(autoGenerate = true) val uid: Long,
-    val name: String,
+    val title: String,
     @ColumnInfo(name="place_id") val placeId: Long,
     @ColumnInfo(name="timeframe_id") val timeframeId: Long,
-    val active: Boolean,
-    val icon: String, //TODO
+    val active: Boolean
 )

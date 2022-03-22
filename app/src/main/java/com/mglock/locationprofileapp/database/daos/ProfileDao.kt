@@ -14,8 +14,8 @@ interface ProfileDao {
     @Query("SELECT * FROM profile WHERE uid IN (:profileIds)")
     fun getByIds(profileIds: IntArray): List<Profile>
 
-    @Query("SELECT * FROM profile WHERE name LIKE (:name)")
-    fun getByTitle(name: String): List<Profile>
+    @Query("SELECT * FROM profile WHERE title LIKE (:title)")
+    fun getByTitle(title: String): List<Profile>
 
     @Insert
     fun insertAll(vararg profiles: Profile)
