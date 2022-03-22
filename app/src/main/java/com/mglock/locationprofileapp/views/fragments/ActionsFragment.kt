@@ -28,7 +28,7 @@ class ActionsFragment : Fragment() {
         _binding = FragmentActionsBinding.inflate(inflater, container, false)
 
         // set the adapter for the recyclerview to display the list items
-        val recyclerView = _binding!!.recyclerview
+        val recyclerView = _binding!!.recyclerViewActions
         mViewModel.actionGroups.observe(viewLifecycleOwner) { actionGroups ->
             recyclerView.adapter = RecyclerViewAdapter(actionGroups)
         }
