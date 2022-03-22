@@ -1,11 +1,26 @@
 <resources>
     <string name="app_name">LocationProfileApp</string>
 
+    <!-- Actions Tab -->
     <string name="info_button_content_description">Info button</string>
-    <string name="placeholder_string">Placeholder</string>
-    <string name="add_place_content_description">Add a new place</string>
+
+
+    <!-- Profiles Tab -->
     <string name="add_profile_content_description">Add a new profile</string>
     <string name="currently_active_profile_content_description">Mark currently active profile</string>
     <string name="profile_details_button_content_description">Expand detail info about Profile</string>
-    <string name="activate_profile_label">Active</string>
+    <string name="activate_profile_label">Activate</string>
+    <string name="profile_time_label">Time</string>
+    <string name="profile_place_label">Place</string>
+    <string name="profile_action_label">Action</string>
+    <string name="deactivate_profile_button_text">Deactivate</string>
+    <string name="activate_profile_button_text">Activate</string>
+
+    <!-- Places Tab -->
+    <string name="add_place_content_description">Add a new place</string>
+
+    <!-- other -->
+    <string name="placeholder_string">Placeholder</string>
+    <string name="edit_button_text">Edit</string>
+    <string name="delete_button_text">Delete</string>
 </resources>
