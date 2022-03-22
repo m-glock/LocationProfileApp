@@ -9,17 +9,17 @@ import com.mglock.locationprofileapp.database.entities.Place
 @Dao
 interface PlaceDao {
     @Query("SELECT * FROM place")
-    fun getAll(): List<Place>
+    suspend fun getAll(): List<Place>
 
     @Query("SELECT * FROM place WHERE uid IN (:placeIds)")
-    fun getByIds(placeIds: IntArray): List<Place>
+    suspend fun getByIds(placeIds: IntArray): List<Place>
 
     @Query("SELECT * FROM place WHERE title LIKE (:title)")
-    fun getByTitle(title: String): List<Place>
+    suspend fun getByTitle(title: String): List<Place>
 
     @Insert
-    fun insertAll(vararg places: Place)
+    suspend fun insertAll(vararg places: Place)
 
     @Delete
-    fun delete(place: Place)
+    suspend fun delete(place: Place)
 }

@@ -31,12 +31,9 @@ class PlacesFragment : Fragment() {
 
         // set the adapter for the recyclerview to display the list items
         val recyclerView = _binding!!.recyclerViewPlaces
-        val places = listOf(
-            Place(0, "Zuhause", "Trojanstr. 2, 12437 Berlin", "324567", "76543", 5),
-            Place(0, "Uni", "Wilhelminenhofstraße 75A, 12459 Berlin", "324567", "76543", 5),
-            Place(0, "Arbeit", "Köpenicker Str. 9, 10997 Berlin", "324567", "76543", 5),
-        )
-        recyclerView.adapter = RecyclerViewPlacesAdapter(places)
+        mViewModel.places.observe(viewLifecycleOwner){ places ->
+            recyclerView.adapter = RecyclerViewPlacesAdapter(places)
+        }
 
         return binding.root
     }
