@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import com.mglock.locationprofileapp.database.entities.Place
 import com.mglock.locationprofileapp.databinding.FragmentPlacesBinding
 import com.mglock.locationprofileapp.viewmodels.PlacesViewModel
 import com.mglock.locationprofileapp.views.adapter.RecyclerViewPlacesAdapter
@@ -32,7 +31,7 @@ class PlacesFragment : Fragment() {
         // set the adapter for the recyclerview to display the list items
         val recyclerView = _binding!!.recyclerViewPlaces
         mViewModel.places.observe(viewLifecycleOwner){ places ->
-            recyclerView.adapter = RecyclerViewPlacesAdapter(places)
+            recyclerView.adapter = RecyclerViewPlacesAdapter(places, mViewModel)
         }
 
         return binding.root

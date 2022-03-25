@@ -34,8 +34,18 @@ class PlacesViewModel(app: Application): AndroidViewModel(app) {
         viewModelScope.launch {
             try{
                 val db = AppDatabase.getInstance(getApplication())
-                _places.value?.remove(place)
-                //db.placeDao().delete(place)
+                db.placeDao().delete(place)
+            } catch(e: Exception){
+                Log.e("Error", e.stackTraceToString())
+            }
+        }
+    }
+
+    fun updatePlace(place: Place){
+        viewModelScope.launch {
+            try{
+                val db = AppDatabase.getInstance(getApplication())
+                //TODO update place in DB
             } catch(e: Exception){
                 Log.e("Error", e.stackTraceToString())
             }

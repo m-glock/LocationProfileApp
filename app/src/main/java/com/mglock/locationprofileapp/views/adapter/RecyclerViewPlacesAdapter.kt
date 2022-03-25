@@ -6,11 +6,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.mglock.locationprofileapp.database.entities.Place
 import com.mglock.locationprofileapp.databinding.ListTilePlacesBinding
+import com.mglock.locationprofileapp.viewmodels.PlacesViewModel
 
-class RecyclerViewPlacesAdapter(private val dataSet: List<Place>) :
+class RecyclerViewPlacesAdapter(private val dataSet: MutableList<Place>, private val viewModel: PlacesViewModel) :
     RecyclerView.Adapter<RecyclerViewPlacesAdapter.ViewHolder>() {
 
-    class ViewHolder(itemBinding: ListTilePlacesBinding) : RecyclerView.ViewHolder(itemBinding.root) {
+    inner class ViewHolder(itemBinding: ListTilePlacesBinding) : RecyclerView.ViewHolder(itemBinding.root) {
         private val placeTitle: TextView = itemBinding.placeTitle
         private val placeAddress: TextView = itemBinding.placeAddress
         var place: Place? = null
@@ -23,7 +24,12 @@ class RecyclerViewPlacesAdapter(private val dataSet: List<Place>) :
         }
 
         init {
-            // Define click listener for the ViewHolder's View.
+            itemBinding.buttonDelete.setOnClickListener {
+                deleteItem(place!!)
+            }
+            itemBinding.buttonEdit.setOnClickListener {
+                editItem(place!!)
+            }
         }
     }
 
@@ -42,4 +48,19 @@ class RecyclerViewPlacesAdapter(private val dataSet: List<Place>) :
     }
 
     override fun getItemCount() = dataSet.size
+
+
+    fun deleteItem(place: Place){
+        val position = dataSet.indexOf(place)
+        dataSet.remove(place)
+        viewModel.deletePlace(place)
+        notifyItemRemoved(position)
+    }
+
+    fun editItem(place: Place){
+        val position = dataSet.indexOf(place)
+        // TODO edit item
+        viewModel.updatePlace(place)
+        notifyItemChanged(position)
+    }
 }
