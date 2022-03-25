@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="tab_fragment_padding">10dp</dimen>
+    <dimen name="fab_margin">10dp</dimen>
+    <dimen name="side_margin_tab_top_area">20dp</dimen>
+    <dimen name="text_size_title">18sp</dimen>
+    <dimen name="text_size_subtitle">12sp</dimen>
+    <dimen name="recycler_view_top_margin">60dp</dimen>
+    <dimen name="list_tile_margin">10dp</dimen>
+    <dimen name="list_tile_padding_vertical">5dp</dimen>
+    <dimen name="list_tile_padding_horizontal">20dp</dimen>
+    <dimen name="list_tile_height">60dp</dimen>
+    <dimen name="image_button_no_padding">0dp</dimen>
+    <dimen name="icon_margin">5dp</dimen>
+    <dimen name="text_icon_margin">10dp</dimen>
+</resources>

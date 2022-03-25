@@ -23,4 +23,5 @@
     <string name="placeholder_string">Placeholder</string>
     <string name="edit_button_text">Edit</string>
     <string name="delete_button_text">Delete</string>
+    <string name="activate_all_actions">Activate All</string>
 </resources>
