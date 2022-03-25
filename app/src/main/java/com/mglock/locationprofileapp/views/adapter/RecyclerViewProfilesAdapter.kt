@@ -4,68 +4,46 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.ImageButton
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.mglock.locationprofileapp.R
 import com.mglock.locationprofileapp.database.entities.relations.ProfileWithRelations
 import com.mglock.locationprofileapp.databinding.ListTileProfilesBinding
+import com.mglock.locationprofileapp.viewmodels.ProfilesViewModel
 
-class RecyclerViewProfilesAdapter(private val dataSet: List<ProfileWithRelations>) :
+class RecyclerViewProfilesAdapter(private val dataSet: MutableList<ProfileWithRelations>, private val viewModel: ProfilesViewModel) :
     RecyclerView.Adapter<RecyclerViewProfilesAdapter.ViewHolder>() {
 
     private var context: Context? = null
 
-    inner class ViewHolder(itemBinding: ListTileProfilesBinding) : RecyclerView.ViewHolder(itemBinding.root) {
-        private var activeProfileCheck: ImageView = itemBinding.activeProfileCheck
-        private var profileTitle: TextView = itemBinding.profileTitle
-        private var profileTimeText: TextView = itemBinding.profileTimeText
-        private var profilePlaceText: TextView = itemBinding.profilePlaceText
-        private var profileActionText: TextView = itemBinding.profileActionText
-
-        lateinit var profileWithRelations: ProfileWithRelations
+    inner class ViewHolder(val itemBinding: ListTileProfilesBinding) : RecyclerView.ViewHolder(itemBinding.root) {
+        lateinit var profile: ProfileWithRelations
 
         fun setValues(){
-            activeProfileCheck.visibility = if(profileWithRelations.profile.active) View.VISIBLE else View.INVISIBLE
-            profileTitle.text = profileWithRelations.profile.title
-            profileTimeText.text = "-" // TODO profile.timeframe
-            profilePlaceText.text = profileWithRelations.place?.title ?: "-"
-            profileActionText.text = "Bluetooth on, Volume 7/11" // TODO profile.actions
+            itemBinding.activeProfileCheck.visibility = if(profile.profile.active) View.VISIBLE else View.INVISIBLE
+            itemBinding.profileTitle.text = profile.profile.title
+            itemBinding.profileTimeText.text = "-" // TODO profile.timeframe
+            itemBinding.profilePlaceText.text = profile.place?.title ?: "-"
+            itemBinding.profileActionText.text = "Bluetooth on, Volume 7/11" // TODO profile.actions
+            itemBinding.activateProfileButton.text = if(profile.profile.active) "Deactivate" else "Activate"
         }
 
         init {
-            // Define click listener for the ViewHolder's View.
             itemBinding.buttonExpand.setOnClickListener {
-                val height: Int
-                val imageResource: Int
-                if(itemBinding.expandableLayout.layoutParams.height == ViewGroup.LayoutParams.WRAP_CONTENT){
-                    height = context!!.resources.getDimensionPixelSize(R.dimen.profile_expandable_zero_height)
-                    imageResource = R.drawable.ic_action_arrow_down
-                } else {
-                    height = ViewGroup.LayoutParams.WRAP_CONTENT
-                    imageResource = R.drawable.ic_action_arrow_up
-                }
-                itemBinding.expandableLayout.layoutParams.height = height
-                itemBinding.expandableLayout.requestLayout()
-                itemBinding.buttonExpand.setImageResource(imageResource)
+                expandDetailInfo(itemBinding.expandableLayout, itemBinding.buttonExpand)
             }
 
             itemBinding.activateProfileButton.setOnClickListener {
-                itemBinding.activateProfileButton.text =
-                    if(itemBinding.activateProfileButton.text == "Activate"){
-                        "Deactivate"
-                    } else {
-                        "Activate"
-                    }
-                profileWithRelations.profile.active = !profileWithRelations.profile.active //TODO update in RecyclerView
+                activateProfile(profile)
             }
 
             itemBinding.editProfileButton.setOnClickListener {
-                //TODO implement edit
+                editProfile(profile)
             }
 
             itemBinding.deleteProfileButton.setOnClickListener {
-                //TODO implement delete
+                deleteProfile(profile)
             }
         }
     }
@@ -81,9 +59,42 @@ class RecyclerViewProfilesAdapter(private val dataSet: List<ProfileWithRelations
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.profileWithRelations = dataSet[position]
+        holder.profile = dataSet[position]
         holder.setValues()
     }
 
     override fun getItemCount() = dataSet.size
+
+    fun expandDetailInfo(expandableLayout: ConstraintLayout, expandableButton: ImageButton){
+        if(expandableLayout.layoutParams.height == ViewGroup.LayoutParams.WRAP_CONTENT){
+            expandableLayout.layoutParams.height =
+                context!!.resources.getDimensionPixelSize(R.dimen.profile_expandable_zero_height)
+            expandableButton.setImageResource(R.drawable.ic_action_arrow_down)
+        } else {
+            expandableLayout.layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
+            expandableButton.setImageResource(R.drawable.ic_action_arrow_up)
+        }
+        expandableLayout.requestLayout()
+    }
+
+    fun activateProfile(profile: ProfileWithRelations){
+        profile.profile.active = !profile.profile.active
+        val position = dataSet.indexOf(profile)
+        viewModel.updateProfile(profile.profile)
+        notifyItemChanged(position)
+    }
+
+    fun editProfile(profile: ProfileWithRelations){
+        val position = dataSet.indexOf(profile)
+        // TODO edit item
+        viewModel.updateProfile(profile.profile)
+        notifyItemChanged(position)
+    }
+
+    fun deleteProfile(profile: ProfileWithRelations){
+        val position = dataSet.indexOf(profile)
+        dataSet.remove(profile)
+        viewModel.deleteProfile(profile.profile)
+        notifyItemRemoved(position)
+    }
 }

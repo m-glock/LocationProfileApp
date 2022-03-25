@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Transaction
+import androidx.room.Update
 import com.mglock.locationprofileapp.database.entities.Profile
 import com.mglock.locationprofileapp.database.entities.relations.ProfileWithRelations
 
@@ -28,6 +29,9 @@ interface ProfileDao {
 
     @Query("SELECT * FROM profile WHERE title LIKE (:title)")
     suspend fun getByTitleWithRelations(title: String): List<ProfileWithRelations>
+
+    @Update
+    fun update(profile: Profile)
 
     @Insert
     fun insertAll(vararg profiles: Profile)

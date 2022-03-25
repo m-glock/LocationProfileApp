@@ -31,7 +31,7 @@ class ProfilesFragment : Fragment() {
         // set the adapter for the recyclerview to display the list items
         val recyclerView = _binding!!.recyclerViewProfiles
         mViewModel.profiles.observe(viewLifecycleOwner){ profiles ->
-            recyclerView.adapter = RecyclerViewProfilesAdapter(profiles)
+            recyclerView.adapter = RecyclerViewProfilesAdapter(profiles, mViewModel)
         }
 
         return binding.root
