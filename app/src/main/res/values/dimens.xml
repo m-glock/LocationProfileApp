@@ -15,4 +15,8 @@
     <dimen name="text_icon_margin">10dp</dimen>
     <dimen name="profile_expandable_text_bottom_margin">20dp</dimen>
     <dimen name="profile_expandable_zero_height">0dp</dimen>
+    <dimen name="fragment_padding_horizontal">30dp</dimen>
+    <dimen name="fragment_padding_vertical">15dp</dimen>
+    <dimen name="input_margin_top">40dp</dimen>
+    <dimen name="add_place_input_width">200dp</dimen>
 </resources>

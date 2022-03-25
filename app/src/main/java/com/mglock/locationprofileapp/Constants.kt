@@ -8,5 +8,12 @@ class Constants {
             "Profiles",
             "Places"
         )
+
+        val automaticPlaceTime = arrayOf(
+            "1 hour",
+            "2 hours",
+            "4 hours",
+            "8 hours"
+        )
     }
 }

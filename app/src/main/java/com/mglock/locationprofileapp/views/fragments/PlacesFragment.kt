@@ -1,11 +1,13 @@
 package com.mglock.locationprofileapp.views.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import com.mglock.locationprofileapp.AddPlace
 import com.mglock.locationprofileapp.databinding.FragmentPlacesBinding
 import com.mglock.locationprofileapp.viewmodels.PlacesViewModel
 import com.mglock.locationprofileapp.views.adapter.RecyclerViewPlacesAdapter
@@ -32,6 +34,11 @@ class PlacesFragment : Fragment() {
         val recyclerView = _binding!!.recyclerViewPlaces
         mViewModel.places.observe(viewLifecycleOwner){ places ->
             recyclerView.adapter = RecyclerViewPlacesAdapter(places, mViewModel)
+        }
+
+        _binding!!.fabAddPlace.setOnClickListener { view ->
+            val intent = Intent(context, AddPlace::class.java)
+            startActivity(intent)
         }
 
         return binding.root
