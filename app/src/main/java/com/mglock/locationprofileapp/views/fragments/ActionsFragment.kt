@@ -11,6 +11,7 @@ import com.mglock.locationprofileapp.viewmodels.ActionsViewModel
 import com.mglock.locationprofileapp.views.adapter.RecyclerViewActionsAdapter
 
 class ActionsFragment : Fragment() {
+
     private var _binding: FragmentActionsBinding? = null
     private val binding get(): FragmentActionsBinding = _binding!!
     private lateinit var mViewModel: ActionsViewModel
@@ -30,23 +31,14 @@ class ActionsFragment : Fragment() {
         // set the adapter for the recyclerview to display the list items
         val recyclerView = _binding!!.recyclerViewActions
         mViewModel.actionGroups.observe(viewLifecycleOwner) { actionGroups ->
-            recyclerView.adapter = RecyclerViewActionsAdapter(actionGroups)
+            recyclerView.adapter = RecyclerViewActionsAdapter(actionGroups, mViewModel)
         }
 
         return binding.root
     }
 
-    // called when the user switches to another tab
-    // update the database
-    override fun onPause() {
-        super.onPause()
-        mViewModel.updateActionGroup()
-    }
-
-
     override fun onDestroyView() {
         super.onDestroyView()
-        mViewModel.updateActionGroup()
         _binding = null
     }
 }

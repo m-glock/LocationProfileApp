@@ -7,13 +7,14 @@ import androidx.appcompat.widget.SwitchCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.mglock.locationprofileapp.database.entities.ActionGroup
 import com.mglock.locationprofileapp.databinding.ListTileActionsBinding
+import com.mglock.locationprofileapp.viewmodels.ActionsViewModel
 
-class RecyclerViewActionsAdapter(private val dataSet: List<ActionGroup>) :
+class RecyclerViewActionsAdapter(private val dataSet: List<ActionGroup>, private val viewModel: ActionsViewModel) :
     RecyclerView.Adapter<RecyclerViewActionsAdapter.ViewHolder>() {
 
-    class ViewHolder(itemBinding: ListTileActionsBinding) : RecyclerView.ViewHolder(itemBinding.root) {
-        val textView: TextView = itemBinding.textView
-        val switch: SwitchCompat = itemBinding.actionSwitch
+    inner class ViewHolder(itemBinding: ListTileActionsBinding) : RecyclerView.ViewHolder(itemBinding.root) {
+        private val textView: TextView = itemBinding.textView
+        private val switch: SwitchCompat = itemBinding.actionSwitch
         var actionGroup: ActionGroup? = null
 
         fun setValues(){
@@ -24,14 +25,11 @@ class RecyclerViewActionsAdapter(private val dataSet: List<ActionGroup>) :
         }
 
         init {
-            // Define click listener for the ViewHolder's View.
             switch.setOnCheckedChangeListener { _, isChecked ->
                 if(isChecked){
                     // TODO check for permissions
-                    actionGroup?.active = isChecked
-                } else {
-                    actionGroup?.active = isChecked
                 }
+                updateElement(actionGroup!!, isChecked)
             }
         }
     }
@@ -51,4 +49,9 @@ class RecyclerViewActionsAdapter(private val dataSet: List<ActionGroup>) :
     }
 
     override fun getItemCount() = dataSet.size
+
+    fun updateElement(actionGroup: ActionGroup, isChecked: Boolean){
+        actionGroup.active = isChecked
+        viewModel.updateActionGroup(actionGroup)
+    }
 }

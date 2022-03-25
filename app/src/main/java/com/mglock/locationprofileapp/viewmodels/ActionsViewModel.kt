@@ -19,19 +19,22 @@ class ActionsViewModel(app: Application): AndroidViewModel(app) {
             try{
                 val db = AppDatabase.getInstance(getApplication())
                 _actionGroups.value = db.actionGroupDao().getAll()
+
+                //TODO see if there is a better solution
+                if(_actionGroups.value?.isEmpty() == true){
+                    _actionGroups.value = db.actionGroupDao().getAll()
+                }
             } catch(e: Exception){
                 Log.e("Error", e.stackTraceToString())
             }
         }
     }
 
-    fun updateActionGroup(){
+    fun updateActionGroup(actionGroup: ActionGroup){
         viewModelScope.launch {
             try{
                 val db = AppDatabase.getInstance(getApplication())
-                _actionGroups.value?.forEach { actionGroup ->
-                    db.actionGroupDao().update(actionGroup)
-                }
+                db.actionGroupDao().update(actionGroup)
             } catch(e: Exception){
                 Log.e("Error", e.stackTraceToString())
             }
