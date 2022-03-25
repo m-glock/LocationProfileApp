@@ -11,7 +11,7 @@ interface TimeframeDao {
     @Query("SELECT * FROM timeframe")
     fun getAll(): List<Timeframe>
 
-    @Query("SELECT * FROM timeframe WHERE uid IN (:timeframeIds)")
+    @Query("SELECT * FROM timeframe WHERE timeframe_uid IN (:timeframeIds)")
     fun getByIds(timeframeIds: IntArray): List<Timeframe>
 
     @Insert

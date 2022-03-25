@@ -11,7 +11,7 @@ interface DetailActionDao {
     @Query("SELECT * FROM detail_action")
     fun getAll(): List<DetailAction>
 
-    @Query("SELECT * FROM detail_action WHERE uid IN (:actionIds)")
+    @Query("SELECT * FROM detail_action WHERE detail_action_uid IN (:actionIds)")
     fun getByIds(actionIds: LongArray): List<DetailAction>
 
     @Query("SELECT * FROM detail_action WHERE action_group_id In (:actionGroupIds)")

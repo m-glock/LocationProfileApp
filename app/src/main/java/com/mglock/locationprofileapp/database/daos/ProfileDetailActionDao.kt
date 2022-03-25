@@ -11,10 +11,10 @@ interface ProfileDetailActionDao {
     @Query("SELECT * FROM profile_detail_action")
     fun getAll(): List<ProfileDetailAction>
 
-    @Query("SELECT * FROM profile_detail_action WHERE uid IN (:profileDetailActionIds)")
+    @Query("SELECT * FROM profile_detail_action WHERE profile_detail_action_uid IN (:profileDetailActionIds)")
     fun getByIds(profileDetailActionIds: IntArray): List<ProfileDetailAction>
 
-    @Query("SELECT * FROM profile_detail_action WHERE profile_id LIKE (:profileId)")
+    @Query("SELECT * FROM profile_detail_action WHERE profile_uid LIKE (:profileId)")
     fun getByProfile(profileId: Long): List<ProfileDetailAction>
 
     @Insert

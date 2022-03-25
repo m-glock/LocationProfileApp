@@ -3,12 +3,13 @@ package com.mglock.locationprofileapp.database.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.mglock.locationprofileapp.Weekday
 import java.sql.Date
 
 @Entity
 data class Timeframe(
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "timefeame_uid")
+    @ColumnInfo(name = "timeframe_uid")
     val timeframeUID: Long,
 
     val from: Date,
@@ -16,5 +17,7 @@ data class Timeframe(
     val to: Date,
 
     @ColumnInfo(name="am_pm")
-    val amPm: Boolean
+    val amPm: Boolean,
+
+    val weekdays: List<Weekday>
 )
