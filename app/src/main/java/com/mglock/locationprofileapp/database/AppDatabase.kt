@@ -9,6 +9,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.mglock.locationprofileapp.Constants
 import com.mglock.locationprofileapp.database.daos.*
 import com.mglock.locationprofileapp.database.entities.*
+import com.mglock.locationprofileapp.enums.ActionGroupTitle
 
 @Database(entities = [
     ActionGroup::class,
@@ -53,8 +54,8 @@ abstract class AppDatabase : RoomDatabase() {
                 })
                 .build()
 
-        private val PREPOPULATE_ACTION_GROUP = Array(Constants.ActionGroupTitle.values().size){ position ->
-            ActionGroup(0, Constants.ActionGroupTitle.values()[position].title, false)
+        private val PREPOPULATE_ACTION_GROUP = Array(ActionGroupTitle.values().size){ position ->
+            ActionGroup(0, ActionGroupTitle.values()[position].title, false)
         }
 
         //TODO figure out the important ones

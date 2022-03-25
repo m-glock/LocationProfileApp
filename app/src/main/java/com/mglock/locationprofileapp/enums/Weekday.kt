@@ -1,4 +1,4 @@
-package com.mglock.locationprofileapp
+package com.mglock.locationprofileapp.enums
 
 enum class Weekday(val title: String){
     MONDAY("Monday"),
