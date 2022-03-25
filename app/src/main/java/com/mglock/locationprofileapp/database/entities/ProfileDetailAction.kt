@@ -16,6 +16,6 @@ data class ProfileDetailAction(
     @ColumnInfo(name="detail_action_value")
     val detailActionValue: String,
 
-    @ColumnInfo(name="profile_uid")
+    @ColumnInfo(name="profile_uid", index = true)
     val profileId: Long
 )

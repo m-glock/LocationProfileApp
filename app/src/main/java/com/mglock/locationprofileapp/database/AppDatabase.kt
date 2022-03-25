@@ -16,8 +16,7 @@ import com.mglock.locationprofileapp.database.entities.*
     Profile::class,
     ProfileDetailAction::class,
     DetailAction::class,
-    Timeframe::class,
-    TimeframeWeekday::class
+    Timeframe::class
 ], version = 1)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
@@ -27,7 +26,6 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun profileDetailActionDao(): ProfileDetailActionDao
     abstract fun detailActionDao(): DetailActionDao
     abstract fun timeframeDao(): TimeframeDao
-    abstract fun timeframeWeekdayDao(): TimeframeWeekdayDao
 
     companion object {
         // For Singleton instantiation
@@ -55,8 +53,8 @@ abstract class AppDatabase : RoomDatabase() {
                 })
                 .build()
 
-        private val PREPOPULATE_ACTION_GROUP = Array(Constants.ActionGroupTitles.values().size){ position ->
-            ActionGroup(0, Constants.ActionGroupTitles.values()[position].title, false)
+        private val PREPOPULATE_ACTION_GROUP = Array(Constants.ActionGroupTitle.values().size){ position ->
+            ActionGroup(0, Constants.ActionGroupTitle.values()[position].title, false)
         }
 
         //TODO figure out the important ones

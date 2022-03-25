@@ -7,6 +7,7 @@ import com.mglock.locationprofileapp.database.entities.DetailAction
 import com.mglock.locationprofileapp.database.entities.Place
 import com.mglock.locationprofileapp.database.entities.Profile
 import com.mglock.locationprofileapp.database.entities.ProfileDetailAction
+import com.mglock.locationprofileapp.database.entities.Timeframe
 
 data class ProfileWithRelations (
     @Embedded
@@ -15,9 +16,8 @@ data class ProfileWithRelations (
     @Relation(parentColumn = "profile_uid", entityColumn = "place_uid")
     val place: Place?,
 
-    //TODO
-    //@Relation(parentColumn = )
-    //val timeframe: TimeframeWithRelations,
+    @Relation(parentColumn = "profile_uid", entityColumn = "timeframe_uid")
+    val timeframe: List<Timeframe>,
 
     @Relation(
         parentColumn = "profile_uid",

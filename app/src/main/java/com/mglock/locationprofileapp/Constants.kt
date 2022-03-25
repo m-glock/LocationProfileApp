@@ -2,7 +2,7 @@ package com.mglock.locationprofileapp
 
 class Constants {
 
-    enum class ActionGroupTitles(val title: String){
+    enum class ActionGroupTitle(val title: String){
         VOLUME("Volume"),
         WIFI("Wi-Fi"),
         MOBILE_DATA("Mobile Data"),
