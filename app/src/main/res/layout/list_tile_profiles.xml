@@ -1,71 +1,77 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp"
-    android:layout_marginTop="10dp"
-    android:gravity="center_vertical"
-    android:background="@drawable/list_tile_background">
-
-    <ImageView
-        android:id="@+id/activeProfileCheck"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:contentDescription="@string/info_button_content_description"
-        android:src="@drawable/ic_action_check"
-        android:layout_marginStart="10dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@id/expandableLayout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginHorizontal="@dimen/list_tile_margin"
+        android:layout_marginBottom="@dimen/list_tile_margin"
+        android:orientation="vertical"
+        android:background="@drawable/list_tile_background">
 
-    <TextView
-        android:id="@+id/profileTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:text="@string/placeholder_string"
-        android:textSize="16sp"
-        android:layout_marginStart="10dp"
-        android:gravity="center_vertical"
-        app:layout_constraintBottom_toTopOf="@id/expandableLayout"
-        app:layout_constraintStart_toEndOf="@+id/activeProfileCheck"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/currentyActiveProfileIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_action_location"
-        android:layout_marginStart="10dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@id/expandableLayout"
-        app:layout_constraintStart_toEndOf="@+id/profileTitle"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/currently_active_profile_content_description" />
-
-    <ImageButton
-        android:id="@+id/buttonExpand"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_action_arrow_down"
-        android:layout_marginEnd="10dp"
-        android:backgroundTint="@color/transparent"
-        app:layout_constraintBottom_toTopOf="@id/expandableLayout"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/profileListTileLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/list_tile_height"
+        android:paddingHorizontal="@dimen/list_tile_padding_horizontal"
+        android:paddingVertical="@dimen/list_tile_padding_vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/profile_details_button_content_description" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/activeProfileCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:contentDescription="@string/info_button_content_description"
+            android:src="@drawable/ic_action_check"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/profileTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/text_icon_margin"
+            android:gravity="center_vertical"
+            android:text="@string/placeholder_string"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/activeProfileCheck"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/currentyActiveProfileIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/text_icon_margin"
+            android:contentDescription="@string/currently_active_profile_content_description"
+            android:src="@drawable/ic_action_location"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/profileTitle"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/buttonExpand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/transparent"
+            android:contentDescription="@string/profile_details_button_content_description"
+            android:src="@drawable/ic_action_arrow_down"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/expandableLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:visibility="visible">
+        android:layout_height="@dimen/profile_expandable_zero_height"
+        android:paddingHorizontal="@dimen/list_tile_padding_horizontal"
+        android:paddingVertical="@dimen/list_tile_padding_vertical"
+        app:layout_constraintTop_toBottomOf="@+id/profileListTileLayout">
 
         <TextView
             android:id="@+id/profileTimeLabel"
@@ -87,7 +93,7 @@
             android:id="@+id/profilePlaceLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/profile_expandable_text_bottom_margin"
             android:text="@string/profile_place_label"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profileTimeLabel" />
@@ -104,7 +110,7 @@
             android:id="@+id/profileActionLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/profile_expandable_text_bottom_margin"
             android:text="@string/profile_action_label"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profilePlaceLabel" />
@@ -121,7 +127,7 @@
             android:id="@+id/expandableButtonsLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/profile_expandable_text_bottom_margin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:gravity="end"
@@ -131,21 +137,28 @@
                 android:id="@+id/activateProfileButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/transparent"
+                android:textColor="@color/textColorDark"
                 android:text="@string/deactivate_profile_button_text" />
 
             <Button
                 android:id="@+id/editProfileButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/transparent"
+                android:textColor="@color/textColorDark"
                 android:text="@string/edit_button_text" />
 
             <Button
                 android:id="@+id/deleteProfileButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/transparent"
+                android:textColor="@color/textColorDark"
                 android:text="@string/delete_button_text" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

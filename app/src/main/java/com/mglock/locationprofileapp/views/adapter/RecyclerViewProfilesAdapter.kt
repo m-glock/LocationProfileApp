@@ -1,5 +1,6 @@
 package com.mglock.locationprofileapp.views.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +14,9 @@ import com.mglock.locationprofileapp.databinding.ListTileProfilesBinding
 class RecyclerViewProfilesAdapter(private val dataSet: List<ProfileWithRelations>) :
     RecyclerView.Adapter<RecyclerViewProfilesAdapter.ViewHolder>() {
 
-    class ViewHolder(itemBinding: ListTileProfilesBinding) : RecyclerView.ViewHolder(itemBinding.root) {
+    private var context: Context? = null
+
+    inner class ViewHolder(itemBinding: ListTileProfilesBinding) : RecyclerView.ViewHolder(itemBinding.root) {
         private var activeProfileCheck: ImageView = itemBinding.activeProfileCheck
         private var profileTitle: TextView = itemBinding.profileTitle
         private var profileTimeText: TextView = itemBinding.profileTimeText
@@ -33,16 +36,17 @@ class RecyclerViewProfilesAdapter(private val dataSet: List<ProfileWithRelations
         init {
             // Define click listener for the ViewHolder's View.
             itemBinding.buttonExpand.setOnClickListener {
-                val visibility: Int
+                val height: Int
                 val imageResource: Int
-                if(itemBinding.expandableLayout.visibility == View.GONE){
-                    visibility = View.VISIBLE
-                    imageResource = R.drawable.ic_action_arrow_up
-                } else {
-                    visibility = View.GONE
+                if(itemBinding.expandableLayout.layoutParams.height == ViewGroup.LayoutParams.WRAP_CONTENT){
+                    height = context!!.resources.getDimensionPixelSize(R.dimen.profile_expandable_zero_height)
                     imageResource = R.drawable.ic_action_arrow_down
+                } else {
+                    height = ViewGroup.LayoutParams.WRAP_CONTENT
+                    imageResource = R.drawable.ic_action_arrow_up
                 }
-                itemBinding.expandableLayout.visibility = visibility
+                itemBinding.expandableLayout.layoutParams.height = height
+                itemBinding.expandableLayout.requestLayout()
                 itemBinding.buttonExpand.setImageResource(imageResource)
             }
 
@@ -71,6 +75,7 @@ class RecyclerViewProfilesAdapter(private val dataSet: List<ProfileWithRelations
         viewType: Int
     ): ViewHolder {
         val itemBinding = ListTileProfilesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        context = parent.context
 
         return ViewHolder(itemBinding)
     }

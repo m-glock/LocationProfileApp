@@ -13,4 +13,6 @@
     <dimen name="image_button_no_padding">0dp</dimen>
     <dimen name="icon_margin">5dp</dimen>
     <dimen name="text_icon_margin">10dp</dimen>
+    <dimen name="profile_expandable_text_bottom_margin">20dp</dimen>
+    <dimen name="profile_expandable_zero_height">0dp</dimen>
 </resources>
