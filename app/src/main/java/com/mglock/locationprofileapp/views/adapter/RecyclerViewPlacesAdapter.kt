@@ -49,7 +49,6 @@ class RecyclerViewPlacesAdapter(private val dataSet: MutableList<Place>, private
 
     override fun getItemCount() = dataSet.size
 
-
     fun deleteItem(place: Place){
         val position = dataSet.indexOf(place)
         dataSet.remove(place)

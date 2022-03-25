@@ -17,10 +17,10 @@ interface ActionGroupDao {
     suspend fun getAllWithRelations(): List<ActionGroupWithRelations>
 
     @Query("SELECT * FROM action_group WHERE action_group_uid IN (:actionGroupIds)")
-    suspend fun getByIds(actionGroupIds: IntArray): List<ActionGroup>
+    suspend fun getByIds(actionGroupIds: LongArray): List<ActionGroup>
 
     @Query("SELECT * FROM action_group WHERE action_group_uid IN (:actionGroupIds)")
-    suspend fun getByIdsWithRelations(actionGroupIds: IntArray): List<ActionGroupWithRelations>
+    suspend fun getByIdsWithRelations(actionGroupIds: LongArray): List<ActionGroupWithRelations>
 
     @Query("SELECT * FROM action_group WHERE title LIKE (:name)")
     suspend fun getByTitle(name: String): List<ActionGroup>

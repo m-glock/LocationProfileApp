@@ -9,14 +9,14 @@ import com.mglock.locationprofileapp.database.entities.Timeframe
 @Dao
 interface TimeframeDao {
     @Query("SELECT * FROM timeframe")
-    fun getAll(): List<Timeframe>
+    suspend fun getAll(): List<Timeframe>
 
     @Query("SELECT * FROM timeframe WHERE timeframe_uid IN (:timeframeIds)")
-    fun getByIds(timeframeIds: IntArray): List<Timeframe>
+    suspend fun getByIds(timeframeIds: LongArray): List<Timeframe>
 
     @Insert
     fun insertAll(vararg timeframes: Timeframe)
 
     @Delete
-    fun delete(timeframe: Timeframe)
+    suspend fun delete(timeframe: Timeframe)
 }

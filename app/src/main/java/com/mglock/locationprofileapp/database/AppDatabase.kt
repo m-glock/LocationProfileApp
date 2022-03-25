@@ -6,7 +6,6 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.mglock.locationprofileapp.Constants
 import com.mglock.locationprofileapp.database.daos.*
 import com.mglock.locationprofileapp.database.entities.*
 import com.mglock.locationprofileapp.enums.ActionGroupTitle

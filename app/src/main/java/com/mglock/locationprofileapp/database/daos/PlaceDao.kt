@@ -13,7 +13,7 @@ interface PlaceDao {
     suspend fun getAll(): List<Place>
 
     @Query("SELECT * FROM place WHERE place_uid IN (:placeIds)")
-    suspend fun getByIds(placeIds: IntArray): List<Place>
+    suspend fun getByIds(placeIds: LongArray): List<Place>
 
     @Query("SELECT * FROM place WHERE title LIKE (:title)")
     suspend fun getByTitle(title: String): List<Place>

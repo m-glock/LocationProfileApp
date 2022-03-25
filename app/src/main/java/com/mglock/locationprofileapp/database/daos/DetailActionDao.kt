@@ -10,26 +10,26 @@ import com.mglock.locationprofileapp.database.entities.relations.DetailActionWit
 @Dao
 interface DetailActionDao {
     @Query("SELECT * FROM detail_action")
-    fun getAll(): List<DetailAction>
+    suspend fun getAll(): List<DetailAction>
 
     @Query("SELECT * FROM detail_action")
-    fun getAllWithRelations(): List<DetailActionWithRelations>
+    suspend fun getAllWithRelations(): List<DetailActionWithRelations>
 
     @Query("SELECT * FROM detail_action WHERE detail_action_uid IN (:actionIds)")
-    fun getByIds(actionIds: LongArray): List<DetailAction>
+    suspend fun getByIds(actionIds: LongArray): List<DetailAction>
 
     @Query("SELECT * FROM detail_action WHERE detail_action_uid IN (:actionIds)")
-    fun getByIdsWithRelations(actionIds: LongArray): List<DetailActionWithRelations>
+    suspend fun getByIdsWithRelations(actionIds: LongArray): List<DetailActionWithRelations>
 
     @Query("SELECT * FROM detail_action WHERE name LIKE (:name)")
-    fun getByName(name: String): List<DetailAction>
+    suspend fun getByName(name: String): List<DetailAction>
 
     @Query("SELECT * FROM detail_action WHERE name LIKE (:name)")
-    fun getByNameWithRelations(name: String): List<DetailActionWithRelations>
+    suspend fun getByNameWithRelations(name: String): List<DetailActionWithRelations>
 
     @Insert
     fun insertAll(vararg detailActions: DetailAction)
 
     @Delete
-    fun delete(detailActions: DetailAction)
+    suspend fun delete(detailActions: DetailAction)
 }
