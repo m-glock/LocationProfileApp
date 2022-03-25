@@ -18,12 +18,7 @@ class PlacesViewModel(app: Application): AndroidViewModel(app) {
         viewModelScope.launch {
             try{
                 val db = AppDatabase.getInstance(getApplication())
-                //_places.value = db.placeDao().getAll().toMutableList()
-                _places.value = mutableListOf(
-                    Place(0, "Zuhause", "Trojanstr. 2, 12437 Berlin", "324567", "76543", 5),
-                    Place(0, "Uni", "Wilhelminenhofstraße 75A, 12459 Berlin", "324567", "76543", 5),
-                    Place(0, "Arbeit", "Köpenicker Str. 9, 10997 Berlin", "324567", "76543", 5),
-                )
+                _places.value = db.placeDao().getAll().toMutableList()
             } catch(e: Exception){
                 Log.e("Error", e.stackTraceToString())
             }
@@ -45,7 +40,7 @@ class PlacesViewModel(app: Application): AndroidViewModel(app) {
         viewModelScope.launch {
             try{
                 val db = AppDatabase.getInstance(getApplication())
-                //TODO update place in DB
+                db.placeDao().update(place)
             } catch(e: Exception){
                 Log.e("Error", e.stackTraceToString())
             }
