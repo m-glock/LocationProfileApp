@@ -34,8 +34,14 @@ class AddPlaceAutoFragment : Fragment() {
             android.R.layout.simple_spinner_item,
             Constants.automaticPlaceTime
         )
-
         _binding!!.timeAutoCompleteTextView.setAdapter(addPlaceTimesAdapter)
+
+        _binding!!.startAutomaticMode.setOnClickListener {
+            //TODO check permissions
+            val newPlaceTitle = _binding!!.editTextTitleAuto.text.toString()
+            val locationServiceDuration = _binding!!.timeAutoCompleteTextView.text.toString()
+            mViewModel.startLocationTracking(newPlaceTitle, locationServiceDuration)
+        }
 
         return binding.root
     }
