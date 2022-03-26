@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LocationProfileApp">
         <activity
-            android:name=".AddPlace"
+            android:name=".AddPlaceActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

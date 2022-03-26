@@ -16,6 +16,10 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        setSupportActionBar(binding.toolbarMain)
+        supportActionBar!!.setDisplayShowTitleEnabled(false)
+        supportActionBar!!.title = resources.getString(R.string.app_name)
+
         val viewPager = binding.viewPager
         val tabLayout = binding.tabLayout
 

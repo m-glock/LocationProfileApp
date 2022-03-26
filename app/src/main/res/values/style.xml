@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- action bar -->
-    <style name="ActionBarStyle" parent="@android:style/Widget.Holo.Light.ActionBar">
+    <style name="ActionBarStyle" parent="@style/Widget.AppCompat.Toolbar">
+        <item name="android:background">?attr/colorPrimary</item>
+        <item name="colorControlNormal">@color/textColorLight</item>
+    </style>
+    <style name="ActionBarTitleStyle" parent="TextAppearance.AppCompat.Title">
         <item name="android:textColor">@color/textColorLight</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <!-- buttons -->

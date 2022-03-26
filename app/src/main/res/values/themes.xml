@@ -1,5 +1,5 @@
 <resources>
-    <style name="Theme.LocationProfileApp" parent="Theme.MaterialComponents.Light">
+    <style name="Theme.LocationProfileApp" parent="Theme.MaterialComponents.Light.NoActionBar">
 
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/teal</item>
@@ -13,7 +13,7 @@
         <item name="colorOnSecondary">@color/black</item>
 
         <!-- Status and action bar -->
-        <item name="android:actionBarStyle">@style/ActionBarStyle</item>
+        <item name="android:statusBarColor">?attr/colorPrimary</item>
 
         <!-- basic styles -->
         <item name="android:colorBackground">@color/screenBackground</item>

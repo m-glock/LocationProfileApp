@@ -4,31 +4,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/tab_fragment_padding"
-    tools:context=".AddPlace">
+    tools:context=".AddPlaceActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarMain"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:theme="@style/ActionBarStyle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="@string/add_new_place_title"
+            style="@style/ActionBarTitleStyle" />
+
+    </androidx.appcompat.widget.Toolbar>
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/buttonGroupMode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/input_margin_top"
         android:gravity="center_horizontal"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_marginTop="@dimen/input_margin_top"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarMain">
 
         <Button
             android:id="@+id/manualModeButton"
+            style="@style/FocusButton"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/add_place_button_height"
-            android:text="@string/add_place_manual_button_text"
-            style="@style/FocusButton"/>
+            android:text="@string/add_place_manual_button_text" />
 
         <Button
             android:id="@+id/automaticModeButton"
+            style="@style/NoFocusButton"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/add_place_button_height"
             android:layout_marginStart="@dimen/text_icon_margin"
             android:text="@string/add_place_auto_button_text"
-            style="@style/NoFocusButton"
             app:layout_constraintStart_toEndOf="@+id/manualModeButton" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -38,6 +55,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/side_margin_tab_top_area"
+        android:paddingHorizontal="@dimen/fragment_padding_horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonGroupMode" />

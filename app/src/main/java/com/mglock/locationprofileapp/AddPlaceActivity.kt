@@ -10,34 +10,42 @@ import com.mglock.locationprofileapp.databinding.ActivityAddPlaceBinding
 import com.mglock.locationprofileapp.views.fragments.AddPlaceAutoFragment
 import com.mglock.locationprofileapp.views.fragments.AddPlaceManualFragment
 
-class AddPlace : AppCompatActivity() {
+class AddPlaceActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivityAddPlaceBinding
+    private lateinit var _binding: ActivityAddPlaceBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityAddPlaceBinding.inflate(layoutInflater)
-        val view = binding.root
+        _binding = ActivityAddPlaceBinding.inflate(layoutInflater)
+        val view = _binding.root
         setContentView(view)
+
+        setSupportActionBar(_binding.toolbarMain)
+        supportActionBar!!.setDisplayShowTitleEnabled(false)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.title = "Add a new place"
+        _binding.toolbarMain.setNavigationOnClickListener {
+            onBackPressed()
+        }
 
         val addPlaceManualFragment = AddPlaceManualFragment()
         val addPlaceAutoFragment = AddPlaceAutoFragment()
         setNewFragment(addPlaceManualFragment)
 
-        binding.automaticModeButton.setOnClickListener {
+        _binding.automaticModeButton.setOnClickListener {
             setNewFragment(addPlaceAutoFragment)
-            changeButtons(binding.automaticModeButton, binding.manualModeButton)
+            changeButtons(_binding.automaticModeButton, _binding.manualModeButton)
         }
 
-        binding.manualModeButton.setOnClickListener {
+        _binding.manualModeButton.setOnClickListener {
             setNewFragment(addPlaceManualFragment)
-            changeButtons(binding.manualModeButton, binding.automaticModeButton)
+            changeButtons(_binding.manualModeButton, _binding.automaticModeButton)
         }
     }
 
     private fun setNewFragment(fragment: Fragment){
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(binding.modeFragment.id, fragment)
+        fragmentTransaction.replace(_binding.modeFragment.id, fragment)
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
         fragmentTransaction.commit()
     }

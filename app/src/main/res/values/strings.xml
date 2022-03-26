@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LocationProfileApp</string>
+    <string name="app_name">Location Profile App</string>
 
     <!-- Actions Tab -->
     <string name="info_button_content_description">Info button</string>
@@ -17,20 +17,22 @@
     <string name="activate_profile_button_text">Activate</string>
 
     <!-- Places Tab -->
-    <string name="add_place_content_description">Add a new place</string>
+    <string name="add_new_place_title">Add a new place</string>
+    <string name="add_place_content_description">Add a new place either manually or automatically</string>
     <string name="add_place_manual_button_text">Manual</string>
     <string name="add_place_auto_button_text">Automatic</string>
     <string name="add_place_title_label">Title</string>
-    <string name="add_place_time_label">Time</string>
     <!-- Add place automatically -->
     <string name="add_place_address_label">Address</string>
     <string name="add_place_automatic_explanation">The app will track your location during the determined time and will calculate a location and radius for you.</string>
     <string name="start_auto_place_button_text">Start</string>
     <!-- Add place manually -->
+    <string name="add_place_time_label">Time</string>
 
     <!-- other -->
     <string name="placeholder_string">Placeholder</string>
     <string name="edit_button_text">Edit</string>
     <string name="delete_button_text">Delete</string>
+
 
 </resources>

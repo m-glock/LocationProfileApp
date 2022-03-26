@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import com.mglock.locationprofileapp.AddPlace
+import com.mglock.locationprofileapp.AddPlaceActivity
 import com.mglock.locationprofileapp.databinding.FragmentPlacesBinding
 import com.mglock.locationprofileapp.viewmodels.PlacesViewModel
 import com.mglock.locationprofileapp.views.adapter.RecyclerViewPlacesAdapter
@@ -37,7 +37,7 @@ class PlacesFragment : Fragment() {
         }
 
         _binding!!.fabAddPlace.setOnClickListener { view ->
-            val intent = Intent(context, AddPlace::class.java)
+            val intent = Intent(context, AddPlaceActivity::class.java)
             startActivity(intent)
         }
 
