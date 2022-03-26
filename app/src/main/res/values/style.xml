@@ -16,6 +16,20 @@
         <item name="tint">?attr/colorOnPrimary</item>
     </style>
 
+    <style name="NoFocusButton" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:background">@drawable/border_button</item>
+        <item name="android:textColor">@color/textColorDark</item>
+    </style>
+
+    <style name="FocusButton" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:background">@drawable/filled_button</item>
+        <item name="android:textColor">@color/textColorLight</item>
+    </style>
+
+    <style name="SecondaryButton" parent="Widget.AppCompat.Button.Colored">
+
+    </style>
+
     <!-- switches -->
     <style name="SwitchStyle" parent="Theme.AppCompat.Light">
         <item name="colorControlActivated">@color/teal</item>

@@ -18,15 +18,17 @@
         <Button
             android:id="@+id/manualModeButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/add_place_manual_button_text" />
+            android:layout_height="@dimen/add_place_button_height"
+            android:text="@string/add_place_manual_button_text"
+            style="@style/FocusButton"/>
 
         <Button
             android:id="@+id/automaticModeButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/add_place_button_height"
             android:layout_marginStart="@dimen/text_icon_margin"
             android:text="@string/add_place_auto_button_text"
+            style="@style/NoFocusButton"
             app:layout_constraintStart_toEndOf="@+id/manualModeButton" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>

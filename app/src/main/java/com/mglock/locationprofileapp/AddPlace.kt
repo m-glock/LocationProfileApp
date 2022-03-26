@@ -2,6 +2,8 @@ package com.mglock.locationprofileapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.mglock.locationprofileapp.databinding.ActivityAddPlaceBinding
@@ -24,18 +26,26 @@ class AddPlace : AppCompatActivity() {
 
         binding.automaticModeButton.setOnClickListener {
             setNewFragment(addPlaceAutoFragment)
+            changeButtons(binding.automaticModeButton, binding.manualModeButton)
         }
 
         binding.manualModeButton.setOnClickListener {
             setNewFragment(addPlaceManualFragment)
+            changeButtons(binding.manualModeButton, binding.automaticModeButton)
         }
     }
 
-    fun setNewFragment(fragment: Fragment){
+    private fun setNewFragment(fragment: Fragment){
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(binding.modeFragment.id, fragment)
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-        fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
+    }
+
+    private fun changeButtons(buttonFocused: Button, buttonUnfocused: Button){
+        buttonUnfocused.setBackgroundResource(R.drawable.border_button)
+        buttonUnfocused.setTextColor(ContextCompat.getColor(applicationContext, R.color.textColorDark))
+        buttonFocused.setBackgroundResource(R.drawable.filled_button)
+        buttonFocused.setTextColor(ContextCompat.getColor(applicationContext, R.color.textColorLight))
     }
 }
