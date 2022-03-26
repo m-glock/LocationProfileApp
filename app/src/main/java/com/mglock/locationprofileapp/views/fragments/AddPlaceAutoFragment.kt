@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.mglock.locationprofileapp.Constants
 import com.mglock.locationprofileapp.databinding.FragmentAddPlaceAutoBinding
 import com.mglock.locationprofileapp.viewmodels.AddPlaceAutoViewModel
 
@@ -26,6 +28,14 @@ class AddPlaceAutoFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         _binding = FragmentAddPlaceAutoBinding.inflate(inflater, container, false)
+
+        val addPlaceTimesAdapter: ArrayAdapter<String> = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_spinner_item,
+            Constants.automaticPlaceTime
+        )
+
+        _binding!!.timeAutoCompleteTextView.setAdapter(addPlaceTimesAdapter)
 
         return binding.root
     }
