@@ -1,4 +1,4 @@
-package com.mglock.locationprofileapp
+package com.mglock.locationprofileapp.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,6 +6,7 @@ import android.widget.Button
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import com.mglock.locationprofileapp.R
 import com.mglock.locationprofileapp.databinding.ActivityAddPlaceBinding
 import com.mglock.locationprofileapp.views.fragments.AddPlaceAutoFragment
 import com.mglock.locationprofileapp.views.fragments.AddPlaceManualFragment
@@ -52,8 +53,14 @@ class AddPlaceActivity : AppCompatActivity() {
 
     private fun changeButtons(buttonFocused: Button, buttonUnfocused: Button){
         buttonUnfocused.setBackgroundResource(R.drawable.border_button)
-        buttonUnfocused.setTextColor(ContextCompat.getColor(applicationContext, R.color.textColorDark))
+        buttonUnfocused.setTextColor(ContextCompat.getColor(
+            applicationContext,
+            R.color.textColorDark
+        ))
         buttonFocused.setBackgroundResource(R.drawable.filled_button)
-        buttonFocused.setTextColor(ContextCompat.getColor(applicationContext, R.color.textColorLight))
+        buttonFocused.setTextColor(ContextCompat.getColor(
+            applicationContext,
+            R.color.textColorLight
+        ))
     }
 }

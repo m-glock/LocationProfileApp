@@ -1,8 +1,9 @@
-package com.mglock.locationprofileapp
+package com.mglock.locationprofileapp.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.tabs.TabLayoutMediator
+import com.mglock.locationprofileapp.R
 import com.mglock.locationprofileapp.databinding.ActivityMainBinding
 import com.mglock.locationprofileapp.views.adapter.ViewPagerAdapter
 
