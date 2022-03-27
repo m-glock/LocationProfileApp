@@ -1,7 +1,7 @@
 package com.mglock.locationprofileapp.database
 
 import androidx.room.TypeConverter
-import com.mglock.locationprofileapp.enums.Weekday
+import com.mglock.locationprofileapp.util.enums.Weekday
 import java.sql.Date
 import java.util.Locale
 

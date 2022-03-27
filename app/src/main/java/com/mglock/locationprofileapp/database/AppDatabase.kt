@@ -8,7 +8,7 @@ import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.mglock.locationprofileapp.database.daos.*
 import com.mglock.locationprofileapp.database.entities.*
-import com.mglock.locationprofileapp.enums.ActionGroupTitle
+import com.mglock.locationprofileapp.util.enums.ActionGroupTitle
 
 @Database(entities = [
     ActionGroup::class,

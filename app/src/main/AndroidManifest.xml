@@ -15,10 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LocationProfileApp">
         <activity
-            android:name=".activities.AddPlaceActivity"
+            android:name="com.mglock.locationprofileapp.views.activities.AddPlaceActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.MainActivity"
+            android:name="com.mglock.locationprofileapp.views.activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

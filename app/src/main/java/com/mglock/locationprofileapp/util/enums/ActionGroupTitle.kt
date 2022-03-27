@@ -1,4 +1,4 @@
-package com.mglock.locationprofileapp.enums
+package com.mglock.locationprofileapp.util.enums
 
 enum class ActionGroupTitle(val title: String){
     VOLUME("Volume"),

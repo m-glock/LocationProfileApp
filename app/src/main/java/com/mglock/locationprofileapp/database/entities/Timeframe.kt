@@ -3,7 +3,7 @@ package com.mglock.locationprofileapp.database.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.mglock.locationprofileapp.enums.Weekday
+import com.mglock.locationprofileapp.util.enums.Weekday
 import java.sql.Date
 
 @Entity

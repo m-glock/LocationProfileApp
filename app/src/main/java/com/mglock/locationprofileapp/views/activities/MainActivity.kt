@@ -1,4 +1,4 @@
-package com.mglock.locationprofileapp.activities
+package com.mglock.locationprofileapp.views.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
