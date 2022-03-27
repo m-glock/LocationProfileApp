@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextTitle"
+            android:id="@+id/editTextTitleManual"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/add_place_title_label"
@@ -29,7 +29,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/InputLayoutLocation"
+        android:id="@+id/InputLayoutAddress"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -39,24 +39,24 @@
         app:layout_constraintTop_toBottomOf="@+id/InputLayoutTitle">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextLocation"
+            android:id="@+id/editTextAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:focusable="false"
             android:focusableInTouchMode="false"
             android:hint="@string/add_place_address_label"
-            android:inputType="text"
-            android:textSize="16sp" />
+            android:inputType="text" />
+
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!--<androidx.fragment.app.FragmentContainerView
-        android:id="@+id/mapFragment"
-        class="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/addPlaceButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/input_margin_top"
+        android:text="@string/add_place_manual_button_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/InputLayoutLocation" /> -->
+        app:layout_constraintTop_toBottomOf="@+id/InputLayoutAddress" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
