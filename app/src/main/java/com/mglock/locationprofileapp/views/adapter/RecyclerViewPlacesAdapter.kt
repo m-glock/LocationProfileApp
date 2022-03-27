@@ -28,6 +28,7 @@ class RecyclerViewPlacesAdapter(private val dataSet: List<Place>, private val vi
                 viewModel.deletePlace(place!!)
             }
             itemBinding.buttonEdit.setOnClickListener {
+                //TODO edit item
                 viewModel.updatePlace(place!!)
             }
         }

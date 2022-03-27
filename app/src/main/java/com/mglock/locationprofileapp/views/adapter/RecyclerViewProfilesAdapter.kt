@@ -12,7 +12,7 @@ import com.mglock.locationprofileapp.database.entities.relations.ProfileWithRela
 import com.mglock.locationprofileapp.databinding.ListTileProfilesBinding
 import com.mglock.locationprofileapp.viewmodels.ProfilesViewModel
 
-class RecyclerViewProfilesAdapter(private val dataSet: MutableList<ProfileWithRelations>, private val viewModel: ProfilesViewModel) :
+class RecyclerViewProfilesAdapter(private val dataSet: List<ProfileWithRelations>, private val viewModel: ProfilesViewModel) :
     RecyclerView.Adapter<RecyclerViewProfilesAdapter.ViewHolder>() {
 
     private var context: Context? = null
@@ -35,7 +35,8 @@ class RecyclerViewProfilesAdapter(private val dataSet: MutableList<ProfileWithRe
             }
 
             itemBinding.activateProfileButton.setOnClickListener {
-                activateProfile(profile)
+                profile.profile.active = !profile.profile.active
+                viewModel.updateProfile(profile.profile)
             }
 
             itemBinding.editProfileButton.setOnClickListener {
@@ -43,7 +44,7 @@ class RecyclerViewProfilesAdapter(private val dataSet: MutableList<ProfileWithRe
             }
 
             itemBinding.deleteProfileButton.setOnClickListener {
-                deleteProfile(profile)
+                viewModel.deleteProfile(profile.profile)
             }
         }
     }
@@ -77,24 +78,8 @@ class RecyclerViewProfilesAdapter(private val dataSet: MutableList<ProfileWithRe
         expandableLayout.requestLayout()
     }
 
-    fun activateProfile(profile: ProfileWithRelations){
-        profile.profile.active = !profile.profile.active
-        val position = dataSet.indexOf(profile)
-        viewModel.updateProfile(profile.profile)
-        notifyItemChanged(position)
-    }
-
     fun editProfile(profile: ProfileWithRelations){
-        val position = dataSet.indexOf(profile)
         // TODO edit item
         viewModel.updateProfile(profile.profile)
-        notifyItemChanged(position)
-    }
-
-    fun deleteProfile(profile: ProfileWithRelations){
-        val position = dataSet.indexOf(profile)
-        dataSet.remove(profile)
-        viewModel.deleteProfile(profile.profile)
-        notifyItemRemoved(position)
     }
 }

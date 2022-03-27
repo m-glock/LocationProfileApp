@@ -30,8 +30,17 @@ class ProfilesFragment : Fragment() {
 
         // set the adapter for the recyclerview to display the list items
         val recyclerView = _binding!!.recyclerViewProfiles
+        val textViewNoProfiles = _binding!!.textViewNoProfiles
         mViewModel.profiles.observe(viewLifecycleOwner){ profiles ->
-            recyclerView.adapter = RecyclerViewProfilesAdapter(profiles, mViewModel)
+            // if the view is empty, a text is shown instead
+            if(profiles.isEmpty()){
+                recyclerView.visibility = View.GONE
+                textViewNoProfiles.visibility = View.VISIBLE
+            } else {
+                recyclerView.visibility = View.VISIBLE
+                textViewNoProfiles.visibility = View.GONE
+                recyclerView.adapter = RecyclerViewProfilesAdapter(profiles, mViewModel)
+            }
         }
 
         return binding.root
