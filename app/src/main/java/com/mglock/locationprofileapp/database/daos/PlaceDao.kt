@@ -6,11 +6,12 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import com.mglock.locationprofileapp.database.entities.Place
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface PlaceDao {
     @Query("SELECT * FROM place")
-    suspend fun getAll(): List<Place>
+    fun getAll(): Flow<List<Place>>
 
     @Query("SELECT * FROM place WHERE place_uid IN (:placeIds)")
     suspend fun getByIds(placeIds: LongArray): List<Place>

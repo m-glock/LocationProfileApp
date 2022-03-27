@@ -32,8 +32,17 @@ class PlacesFragment : Fragment() {
 
         // set the adapter for the recyclerview to display the list items
         val recyclerView = _binding!!.recyclerViewPlaces
+        val textViewNoPlaces = _binding!!.textViewNoPlaces
         mViewModel.places.observe(viewLifecycleOwner){ places ->
-            recyclerView.adapter = RecyclerViewPlacesAdapter(places, mViewModel)
+            // if the view is empty, a text is shown instead
+            if(places.isEmpty()){
+                recyclerView.visibility = View.GONE
+                textViewNoPlaces.visibility = View.VISIBLE
+            } else {
+                recyclerView.visibility = View.VISIBLE
+                textViewNoPlaces.visibility = View.GONE
+                recyclerView.adapter = RecyclerViewPlacesAdapter(places, mViewModel)
+            }
         }
 
         _binding!!.fabAddPlace.setOnClickListener { view ->

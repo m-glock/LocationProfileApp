@@ -8,7 +8,7 @@ import com.mglock.locationprofileapp.database.entities.Place
 import com.mglock.locationprofileapp.databinding.ListTilePlacesBinding
 import com.mglock.locationprofileapp.viewmodels.PlacesViewModel
 
-class RecyclerViewPlacesAdapter(private val dataSet: MutableList<Place>, private val viewModel: PlacesViewModel) :
+class RecyclerViewPlacesAdapter(private val dataSet: List<Place>, private val viewModel: PlacesViewModel) :
     RecyclerView.Adapter<RecyclerViewPlacesAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemBinding: ListTilePlacesBinding) : RecyclerView.ViewHolder(itemBinding.root) {
@@ -25,10 +25,10 @@ class RecyclerViewPlacesAdapter(private val dataSet: MutableList<Place>, private
 
         init {
             itemBinding.buttonDelete.setOnClickListener {
-                deleteItem(place!!)
+                viewModel.deletePlace(place!!)
             }
             itemBinding.buttonEdit.setOnClickListener {
-                editItem(place!!)
+                viewModel.updatePlace(place!!)
             }
         }
     }
@@ -48,18 +48,4 @@ class RecyclerViewPlacesAdapter(private val dataSet: MutableList<Place>, private
     }
 
     override fun getItemCount() = dataSet.size
-
-    fun deleteItem(place: Place){
-        val position = dataSet.indexOf(place)
-        dataSet.remove(place)
-        viewModel.deletePlace(place)
-        notifyItemRemoved(position)
-    }
-
-    fun editItem(place: Place){
-        val position = dataSet.indexOf(place)
-        // TODO edit item
-        viewModel.updatePlace(place)
-        notifyItemChanged(position)
-    }
 }

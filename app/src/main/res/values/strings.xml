@@ -22,6 +22,7 @@
     <string name="activate_profile_button_text">Activate</string>
 
     <!-- Places Tab -->
+    <string name="places_empty_list_text">There are no places yet. Click on the \'Add\' button in the lower right corner to add a new place</string>
     <string name="add_new_place_title">Add a new place</string>
     <string name="add_place_content_description">Add a new place either manually or automatically</string>
     <string name="add_place_manual_mode_button_text">Manual</string>
@@ -43,6 +44,5 @@
     <string name="placeholder_string">Placeholder</string>
     <string name="edit_button_text">Edit</string>
     <string name="delete_button_text">Delete</string>
-
 
 </resources>
