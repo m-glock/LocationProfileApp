@@ -8,6 +8,8 @@ import android.widget.ImageButton
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.mglock.locationprofileapp.R
+import com.mglock.locationprofileapp.database.entities.DetailAction
+import com.mglock.locationprofileapp.database.entities.Timeframe
 import com.mglock.locationprofileapp.database.entities.relations.ProfileWithRelations
 import com.mglock.locationprofileapp.databinding.ListTileProfilesBinding
 import com.mglock.locationprofileapp.viewmodels.ProfilesViewModel
@@ -23,9 +25,9 @@ class RecyclerViewProfilesAdapter(private val dataSet: List<ProfileWithRelations
         fun setValues(){
             itemBinding.activeProfileCheck.visibility = if(profile.profile.active) View.VISIBLE else View.INVISIBLE
             itemBinding.profileTitle.text = profile.profile.title
-            itemBinding.profileTimeText.text = "-" // TODO profile.timeframe
+            itemBinding.profileTimeText.text = getStringFromTimeframes(profile.timeframe)
             itemBinding.profilePlaceText.text = profile.place?.title ?: "-"
-            itemBinding.profileActionText.text = "Bluetooth on, Volume 7/11" // TODO profile.actions
+            itemBinding.profileActionText.text = getStringFromActions(profile.actions)
             itemBinding.activateProfileButton.text = if(profile.profile.active) "Deactivate" else "Activate"
         }
 
@@ -66,7 +68,7 @@ class RecyclerViewProfilesAdapter(private val dataSet: List<ProfileWithRelations
 
     override fun getItemCount() = dataSet.size
 
-    fun expandDetailInfo(expandableLayout: ConstraintLayout, expandableButton: ImageButton){
+    private fun expandDetailInfo(expandableLayout: ConstraintLayout, expandableButton: ImageButton){
         if(expandableLayout.layoutParams.height == ViewGroup.LayoutParams.WRAP_CONTENT){
             expandableLayout.layoutParams.height =
                 context!!.resources.getDimensionPixelSize(R.dimen.profile_expandable_zero_height)
@@ -78,8 +80,20 @@ class RecyclerViewProfilesAdapter(private val dataSet: List<ProfileWithRelations
         expandableLayout.requestLayout()
     }
 
-    fun editProfile(profile: ProfileWithRelations){
-        // TODO edit item
+    private fun editProfile(profile: ProfileWithRelations){
+        // TODO edit item - see places
         viewModel.updateProfile(profile.profile)
+    }
+
+    private fun getStringFromTimeframes(timeframes: List<Timeframe>): String{
+        if(timeframes.isEmpty()) return "-"
+        //TODO
+        return "-"
+    }
+
+    private fun getStringFromActions(actions: List<DetailAction>): String{
+        if(actions.isEmpty()) return "-"
+        //TODO
+        return "-"
     }
 }
