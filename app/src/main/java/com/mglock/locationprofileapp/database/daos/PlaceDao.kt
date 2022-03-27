@@ -22,6 +22,9 @@ interface PlaceDao {
     suspend fun update(place: Place)
 
     @Insert
+    suspend fun insert(place: Place)
+
+    @Insert
     fun insertAll(vararg places: Place)
 
     @Delete

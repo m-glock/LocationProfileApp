@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 }
 
 android {
@@ -53,15 +54,17 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     // android lifecycle/viewmodel dependencies
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0-alpha04'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.5.0-alpha04'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.0-alpha04'
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.0-alpha04'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-savedstate:2.5.0-alpha04'
-    kapt 'androidx.lifecycle:lifecycle-common-java8:2.5.0-alpha04'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0-alpha05'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.5.0-alpha05'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.0-alpha05'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.0-alpha05'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-savedstate:2.5.0-alpha05'
+    kapt 'androidx.lifecycle:lifecycle-common-java8:2.5.0-alpha05'
 
     // other dependencies
     implementation 'com.karumi:dexter:6.2.1'
+    implementation 'com.google.android.libraries.places:places:2.5.0'
+    implementation 'com.google.android.gms:play-services-maps:18.0.2'
 
     // test dependencies
     testImplementation 'junit:junit:4.13.2'
