@@ -33,26 +33,61 @@
             android:layout_height="wrap_content"
             android:hint="@string/add_place_title_label"
             android:inputType="textCapWords"
-            android:textSize="16sp" />
+            android:textSize="@dimen/add_place_label_text_size" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/inputLayoutTime"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/input_margin_top"
-        android:hint="@string/add_place_time_label"
-        app:layout_constraintTop_toBottomOf="@+id/inputLayoutTitleAuto"
-        tools:layout_editor_absoluteX="30dp">
+        android:padding="@dimen/duration_radio_padding"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputLayoutTitleAuto">
 
-        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
-            android:id="@+id/timeAutoCompleteTextView"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/textTimeAuto"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:clickable="true" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginTop="5dp"
+            android:text="@string/add_place_duration_label"
+            android:textSize="@dimen/add_place_label_text_size"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioGroup
+            android:id="@+id/radioGroupAddPlaceAutoTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/duration_radio_padding"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/duration_radio_height"
+                android:text="@string/add_place_duration_first_option"/>
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/duration_radio_height"
+                android:text="@string/add_place_duration_second_option" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/duration_radio_height"
+                android:text="@string/add_place_duration_third_option" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/duration_radio_height"
+                android:text="@string/add_place_duration_fourth_option" />
+
+        </RadioGroup>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
         android:id="@+id/startAutomaticMode"
@@ -62,6 +97,6 @@
         android:text="@string/start_auto_place_button_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputLayoutTime" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

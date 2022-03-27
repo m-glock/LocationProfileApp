@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         viewPager.adapter = adapter
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-            tab.text = Constants.tabTitles[position]
+            tab.text = resources.getStringArray(R.array.tab_titles)[position]
         }.attach()
         viewPager.currentItem = 1
     }
