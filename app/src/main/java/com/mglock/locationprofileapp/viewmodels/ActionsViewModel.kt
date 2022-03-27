@@ -5,25 +5,22 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.asLiveData
 import com.mglock.locationprofileapp.database.AppDatabase
 import com.mglock.locationprofileapp.database.entities.ActionGroup
 import kotlinx.coroutines.launch
 
 class ActionsViewModel(app: Application): AndroidViewModel(app) {
 
-    private var _actionGroups: MutableLiveData<List<ActionGroup>> = MutableLiveData()
+    private var _actionGroups: LiveData<List<ActionGroup>> = MutableLiveData()
     val actionGroups get() = _actionGroups
 
     init {
         viewModelScope.launch {
             try{
                 val db = AppDatabase.getInstance(getApplication())
-                _actionGroups.value = db.actionGroupDao().getAll()
-
-                //TODO see if there is a better solution
-                if(_actionGroups.value?.isEmpty() == true){
-                    _actionGroups.value = db.actionGroupDao().getAll()
-                }
+                _actionGroups = db.actionGroupDao().getAll().asLiveData(this.coroutineContext)
             } catch(e: Exception){
                 Log.e("Error", e.stackTraceToString())
             }

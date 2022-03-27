@@ -7,14 +7,15 @@ import androidx.room.Query
 import androidx.room.Update
 import com.mglock.locationprofileapp.database.entities.ActionGroup
 import com.mglock.locationprofileapp.database.entities.relations.ActionGroupWithRelations
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ActionGroupDao {
     @Query("SELECT * FROM action_group")
-    suspend fun getAll(): List<ActionGroup>
+    fun getAll(): Flow<List<ActionGroup>>
 
     @Query("SELECT * FROM action_group")
-    suspend fun getAllWithRelations(): List<ActionGroupWithRelations>
+    fun getAllWithRelations(): Flow<List<ActionGroupWithRelations>>
 
     @Query("SELECT * FROM action_group WHERE action_group_uid IN (:actionGroupIds)")
     suspend fun getByIds(actionGroupIds: LongArray): List<ActionGroup>
