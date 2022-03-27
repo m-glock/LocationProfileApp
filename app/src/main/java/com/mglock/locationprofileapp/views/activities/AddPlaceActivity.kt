@@ -24,7 +24,6 @@ class AddPlaceActivity : AppCompatActivity() {
         setSupportActionBar(_binding.toolbarMain)
         supportActionBar!!.setDisplayShowTitleEnabled(false)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.title = "Add a new place"
         _binding.toolbarMain.setNavigationOnClickListener {
             onBackPressed()
         }

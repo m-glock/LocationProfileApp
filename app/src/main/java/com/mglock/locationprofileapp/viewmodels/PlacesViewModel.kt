@@ -38,15 +38,4 @@ class PlacesViewModel(app: Application): AndroidViewModel(app) {
         }
     }
 
-    fun updatePlace(place: Place){
-        viewModelScope.launch {
-            try{
-                val db = AppDatabase.getInstance(getApplication())
-                db.placeDao().update(place)
-            } catch(e: Exception){
-                Log.e("Error", e.stackTraceToString())
-            }
-        }
-    }
-
 }

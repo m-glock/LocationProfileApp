@@ -8,7 +8,7 @@ import com.mglock.locationprofileapp.database.entities.Place
 import com.mglock.locationprofileapp.databinding.ListTilePlacesBinding
 import com.mglock.locationprofileapp.viewmodels.PlacesViewModel
 
-class RecyclerViewPlacesAdapter(private val dataSet: List<Place>, private val viewModel: PlacesViewModel) :
+class RecyclerViewPlacesAdapter(private val dataSet: List<Place>, private val viewModel: PlacesViewModel, val adapterOnClick : (Place) -> Unit) :
     RecyclerView.Adapter<RecyclerViewPlacesAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemBinding: ListTilePlacesBinding) : RecyclerView.ViewHolder(itemBinding.root) {
@@ -19,7 +19,7 @@ class RecyclerViewPlacesAdapter(private val dataSet: List<Place>, private val vi
         fun setValues(){
             if(place != null){
                 placeTitle.text = place!!.title
-                placeAddress.text = place!!.address //TODO either address or lat/long
+                placeAddress.text = place!!.address ?: "${place!!.latitude}/${place!!.longitude}"
             }
         }
 
@@ -28,8 +28,7 @@ class RecyclerViewPlacesAdapter(private val dataSet: List<Place>, private val vi
                 viewModel.deletePlace(place!!)
             }
             itemBinding.buttonEdit.setOnClickListener {
-                //TODO edit item
-                viewModel.updatePlace(place!!)
+                adapterOnClick(place!!)
             }
         }
     }

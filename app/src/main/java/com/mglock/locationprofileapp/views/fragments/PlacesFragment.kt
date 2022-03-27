@@ -7,9 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import com.mglock.locationprofileapp.database.entities.Place
 import com.mglock.locationprofileapp.views.activities.AddPlaceActivity
 import com.mglock.locationprofileapp.databinding.FragmentPlacesBinding
 import com.mglock.locationprofileapp.viewmodels.PlacesViewModel
+import com.mglock.locationprofileapp.views.activities.EditPlaceActivity
 import com.mglock.locationprofileapp.views.adapter.RecyclerViewPlacesAdapter
 
 class PlacesFragment : Fragment() {
@@ -41,11 +43,14 @@ class PlacesFragment : Fragment() {
             } else {
                 recyclerView.visibility = View.VISIBLE
                 textViewNoPlaces.visibility = View.GONE
-                recyclerView.adapter = RecyclerViewPlacesAdapter(places, mViewModel)
+                recyclerView.adapter = RecyclerViewPlacesAdapter(
+                    places,
+                    mViewModel
+                ) { place -> clickEditButton(place) }
             }
         }
 
-        _binding!!.fabAddPlace.setOnClickListener { view ->
+        _binding!!.fabAddPlace.setOnClickListener { _ ->
             val intent = Intent(context, AddPlaceActivity::class.java)
             startActivity(intent)
         }
@@ -56,5 +61,11 @@ class PlacesFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun clickEditButton(place: Place) {
+        val intent = Intent(context, EditPlaceActivity::class.java)
+        intent.putExtra("place", place)
+        startActivity(intent)
     }
 }

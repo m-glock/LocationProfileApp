@@ -15,7 +15,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
-import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.libraries.places.widget.Autocomplete
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import com.mglock.locationprofileapp.databinding.FragmentAddPlaceManualBinding
@@ -25,10 +24,11 @@ class AddPlaceManualFragment : Fragment() {
     private var _binding: FragmentAddPlaceManualBinding? = null
     private val binding get(): FragmentAddPlaceManualBinding = _binding!!
     private lateinit var mViewModel: AddPlaceManualViewModel
-    private lateinit var placesClient: PlacesClient
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
     private var mLatitude: Double? = null
     private var mLongitude: Double? = null
+    private var place: com.mglock.locationprofileapp.database.entities.Place? = null
+    private var buttonText: String = "Add Place"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +39,6 @@ class AddPlaceManualFragment : Fragment() {
             val apiKey = applicationInfo.metaData.getString("com.google.android.geo.API_KEY")
             Places.initialize(requireContext(), apiKey!!)
         }
-        placesClient = Places.createClient(requireContext())
 
         resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
@@ -63,6 +62,14 @@ class AddPlaceManualFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentAddPlaceManualBinding.inflate(inflater, container, false)
 
+        // set values (if available)
+        _binding!!.addPlaceButton.text = buttonText
+        if(place != null){
+            _binding!!.editTextTitleManual.setText(place!!.title)
+            //TODO if only lat/long are available
+            _binding!!.editTextAddress.setText(place!!.address)
+        }
+
         _binding!!.editTextAddress.setOnClickListener { _ ->
             //TODO check permissions
             try{
@@ -83,8 +90,13 @@ class AddPlaceManualFragment : Fragment() {
             val newPlaceTitle = _binding!!.editTextTitleManual.text.toString()
             val address = _binding!!.editTextAddress.text.toString()
             if(address.isNotBlank() && newPlaceTitle.isNotBlank()){
-                //TODO range
-                mViewModel.addPlace(newPlaceTitle, address, mLatitude!!, mLongitude!!, 0)
+                if(place != null){
+                    place!!.title = newPlaceTitle
+                    place!!.address = address
+                    updatePlace(place!!)
+                } else {
+                    addPlace(newPlaceTitle, address)
+                }
                 requireActivity().finish()
             } else {
                 AlertDialog.Builder(context)
@@ -102,5 +114,22 @@ class AddPlaceManualFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun addPlace(newPlaceTitle: String, address: String){
+        mViewModel.addPlace(newPlaceTitle, address, mLatitude!!, mLongitude!!)
+    }
+
+    private fun updatePlace(place: com.mglock.locationprofileapp.database.entities.Place){
+        mViewModel.updatePlace(place)
+    }
+
+    companion object{
+        fun newInstance(buttonText: String, place: com.mglock.locationprofileapp.database.entities.Place): AddPlaceManualFragment{
+            val fragment = AddPlaceManualFragment()
+            fragment.buttonText = buttonText
+            fragment.place = place
+            return fragment
+        }
     }
 }

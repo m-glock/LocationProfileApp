@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 @Entity(indices = [Index(value= ["title", "address"], unique = true)])
 data class Place (
@@ -11,13 +12,11 @@ data class Place (
     @ColumnInfo(name = "place_uid")
     val placeUID: Long,
 
-    val title: String,
+    var title: String,
 
-    val address: String?,
+    var address: String?,
 
     val latitude: String?,
 
-    val longitude: String?,
-
-    val range: Int
-)
+    val longitude: String?
+): Serializable

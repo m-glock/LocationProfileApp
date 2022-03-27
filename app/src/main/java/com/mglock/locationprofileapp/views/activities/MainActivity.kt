@@ -19,7 +19,6 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbarMain)
         supportActionBar!!.setDisplayShowTitleEnabled(false)
-        supportActionBar!!.title = resources.getString(R.string.app_name)
 
         val viewPager = binding.viewPager
         val tabLayout = binding.tabLayout

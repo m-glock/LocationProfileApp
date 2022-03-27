@@ -45,6 +45,7 @@
     <string name="placeholder_string">Placeholder</string>
     <string name="edit_button_text">Edit</string>
     <string name="delete_button_text">Delete</string>
+    <string name="edit_place_title">Edit Place</string>
 
 
 </resources>
