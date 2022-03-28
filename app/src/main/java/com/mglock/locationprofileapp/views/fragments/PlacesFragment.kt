@@ -50,7 +50,7 @@ class PlacesFragment : Fragment() {
             }
         }
 
-        _binding!!.fabAddPlace.setOnClickListener { _ ->
+        _binding!!.fabAddPlace.setOnClickListener {
             val intent = Intent(context, AddPlaceActivity::class.java)
             startActivity(intent)
         }

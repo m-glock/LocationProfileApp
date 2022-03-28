@@ -49,6 +49,52 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/rangeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/input_margin_top"
+        android:gravity="center_vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/InputLayoutAddress">
+
+        <TextView
+            android:id="@+id/rangeLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/range_label"
+            android:layout_marginStart="@dimen/text_icon_margin"
+            android:textSize="@dimen/text_size_title"/>
+
+        <TextView
+            android:id="@+id/rangeNumberText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/text_icon_margin"
+            android:text="@string/slider_current_value"
+            android:textSize="@dimen/text_size_title" />
+
+        <TextView
+            android:id="@+id/rangeUnitText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/range_unit"
+            android:textSize="@dimen/text_size_title"/>
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/rangeSlider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/text_icon_margin"
+            android:valueFrom="@string/slider_start_value"
+            android:valueTo="@string/slider_end_value"
+            android:value="@string/slider_current_value"
+            android:stepSize="@string/slider_step_size"
+            app:labelBehavior="gone"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
     <Button
         android:id="@+id/addPlaceButton"
         android:layout_width="wrap_content"
@@ -57,6 +103,6 @@
         android:text="@string/add_place_manual_button_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/InputLayoutAddress" />
+        app:layout_constraintTop_toBottomOf="@+id/rangeLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

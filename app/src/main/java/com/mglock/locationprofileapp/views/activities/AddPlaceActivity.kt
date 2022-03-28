@@ -28,7 +28,7 @@ class AddPlaceActivity : AppCompatActivity() {
             onBackPressed()
         }
 
-        val addPlaceManualFragment = AddPlaceManualFragment()
+        val addPlaceManualFragment = AddPlaceManualFragment(null)
         val addPlaceAutoFragment = AddPlaceAutoFragment()
         setNewFragment(addPlaceManualFragment)
 

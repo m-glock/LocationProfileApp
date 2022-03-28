@@ -24,15 +24,11 @@ import com.mglock.locationprofileapp.databinding.FragmentAddPlaceManualBinding
 import com.mglock.locationprofileapp.util.PermissionListener
 import com.mglock.locationprofileapp.viewmodels.AddPlaceManualViewModel
 
-class AddPlaceManualFragment : Fragment() {
+class AddPlaceManualFragment(private val editablePlace: com.mglock.locationprofileapp.database.entities.Place?) : Fragment() {
     private var _binding: FragmentAddPlaceManualBinding? = null
     private val binding get(): FragmentAddPlaceManualBinding = _binding!!
     private lateinit var mViewModel: AddPlaceManualViewModel
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
-    private var mLatitude: Double? = null
-    private var mLongitude: Double? = null
-    private var place: com.mglock.locationprofileapp.database.entities.Place? = null
-    private var buttonText: String = "Add Place"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,15 +40,15 @@ class AddPlaceManualFragment : Fragment() {
             Places.initialize(requireContext(), apiKey!!)
         }
 
+        // built resultLauncher for handling result of address autocomplete
         resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
                 // There are no request codes
                 val data: Intent? = result.data
                 val place: Place = Autocomplete.getPlaceFromIntent(data!!)
 
-                _binding!!.editTextAddress.setText(place.address)
-                mLatitude = place.latLng!!.latitude
-                mLongitude = place.latLng!!.longitude
+                binding.editTextAddress.setText(place.address)
+                mViewModel.updateLatLng(place.latLng!!)
             } else {
                 AlertDialog.Builder(context)
                     .setTitle("Error with Addresses")
@@ -72,18 +68,12 @@ class AddPlaceManualFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentAddPlaceManualBinding.inflate(inflater, container, false)
 
-        // set values (if available)
-        _binding!!.addPlaceButton.text = buttonText
-        if(place != null){
-            _binding!!.editTextTitleManual.setText(place!!.title)
-            if(place!!.address.isNullOrBlank()){
-                _binding!!.editTextAddress.setText(getString(R.string.lat_long_as_text, place!!.latitude, place!!.longitude))
-            } else {
-                _binding!!.editTextAddress.setText(place!!.address)
-            }
+        binding.rangeSlider.addOnChangeListener { _, value, _ ->
+            binding.rangeNumberText.text = value.toInt().toString()
         }
 
-        _binding!!.editTextAddress.setOnClickListener { _ ->
+        // check permissions when trying to access the autocomplete for address
+        binding.editTextAddress.setOnClickListener { _ ->
             Dexter.withContext(requireContext())
                 .withPermissions(
                     Manifest.permission.ACCESS_COARSE_LOCATION,
@@ -96,26 +86,20 @@ class AddPlaceManualFragment : Fragment() {
                 .check()
         }
 
-        _binding!!.addPlaceButton.setOnClickListener {
-            val newPlaceTitle = _binding!!.editTextTitleManual.text.toString()
-            val address = _binding!!.editTextAddress.text.toString()
-            if(address.isNotBlank() && newPlaceTitle.isNotBlank()){
-                if(place != null){
-                    place!!.title = newPlaceTitle
-                    place!!.address = address
-                    updatePlace(place!!)
-                } else {
-                    addPlace(newPlaceTitle, address)
-                }
-                requireActivity().finish()
-            } else {
-                AlertDialog.Builder(context)
-                    .setTitle("Missing Information")
-                    .setMessage("Title and Address information is needed. Please make sure that both are set.")
-                    .setPositiveButton("Okay", null)
-                    .create()
-                    .show()
-            }
+        binding.addPlaceButton.setOnClickListener {
+            addOrUpdatePlace()
+        }
+
+        // update text of slider value if value in VM changes
+        mViewModel.sliderValue.observe(viewLifecycleOwner){
+            binding.rangeNumberText.text = it.toString()
+        }
+
+        // set values (if available)
+        setValues()
+        if(editablePlace != null){
+            mViewModel.place.value = editablePlace
+            mViewModel.buttonText.value = "Done"
         }
 
         return binding.root
@@ -124,6 +108,23 @@ class AddPlaceManualFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun setValues(){
+        mViewModel.buttonText.observe(viewLifecycleOwner){ text ->
+            binding.addPlaceButton.text = text
+        }
+        mViewModel.place.observe(viewLifecycleOwner){ place ->
+            if(place != null){
+                binding.editTextTitleManual.setText(place.title)
+                binding.rangeSlider.value = place.range.toFloat()
+                if(place.address.isNullOrBlank()){
+                    binding.editTextAddress.setText(getString(R.string.lat_long_as_text, place.latitude, place.longitude))
+                } else {
+                    binding.editTextAddress.setText(place.address)
+                }
+            }
+        }
     }
 
     private fun startGoogleAddress(){
@@ -141,20 +142,20 @@ class AddPlaceManualFragment : Fragment() {
         }
     }
 
-    private fun addPlace(newPlaceTitle: String, address: String){
-        mViewModel.addPlace(newPlaceTitle, address, mLatitude!!, mLongitude!!)
-    }
-
-    private fun updatePlace(place: com.mglock.locationprofileapp.database.entities.Place){
-        mViewModel.updatePlace(place)
-    }
-
-    companion object{
-        fun newInstance(buttonText: String, place: com.mglock.locationprofileapp.database.entities.Place): AddPlaceManualFragment{
-            val fragment = AddPlaceManualFragment()
-            fragment.buttonText = buttonText
-            fragment.place = place
-            return fragment
+    private fun addOrUpdatePlace(){
+        val newPlaceTitle = binding.editTextTitleManual.text.toString()
+        val address = binding.editTextAddress.text.toString()
+        val range = binding.rangeSlider.value.toInt()
+        if(address.isNotBlank() && newPlaceTitle.isNotBlank()){
+            mViewModel.addOrUpdatePlace(newPlaceTitle, address, range)
+            requireActivity().finish()
+        } else {
+            AlertDialog.Builder(context)
+                .setTitle("Missing Information")
+                .setMessage("Title and Address information is needed. Please make sure that both are set.")
+                .setPositiveButton("Okay", null)
+                .create()
+                .show()
         }
     }
 }

@@ -25,7 +25,7 @@ class EditPlaceActivity : AppCompatActivity() {
         val place = intent.getSerializableExtra("place") as Place
 
         // open fragment to edit place
-        val editFragment = AddPlaceManualFragment.newInstance("Done", place)
+        val editFragment = AddPlaceManualFragment(place)
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(_binding.fragmentContainerEditPlace.id, editFragment)
         fragmentTransaction.commit()

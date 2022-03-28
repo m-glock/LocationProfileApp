@@ -3,14 +3,23 @@ package com.mglock.locationprofileapp.viewmodels
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.google.android.gms.maps.model.LatLng
 import com.mglock.locationprofileapp.database.AppDatabase
 import com.mglock.locationprofileapp.database.entities.Place
 import kotlinx.coroutines.launch
 
 class AddPlaceManualViewModel(app: Application): AndroidViewModel(app) {
 
-    fun addPlace(title: String, address: String, latitude: Double, longitude: Double){
+    private val _sliderValue: MutableLiveData<Int> = MutableLiveData<Int>()
+    val sliderValue get(): MutableLiveData<Int> = _sliderValue
+    var mLatitude: Double? = null
+    var mLongitude: Double? = null
+    var place: MutableLiveData<Place> = MutableLiveData()
+    var buttonText: MutableLiveData<String> = MutableLiveData("Add Place")
+
+    private fun addPlace(title: String, address: String, range: Int){
         viewModelScope.launch {
             try{
                 val db = AppDatabase.getInstance(getApplication())
@@ -18,9 +27,9 @@ class AddPlaceManualViewModel(app: Application): AndroidViewModel(app) {
                     0,
                     title,
                     address,
-                    latitude.toString(),
-                    longitude.toString(),
-                    0
+                    mLatitude.toString(),
+                    mLongitude.toString(),
+                    range
                 ))
             } catch(e: Exception){
                 Log.e("Error", e.stackTraceToString())
@@ -28,7 +37,7 @@ class AddPlaceManualViewModel(app: Application): AndroidViewModel(app) {
         }
     }
 
-    fun updatePlace(place: Place){
+    private fun updatePlace(place: Place){
         viewModelScope.launch {
             try{
                 val db = AppDatabase.getInstance(getApplication())
@@ -36,6 +45,23 @@ class AddPlaceManualViewModel(app: Application): AndroidViewModel(app) {
             } catch(e: Exception){
                 Log.e("Error", e.stackTraceToString())
             }
+        }
+    }
+
+    fun updateLatLng(latLng: LatLng){
+        mLatitude = latLng.latitude
+        mLongitude = latLng.longitude
+    }
+
+    fun addOrUpdatePlace(newPlaceTitle: String, address: String, range: Int) {
+        val place = place.value
+        if(place != null){
+            place.title = newPlaceTitle
+            place.address = address
+            place.range = range
+            updatePlace(place)
+        } else {
+            addPlace(newPlaceTitle, address, range)
         }
     }
 }
