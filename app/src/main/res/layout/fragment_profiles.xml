@@ -7,45 +7,59 @@
     tools:context=".views.fragments.ProfilesFragment"
     android:padding="@dimen/tab_fragment_padding">
 
-    <TextView
-        android:id="@+id/activateProfilesTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/side_margin_tab_top_area"
-        android:text="@string/activate_profile_label"
-        android:textSize="@dimen/text_size_title"
-        app:layout_constraintBaseline_toBaselineOf="@+id/activateProfilesSwitch"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/activateProfilesSwitch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/side_margin_tab_top_area"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textViewNoProfiles"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/recycler_view_top_margin"
-        android:visibility="gone"
-        android:padding="@dimen/empty_list_tab_padding"
-        android:text="@string/profiles_empty_list_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activateProfilesTextView" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewProfiles"
+    <ScrollView
+        android:id="@+id/scrollViewProfiles"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/recycler_view_top_margin"
-        app:layoutManager="LinearLayoutManager"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/scrollViewLayoutProfiles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/activateProfilesTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/side_margin_tab_top_area"
+                android:text="@string/activate_profile_label"
+                android:textSize="@dimen/text_size_title"
+                app:layout_constraintBaseline_toBaselineOf="@+id/activateProfilesSwitch"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/activateProfilesSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/side_margin_tab_top_area"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textViewNoProfiles"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/recycler_view_top_margin"
+                android:visibility="gone"
+                android:padding="@dimen/empty_list_tab_padding"
+                android:text="@string/profiles_empty_list_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activateProfilesTextView" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewProfiles"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/recycler_view_top_margin"
+                app:layoutManager="LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAddProfile"
