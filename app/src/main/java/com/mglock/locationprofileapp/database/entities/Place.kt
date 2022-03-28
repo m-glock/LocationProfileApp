@@ -18,5 +18,7 @@ data class Place (
 
     val latitude: String?,
 
-    val longitude: String?
+    val longitude: String?,
+
+    val range: Int
 ): Serializable

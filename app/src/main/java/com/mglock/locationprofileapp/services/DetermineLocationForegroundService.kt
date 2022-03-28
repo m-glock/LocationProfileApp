@@ -67,7 +67,7 @@ class DetermineLocationForegroundService: Service() {
             override fun run() {
                 val db = AppDatabase.getInstance(this@DetermineLocationForegroundService)
                 // TODO create place object from information
-                val place = Place(0, newPlaceTitle, "unknown", "unknown", "unknown")
+                val place = Place(0, newPlaceTitle, "unknown", "unknown", "unknown", 0)
                 db.placeDao().insertAll(place)
                 stopSelf()
             }

@@ -19,7 +19,8 @@ class AddPlaceManualViewModel(app: Application): AndroidViewModel(app) {
                     title,
                     address,
                     latitude.toString(),
-                    longitude.toString()
+                    longitude.toString(),
+                    0
                 ))
             } catch(e: Exception){
                 Log.e("Error", e.stackTraceToString())
