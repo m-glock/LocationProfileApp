@@ -1,5 +1,6 @@
 package com.mglock.locationprofileapp.views.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.mglock.locationprofileapp.databinding.FragmentProfilesBinding
 import com.mglock.locationprofileapp.viewmodels.ProfilesViewModel
+import com.mglock.locationprofileapp.views.activities.AddProfileActivity
 import com.mglock.locationprofileapp.views.adapter.RecyclerViewProfilesAdapter
 
 class ProfilesFragment : Fragment() {
@@ -41,6 +43,11 @@ class ProfilesFragment : Fragment() {
                 textViewNoProfiles.visibility = View.GONE
                 recyclerView.adapter = RecyclerViewProfilesAdapter(profiles, mViewModel)
             }
+        }
+
+        binding.fabAddProfile.setOnClickListener {
+            val intent = Intent(context, AddProfileActivity::class.java)
+            startActivity(intent)
         }
 
         return binding.root
