@@ -20,10 +20,10 @@ class AddPlaceActivity : AppCompatActivity() {
         binding = ActivityAddPlaceBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(binding.toolbarMain)
+        setSupportActionBar(binding.toolbarAddPlace)
         supportActionBar!!.setDisplayShowTitleEnabled(false)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        binding.toolbarMain.setNavigationOnClickListener {
+        binding.toolbarAddPlace.setNavigationOnClickListener {
             onBackPressed()
         }
 

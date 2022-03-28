@@ -7,7 +7,7 @@
     tools:context=".views.activities.EditPlaceActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarMain"
+        android:id="@+id/toolbarEditPlace"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:theme="@style/ActionBarStyle"
@@ -32,6 +32,6 @@
         android:layout_marginTop="@dimen/input_margin_top"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarMain" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbarEditPlace" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

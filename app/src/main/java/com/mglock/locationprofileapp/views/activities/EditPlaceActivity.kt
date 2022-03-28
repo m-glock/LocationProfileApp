@@ -15,10 +15,10 @@ class EditPlaceActivity : AppCompatActivity() {
         binding = ActivityEditPlaceBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(binding.toolbarMain)
+        setSupportActionBar(binding.toolbarEditPlace)
         supportActionBar!!.setDisplayShowTitleEnabled(false)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        binding.toolbarMain.setNavigationOnClickListener {
+        binding.toolbarEditPlace.setNavigationOnClickListener {
             onBackPressed()
         }
 

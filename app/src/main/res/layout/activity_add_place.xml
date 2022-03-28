@@ -7,7 +7,7 @@
     tools:context=".views.activities.AddPlaceActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarMain"
+        android:id="@+id/toolbarAddPlace"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:theme="@style/ActionBarStyle"
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:layout_marginTop="@dimen/input_margin_top"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarMain">
+        app:layout_constraintTop_toBottomOf="@+id/toolbarAddPlace">
 
         <Button
             android:id="@+id/manualModeButton"
