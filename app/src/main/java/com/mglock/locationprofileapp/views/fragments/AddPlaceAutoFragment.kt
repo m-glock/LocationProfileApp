@@ -32,7 +32,7 @@ class AddPlaceAutoFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentAddPlaceAutoBinding.inflate(inflater, container, false)
 
-        _binding!!.startAutomaticMode.setOnClickListener {
+        binding.startAutomaticMode.setOnClickListener {
             Dexter.withContext(requireContext())
                 .withPermissions(
                     Manifest.permission.ACCESS_COARSE_LOCATION,
@@ -54,12 +54,11 @@ class AddPlaceAutoFragment : Fragment() {
     }
 
     private fun startAutomaticLocationTracking(){
-        val newPlaceTitle = _binding!!.editTextTitleAuto.text.toString()
-        val radioGroup = _binding!!.radioGroupAddPlaceAutoTime
+        val newPlaceTitle = binding.editTextTitleAuto.text.toString()
+        val radioGroup = binding.radioGroupAddPlaceAutoTime
         val checkedRadioButton: RadioButton? = radioGroup.findViewById(radioGroup.checkedRadioButtonId)
         if(checkedRadioButton != null && newPlaceTitle.isNotBlank()){
-            val locationServiceDuration = checkedRadioButton.text.toString()
-            mViewModel.startLocationTracking(newPlaceTitle, locationServiceDuration)
+            mViewModel.startLocationTracking(newPlaceTitle, checkedRadioButton.text.toString())
             requireActivity().finish()
         } else {
             AlertDialog.Builder(context)

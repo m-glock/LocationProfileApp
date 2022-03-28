@@ -33,8 +33,8 @@ class PlacesFragment : Fragment() {
         _binding = FragmentPlacesBinding.inflate(inflater, container, false)
 
         // set the adapter for the recyclerview to display the list items
-        val recyclerView = _binding!!.recyclerViewPlaces
-        val textViewNoPlaces = _binding!!.textViewNoPlaces
+        val recyclerView = binding.recyclerViewPlaces
+        val textViewNoPlaces = binding.textViewNoPlaces
         mViewModel.places.observe(viewLifecycleOwner){ places ->
             // if the view is empty, a text is shown instead
             if(places.isEmpty()){
@@ -50,7 +50,7 @@ class PlacesFragment : Fragment() {
             }
         }
 
-        _binding!!.fabAddPlace.setOnClickListener {
+        binding.fabAddPlace.setOnClickListener {
             val intent = Intent(context, AddPlaceActivity::class.java)
             startActivity(intent)
         }

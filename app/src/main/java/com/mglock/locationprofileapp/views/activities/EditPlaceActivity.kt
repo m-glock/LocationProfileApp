@@ -8,17 +8,17 @@ import com.mglock.locationprofileapp.views.fragments.AddPlaceManualFragment
 
 class EditPlaceActivity : AppCompatActivity() {
 
-    private lateinit var _binding: ActivityEditPlaceBinding
+    private lateinit var binding: ActivityEditPlaceBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = ActivityEditPlaceBinding.inflate(layoutInflater)
-        setContentView(_binding.root)
+        binding = ActivityEditPlaceBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        setSupportActionBar(_binding.toolbarMain)
+        setSupportActionBar(binding.toolbarMain)
         supportActionBar!!.setDisplayShowTitleEnabled(false)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        _binding.toolbarMain.setNavigationOnClickListener {
+        binding.toolbarMain.setNavigationOnClickListener {
             onBackPressed()
         }
 
@@ -27,7 +27,7 @@ class EditPlaceActivity : AppCompatActivity() {
         // open fragment to edit place
         val editFragment = AddPlaceManualFragment(place)
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(_binding.fragmentContainerEditPlace.id, editFragment)
+        fragmentTransaction.replace(binding.fragmentContainerEditPlace.id, editFragment)
         fragmentTransaction.commit()
     }
 }
