@@ -90,6 +90,7 @@ class AddPlaceManualFragment : Fragment() {
                     Manifest.permission.ACCESS_FINE_LOCATION
                 )
                 .withListener(PermissionListener(requireContext()){
+                    //method to be called if permissions are granted
                    startGoogleAddress()
                 })
                 .check()

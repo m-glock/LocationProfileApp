@@ -12,6 +12,7 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 
 class PermissionListener(private val activityContext: Context, val onPermissionsGranted : () -> Unit): MultiplePermissionsListener {
 
+    //TODO properly handle all possible actions from the user (deny, deny&don't ask again etc.)
     override fun onPermissionsChecked(report: MultiplePermissionsReport?) {
         if(!report!!.areAllPermissionsGranted()){
             AlertDialog.Builder(activityContext)
