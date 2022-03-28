@@ -1,5 +1,6 @@
 package com.mglock.locationprofileapp.views.fragments
 
+import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
@@ -17,7 +18,10 @@ import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.widget.Autocomplete
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
+import com.karumi.dexter.Dexter
+import com.mglock.locationprofileapp.R
 import com.mglock.locationprofileapp.databinding.FragmentAddPlaceManualBinding
+import com.mglock.locationprofileapp.util.PermissionListener
 import com.mglock.locationprofileapp.viewmodels.AddPlaceManualViewModel
 
 class AddPlaceManualFragment : Fragment() {
@@ -50,7 +54,13 @@ class AddPlaceManualFragment : Fragment() {
                 mLatitude = place.latLng!!.latitude
                 mLongitude = place.latLng!!.longitude
             } else {
-                //TODO handle error
+                AlertDialog.Builder(context)
+                    .setTitle("Error with Addresses")
+                    .setMessage("Something went wrong the address search. " +
+                            "Please try again later. If the problem persists, ask support.")
+                    .setPositiveButton("Okay", null)
+                    .create()
+                    .show()
             }
         }
     }
@@ -66,24 +76,23 @@ class AddPlaceManualFragment : Fragment() {
         _binding!!.addPlaceButton.text = buttonText
         if(place != null){
             _binding!!.editTextTitleManual.setText(place!!.title)
-            //TODO if only lat/long are available
-            _binding!!.editTextAddress.setText(place!!.address)
+            if(place!!.address.isNullOrBlank()){
+                _binding!!.editTextAddress.setText(getString(R.string.lat_long_as_text, place!!.latitude, place!!.longitude))
+            } else {
+                _binding!!.editTextAddress.setText(place!!.address)
+            }
         }
 
         _binding!!.editTextAddress.setOnClickListener { _ ->
-            //TODO check permissions
-            try{
-                val fields = listOf(
-                    Place.Field.ID,
-                    Place.Field.NAME,
-                    Place.Field.LAT_LNG,
-                    Place.Field.ADDRESS
+            Dexter.withContext(requireContext())
+                .withPermissions(
+                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                    Manifest.permission.ACCESS_FINE_LOCATION
                 )
-                val intent = Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields).build(requireContext())
-                resultLauncher.launch(intent)
-            } catch(e: Exception){
-                Log.i("Error", e.printStackTrace().toString())
-            }
+                .withListener(PermissionListener(requireContext()){
+                   startGoogleAddress()
+                })
+                .check()
         }
 
         _binding!!.addPlaceButton.setOnClickListener {
@@ -114,6 +123,21 @@ class AddPlaceManualFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun startGoogleAddress(){
+        try{
+            val fields = listOf(
+                Place.Field.ID,
+                Place.Field.NAME,
+                Place.Field.LAT_LNG,
+                Place.Field.ADDRESS
+            )
+            val intent = Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields).build(requireContext())
+            resultLauncher.launch(intent)
+        } catch(e: Exception){
+            Log.i("Error", e.printStackTrace().toString())
+        }
     }
 
     private fun addPlace(newPlaceTitle: String, address: String){
