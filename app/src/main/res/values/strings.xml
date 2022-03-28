@@ -29,6 +29,7 @@
     <string name="add_place_manual_mode_button_text">Manual</string>
     <string name="add_place_auto_mode_button_text">Automatic</string>
     <string name="add_place_title_label">Title</string>
+    <string name="lat_long_as_text">%s/%s</string>
     <!-- Add place automatically -->
     <string name="add_place_address_label">Address</string>
     <string name="add_place_automatic_explanation">The app will track your location during the determined time and will calculate a location and radius for you.</string>

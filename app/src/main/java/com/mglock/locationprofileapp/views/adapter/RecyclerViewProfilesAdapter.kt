@@ -87,13 +87,11 @@ class RecyclerViewProfilesAdapter(private val dataSet: List<ProfileWithRelations
 
     private fun getStringFromTimeframes(timeframes: List<Timeframe>): String{
         if(timeframes.isEmpty()) return "-"
-        //TODO
-        return "-"
+        return timeframes.joinToString(","){ timeframe -> timeframe.toString() }
     }
 
     private fun getStringFromActions(actions: List<DetailAction>): String{
         if(actions.isEmpty()) return "-"
-        //TODO
-        return "-"
+        return actions.joinToString(","){ action -> action.name}
     }
 }
