@@ -33,7 +33,8 @@
     </style>
 
     <style name="SecondaryButton" parent="Widget.AppCompat.Button.Colored">
-
+        <item name="backgroundTint">@color/transparent</item>
+        <item name="android:textColor">@color/textColorDark</item>
     </style>
 
     <!-- switches -->

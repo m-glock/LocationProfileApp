@@ -21,6 +21,13 @@
     <string name="profile_action_label">Action</string>
     <string name="deactivate_profile_button_text">Deactivate</string>
     <string name="activate_profile_button_text">Activate</string>
+    <string name="add_new_profile_title">Add new profile</string>
+    <string name="add_profile_actions_label">Actions</string>
+    <string name="add_profile_add_action_button_text">Add Action</string>
+    <string name="add_profile_place_label">Place</string>
+    <string name="add_profile_timeframe_label">Time</string>
+    <string name="add_profile_add_timeframe_button_text">Add Timeframe</string>
+    <string name="add_profile_button_text">Add Profile</string>
 
     <!-- Places Tab -->
     <string name="places_empty_list_text">There are no places yet. Click on the \'Add\' button in the lower right corner to add a new place.</string>
