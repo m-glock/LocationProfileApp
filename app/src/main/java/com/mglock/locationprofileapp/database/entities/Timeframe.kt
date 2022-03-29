@@ -5,6 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.mglock.locationprofileapp.util.Time
 import com.mglock.locationprofileapp.util.enums.Weekday
+import java.io.Serializable
 
 @Entity
 data class Timeframe(
@@ -20,7 +21,7 @@ data class Timeframe(
     val amPm: Boolean,
 
     val weekdays: Set<Weekday>
-){
+): Serializable {
     override fun toString(): String {
         var timeframeString = "from $from to $to"
         if(weekdays.isNotEmpty()){

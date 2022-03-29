@@ -8,6 +8,7 @@ import com.mglock.locationprofileapp.database.entities.Place
 import com.mglock.locationprofileapp.database.entities.Profile
 import com.mglock.locationprofileapp.database.entities.ProfileDetailAction
 import com.mglock.locationprofileapp.database.entities.Timeframe
+import java.io.Serializable
 
 data class ProfileWithRelations (
     @Embedded
@@ -17,7 +18,7 @@ data class ProfileWithRelations (
     val place: Place?,
 
     @Relation(parentColumn = "profile_uid", entityColumn = "timeframe_uid")
-    val timeframe: List<Timeframe>,
+    val timeframe: Timeframe?,
 
     @Relation(
         parentColumn = "profile_uid",
@@ -25,4 +26,4 @@ data class ProfileWithRelations (
         associateBy = Junction(ProfileDetailAction::class)
     )
     val actions: List<DetailAction>
-)
+): Serializable

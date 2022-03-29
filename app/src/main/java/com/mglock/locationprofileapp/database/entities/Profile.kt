@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 @Entity(indices = [Index(value= ["title"], unique = true)])
 data class Profile(
@@ -20,4 +21,4 @@ data class Profile(
     val timeframeId: Long?,
 
     var active: Boolean
-)
+): Serializable

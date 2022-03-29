@@ -3,6 +3,7 @@ package com.mglock.locationprofileapp.database.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 @Entity(tableName = "detail_action")
 data class DetailAction(
@@ -14,4 +15,4 @@ data class DetailAction(
 
     @ColumnInfo(name="action_group_id")
     val actionGroupId: Long
-)
+): Serializable
