@@ -13,14 +13,14 @@ data class Timeframe(
     @ColumnInfo(name = "timeframe_uid")
     val timeframeUID: Long,
 
-    val from: Time,
+    var from: Time,
 
-    val to: Time,
+    var to: Time,
 
     @ColumnInfo(name="am_pm")
     val amPm: Boolean,
 
-    val weekdays: Set<Weekday>
+    var weekdays: Set<Weekday>
 ): Serializable {
     override fun toString(): String {
         var timeframeString = "from $from to $to"

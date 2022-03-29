@@ -15,10 +15,10 @@ data class Profile(
     val title: String,
 
     @ColumnInfo(name="place_id")
-    val placeId: Long?,
+    var placeId: Long?,
 
     @ColumnInfo(name="timeframe_id")
-    val timeframeId: Long?,
+    var timeframeId: Long?,
 
     var active: Boolean
 ): Serializable

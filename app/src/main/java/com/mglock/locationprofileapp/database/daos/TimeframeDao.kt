@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import com.mglock.locationprofileapp.database.entities.Timeframe
 
 @Dao
@@ -19,6 +20,9 @@ interface TimeframeDao {
 
     @Insert
     fun insertAll(vararg timeframes: Timeframe)
+
+    @Update
+    fun update(timeframe: Timeframe)
 
     @Delete
     suspend fun delete(timeframe: Timeframe)

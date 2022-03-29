@@ -53,6 +53,58 @@ class AddProfileViewModel(app: Application): AndroidViewModel(app)  {
         _timeEnd.value = timeEnd
     }
 
+    //TODO update actions
+    fun updateProfile(
+        usePlace: Boolean,
+        useTimeframe: Boolean,
+        selectedPlaceTitle: String,
+        weekdays: Set<Weekday>
+    ) {
+        viewModelScope.launch {
+            try {
+                // update profile and its relations
+                val db = AppDatabase.getInstance(getApplication())
+                val profileWithRelations = profile.value!!
+
+                // if place had been checked, update the place id of the profile
+                if(usePlace){
+                    profileWithRelations.profile.placeId = places.value!!.find { place ->
+                        place.title == selectedPlaceTitle
+                    }?.placeUID
+                } else {
+                    profileWithRelations.profile.placeId = null
+                }
+
+                if(useTimeframe){
+                    if(profileWithRelations.profile.timeframeId == null){
+                        // new timeframe, add it to db
+                        val timeframeUID = db.timeframeDao().insert(Timeframe(
+                            0,
+                            timeStart.value!!,
+                            timeEnd.value!!,
+                            false,
+                            weekdays
+                        ))
+                        profileWithRelations.profile.timeframeId = timeframeUID
+                    } else {
+                        // old timeframe, update it
+                        profileWithRelations.timeframe!!.from = timeStart.value!!
+                        profileWithRelations.timeframe.to = timeEnd.value!!
+                        profileWithRelations.timeframe.weekdays = weekdays
+                        db.timeframeDao().update(profileWithRelations.timeframe)
+                    }
+                } else {
+                    profileWithRelations.profile.timeframeId = null
+                }
+
+                db.profileDao().update(profileWithRelations.profile)
+                return@launch
+            } catch (e: Exception) {
+                Log.e("Error", e.stackTraceToString())
+            }
+        }
+    }
+
     fun addProfile(
         title: String,
         placeTitle: String?,

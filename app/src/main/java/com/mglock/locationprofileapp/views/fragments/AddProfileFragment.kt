@@ -12,8 +12,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.mglock.locationprofileapp.R
 import com.mglock.locationprofileapp.TimePickerFragment
-import com.mglock.locationprofileapp.database.entities.Place
-import com.mglock.locationprofileapp.database.entities.Profile
 import com.mglock.locationprofileapp.database.entities.relations.ProfileWithRelations
 import com.mglock.locationprofileapp.databinding.FragmentAddProfileBinding
 import com.mglock.locationprofileapp.util.enums.Weekday
@@ -93,13 +91,14 @@ class AddProfileFragment(private val editableProfile: ProfileWithRelations?) : F
     private fun createProfileFromInput(){
         val useTimeframe = binding.checkBoxTime.isChecked
         val usePlace = binding.checkBoxPlace.isChecked
-        val selectedPlaceTitle = binding.addPlaceDropdown.selectedItem as String?
+        val selectedPlaceTitle = binding.addPlaceDropdown.selectedItem as String
 
         // if any of the necessary fields are not set, display alert
         // else save data in DB and close Activity
         if(allInputsSet(usePlace, useTimeframe)){
             val title = binding.editTextTitleProfile.text.toString()
-            mViewModel.addProfile(title, selectedPlaceTitle, getWeekdays(), useTimeframe, usePlace)
+            if(mViewModel.profile.value != null) mViewModel.updateProfile(usePlace, useTimeframe, selectedPlaceTitle, getWeekdays())
+            else mViewModel.addProfile(title, selectedPlaceTitle, getWeekdays(), useTimeframe, usePlace)
             requireActivity().finish()
         } else {
             AlertDialog.Builder(context)
@@ -142,7 +141,7 @@ class AddProfileFragment(private val editableProfile: ProfileWithRelations?) : F
             if(profile != null){
                 binding.editTextTitleProfile.setText(profile.profile.title)
                 if(profile.profile.placeId != null){
-                    binding.addPlaceDropdown.setSelection(profile.profile.placeId.toInt())
+                    binding.addPlaceDropdown.setSelection(profile.profile.placeId!!.toInt())
                 }
                 if(profile.timeframe != null){
                     mViewModel.timeStart.value = profile.timeframe.from
