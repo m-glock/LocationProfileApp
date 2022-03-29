@@ -15,6 +15,9 @@ interface TimeframeDao {
     suspend fun getByIds(timeframeIds: LongArray): List<Timeframe>
 
     @Insert
+    suspend fun insert(timeframe: Timeframe): Long
+
+    @Insert
     fun insertAll(vararg timeframes: Timeframe)
 
     @Delete

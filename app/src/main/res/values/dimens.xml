@@ -24,4 +24,5 @@
     <dimen name="duration_radio_padding">15dp</dimen>
     <dimen name="add_place_label_text_size">16sp</dimen>
     <dimen name="empty_list_tab_padding">30dp</dimen>
+    <dimen name="profile_details_label_margin">30dp</dimen>
 </resources>

@@ -1,11 +1,12 @@
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/list_tile_margin"
-        android:layout_marginBottom="@dimen/list_tile_margin"
-        android:orientation="vertical"
-        android:background="@drawable/list_tile_background">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginHorizontal="@dimen/list_tile_margin"
+    android:layout_marginBottom="@dimen/list_tile_margin"
+    android:orientation="vertical"
+    android:background="@drawable/list_tile_background">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/profileListTileLayout"
@@ -71,57 +72,79 @@
         android:layout_height="@dimen/profile_expandable_zero_height"
         android:paddingHorizontal="@dimen/list_tile_padding_horizontal"
         android:paddingVertical="@dimen/list_tile_padding_vertical"
-        app:layout_constraintTop_toBottomOf="@+id/profileListTileLayout">
+        app:layout_constraintTop_toBottomOf="@+id/profileListTileLayout"
+        tools:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/profileTimeLabel"
-            android:layout_width="wrap_content"
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/profileTime"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/profile_time_label"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/profileTimeText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/placeholder_string"
-            app:layout_constraintBaseline_toBaselineOf="@+id/profileTimeLabel"
-            app:layout_constraintEnd_toEndOf="parent" />
+            <TextView
+                android:id="@+id/profileTimeLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/profile_time_label" />
 
-        <TextView
-            android:id="@+id/profilePlaceLabel"
-            android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/profileTimeText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/profile_details_label_margin"
+                android:gravity="end"
+                android:text="@string/placeholder_string" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/profilePlace"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/profile_expandable_text_bottom_margin"
-            android:text="@string/profile_place_label"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profileTimeLabel" />
+            app:layout_constraintTop_toBottomOf="@+id/profileTime" >
 
-        <TextView
-            android:id="@+id/profilePlaceText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/placeholder_string"
-            app:layout_constraintBaseline_toBaselineOf="@+id/profilePlaceLabel"
-            app:layout_constraintEnd_toEndOf="parent" />
+            <TextView
+                android:id="@+id/profilePlaceLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/profile_place_label" />
 
-        <TextView
-            android:id="@+id/profileActionLabel"
-            android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/profilePlaceText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/profile_details_label_margin"
+                android:gravity="end"
+                android:text="@string/placeholder_string" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/profileAction"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/profile_expandable_text_bottom_margin"
-            android:text="@string/profile_action_label"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profilePlaceLabel" />
+            app:layout_constraintTop_toBottomOf="@+id/profilePlace" >
 
-        <TextView
-            android:id="@+id/profileActionText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/placeholder_string"
-            app:layout_constraintBaseline_toBaselineOf="@+id/profileActionLabel"
-            app:layout_constraintEnd_toEndOf="parent" />
+            <TextView
+                android:id="@+id/profileActionLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/profile_action_label" />
+
+            <TextView
+                android:id="@+id/profileActionText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/profile_details_label_margin"
+                android:gravity="end"
+                android:text="@string/placeholder_string" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/expandableButtonsLayout"
@@ -131,7 +154,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:gravity="end"
-            app:layout_constraintTop_toBottomOf="@+id/profileActionLabel">
+            app:layout_constraintTop_toBottomOf="@+id/profileAction">
 
             <Button
                 android:id="@+id/activateProfileButton"

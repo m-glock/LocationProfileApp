@@ -1,24 +1,27 @@
 package com.mglock.locationprofileapp.database
 
 import androidx.room.TypeConverter
+import com.mglock.locationprofileapp.util.Time
 import com.mglock.locationprofileapp.util.enums.Weekday
-import java.sql.Date
 import java.util.Locale
 
 class Converters {
     @TypeConverter
-    fun fromTimestamp(value: Long?): Date? {
-        return value?.let { Date(it) }
+    fun timestampToTime(value: String?): Time? {
+        return value?.let { timeString ->
+            val hAndMin = timeString.split(":")
+            Time(hAndMin[0].toInt(), hAndMin[1].toInt())
+        }
     }
 
     @TypeConverter
-    fun dateToTimestamp(date: Date?): Long? {
-        return date?.time
+    fun timeToTimestamp(time: Time?): String? {
+        return time?.toString()
     }
 
     @TypeConverter
     fun weekdayToString(weekdays: Set<Weekday>): String{
-        return weekdays.joinToString{ weekday -> weekday.title }
+        return weekdays.joinToString(","){ weekday -> weekday.title }
     }
 
     @TypeConverter

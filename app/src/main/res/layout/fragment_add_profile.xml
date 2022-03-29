@@ -169,90 +169,66 @@
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <GridLayout
                     android:id="@+id/weekdayLayout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:clickable="false"
+                    android:columnCount="3"
+                    android:rowCount="3"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/checkBoxTime">
 
-                    <LinearLayout
-                        android:id="@+id/weekdayLayout1"
+                    <CheckBox
+                        android:id="@+id/mondayCheckbox"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
+                        android:layout_height="@dimen/duration_radio_height"
+                        android:tag="weekday"
+                        android:text="@string/monday" />
 
-                        <CheckBox
-                            android:id="@+id/mondayCheckbox"
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/duration_radio_height"
-                            android:text="@string/monday" />
-
-                        <CheckBox
-                            android:id="@+id/tuesdayCheckbox"
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/duration_radio_height"
-                            android:text="@string/tuesday" />
-
-                        <CheckBox
-                            android:id="@+id/wednesdayCheckbox"
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/duration_radio_height"
-                            android:text="@string/wednesday" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/weekdayLayout2"
+                    <CheckBox
+                        android:id="@+id/tuesdayCheckbox"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/text_icon_margin"
-                        android:orientation="vertical"
-                        app:layout_constraintStart_toEndOf="@+id/weekdayLayout1"
-                        app:layout_constraintTop_toTopOf="parent">
+                        android:layout_height="@dimen/duration_radio_height"
+                        android:tag="weekday"
+                        android:text="@string/tuesday" />
 
-                        <CheckBox
-                            android:id="@+id/thursdayCheckbox"
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/duration_radio_height"
-                            android:text="@string/thursday" />
-
-                        <CheckBox
-                            android:id="@+id/fridayCheckbox"
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/duration_radio_height"
-                            android:text="@string/friday" />
-
-                        <CheckBox
-                            android:id="@+id/saturdayCheckbox"
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/duration_radio_height"
-                            android:text="@string/saturday" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/weekdayLayout3"
+                    <CheckBox
+                        android:id="@+id/wednesdayCheckbox"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/text_icon_margin"
-                        android:orientation="vertical"
-                        app:layout_constraintStart_toEndOf="@+id/weekdayLayout2"
-                        app:layout_constraintTop_toTopOf="parent">
+                        android:layout_height="@dimen/duration_radio_height"
+                        android:tag="weekday"
+                        android:text="@string/wednesday" />
 
-                        <CheckBox
-                            android:id="@+id/sundayCheckbox"
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/duration_radio_height"
-                            android:text="@string/sunday" />
+                    <CheckBox
+                        android:id="@+id/thursdayCheckbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/duration_radio_height"
+                        android:tag="weekday"
+                        android:text="@string/thursday" />
 
-                    </LinearLayout>
+                    <CheckBox
+                        android:id="@+id/fridayCheckbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/duration_radio_height"
+                        android:tag="weekday"
+                        android:text="@string/friday" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    <CheckBox
+                        android:id="@+id/saturdayCheckbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/duration_radio_height"
+                        android:tag="weekday"
+                        android:text="@string/saturday" />
+
+                    <CheckBox
+                        android:id="@+id/sundayCheckbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/duration_radio_height"
+                        android:tag="weekday"
+                        android:text="@string/sunday" />
+
+                </GridLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
