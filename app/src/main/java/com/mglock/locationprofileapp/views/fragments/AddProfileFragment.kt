@@ -56,7 +56,7 @@ class AddProfileFragment(private val editableProfile: ProfileWithRelations?) : F
         }
         mViewModel.actions.observe(viewLifecycleOwner){ actions ->
             val actionValuesText = actions.joinToString(", "){ detailAction ->
-                detailAction.toString() //TODO
+                detailAction.toString() //TODO profiledetailaction
             }
             binding.actionsListText.text = actionValuesText
         }
@@ -147,7 +147,10 @@ class AddProfileFragment(private val editableProfile: ProfileWithRelations?) : F
                 if(profile.timeframe != null){
                     mViewModel.timeStart.value = profile.timeframe.from
                     mViewModel.timeEnd.value = profile.timeframe.to
-                    //TODO weekdays
+                    profile.timeframe.weekdays.forEach { weekday ->
+                        val checkbox = binding.root.findViewWithTag(weekday.title) as? CheckBox
+                        checkbox?.isChecked = true
+                    }
                 }
 
                 //TODO add actions

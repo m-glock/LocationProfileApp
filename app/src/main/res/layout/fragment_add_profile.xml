@@ -182,49 +182,49 @@
                         android:id="@+id/mondayCheckbox"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/duration_radio_height"
-                        android:tag="weekday"
+                        android:tag="@string/monday"
                         android:text="@string/monday" />
 
                     <CheckBox
                         android:id="@+id/tuesdayCheckbox"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/duration_radio_height"
-                        android:tag="weekday"
+                        android:tag="@string/tuesday"
                         android:text="@string/tuesday" />
 
                     <CheckBox
                         android:id="@+id/wednesdayCheckbox"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/duration_radio_height"
-                        android:tag="weekday"
+                        android:tag="@string/wednesday"
                         android:text="@string/wednesday" />
 
                     <CheckBox
                         android:id="@+id/thursdayCheckbox"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/duration_radio_height"
-                        android:tag="weekday"
+                        android:tag="@string/thursday"
                         android:text="@string/thursday" />
 
                     <CheckBox
                         android:id="@+id/fridayCheckbox"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/duration_radio_height"
-                        android:tag="weekday"
+                        android:tag="@string/friday"
                         android:text="@string/friday" />
 
                     <CheckBox
                         android:id="@+id/saturdayCheckbox"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/duration_radio_height"
-                        android:tag="weekday"
+                        android:tag="@string/saturday"
                         android:text="@string/saturday" />
 
                     <CheckBox
                         android:id="@+id/sundayCheckbox"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/duration_radio_height"
-                        android:tag="weekday"
+                        android:tag="@string/sunday"
                         android:text="@string/sunday" />
 
                 </GridLayout>
