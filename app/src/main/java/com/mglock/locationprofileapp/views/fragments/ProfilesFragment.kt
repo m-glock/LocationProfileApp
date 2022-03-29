@@ -7,9 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import com.mglock.locationprofileapp.database.entities.Profile
+import com.mglock.locationprofileapp.database.entities.relations.ProfileWithRelations
 import com.mglock.locationprofileapp.databinding.FragmentProfilesBinding
 import com.mglock.locationprofileapp.viewmodels.ProfilesViewModel
 import com.mglock.locationprofileapp.views.activities.AddProfileActivity
+import com.mglock.locationprofileapp.views.activities.EditPlaceActivity
+import com.mglock.locationprofileapp.views.activities.EditProfileActivity
 import com.mglock.locationprofileapp.views.adapter.RecyclerViewProfilesAdapter
 
 class ProfilesFragment : Fragment() {
@@ -41,7 +45,9 @@ class ProfilesFragment : Fragment() {
             } else {
                 recyclerView.visibility = View.VISIBLE
                 textViewNoProfiles.visibility = View.GONE
-                recyclerView.adapter = RecyclerViewProfilesAdapter(profiles, mViewModel)
+                recyclerView.adapter = RecyclerViewProfilesAdapter(profiles, mViewModel){ profile ->
+                    clickEditButton(profile)
+                }
             }
         }
 
@@ -51,6 +57,12 @@ class ProfilesFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    private fun clickEditButton(profile: ProfileWithRelations){
+        val intent = Intent(context, EditProfileActivity::class.java)
+        intent.putExtra("profile", profile)
+        startActivity(intent)
     }
 
     override fun onDestroyView() {

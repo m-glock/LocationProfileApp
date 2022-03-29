@@ -21,6 +21,7 @@
     <string name="profile_action_label">Action</string>
     <string name="deactivate_profile_button_text">Deactivate</string>
     <string name="activate_profile_button_text">Activate</string>
+    <string name="edit_profile_title">Edit Profile</string>
     <!-- Add new Profile -->
     <string name="add_new_profile_title">Add new profile</string>
     <string name="add_profile_actions_label">Actions</string>

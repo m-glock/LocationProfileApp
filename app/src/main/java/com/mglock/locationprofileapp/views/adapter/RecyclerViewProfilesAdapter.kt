@@ -9,13 +9,17 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.mglock.locationprofileapp.R
 import com.mglock.locationprofileapp.database.entities.DetailAction
+import com.mglock.locationprofileapp.database.entities.Profile
 import com.mglock.locationprofileapp.database.entities.Timeframe
 import com.mglock.locationprofileapp.database.entities.relations.ProfileWithRelations
 import com.mglock.locationprofileapp.databinding.ListTileProfilesBinding
 import com.mglock.locationprofileapp.viewmodels.ProfilesViewModel
 
-class RecyclerViewProfilesAdapter(private val dataSet: List<ProfileWithRelations>, private val viewModel: ProfilesViewModel) :
-    RecyclerView.Adapter<RecyclerViewProfilesAdapter.ViewHolder>() {
+class RecyclerViewProfilesAdapter(
+    private val dataSet: List<ProfileWithRelations>,
+    private val viewModel: ProfilesViewModel,
+    val adapterOnClick : (ProfileWithRelations) -> Unit
+): RecyclerView.Adapter<RecyclerViewProfilesAdapter.ViewHolder>() {
 
     private var context: Context? = null
 
@@ -25,7 +29,7 @@ class RecyclerViewProfilesAdapter(private val dataSet: List<ProfileWithRelations
         fun setValues(){
             itemBinding.activeProfileCheck.visibility = if(profile.profile.active) View.VISIBLE else View.INVISIBLE
             itemBinding.profileTitle.text = profile.profile.title
-            itemBinding.profileTimeText.text = getStringFromTimeframes(profile.timeframe)
+            itemBinding.profileTimeText.text = getStringFromTimeframe(profile.timeframe)
             itemBinding.profilePlaceText.text = profile.place?.title ?: "-"
             itemBinding.profileActionText.text = getStringFromActions(profile.actions)
             itemBinding.activateProfileButton.text = if(profile.profile.active) "Deactivate" else "Activate"
@@ -81,13 +85,12 @@ class RecyclerViewProfilesAdapter(private val dataSet: List<ProfileWithRelations
     }
 
     private fun editProfile(profile: ProfileWithRelations){
-        // TODO edit item - see places
-        viewModel.updateProfile(profile.profile)
+        adapterOnClick(profile)
     }
 
-    private fun getStringFromTimeframes(timeframes: List<Timeframe>): String{
-        if(timeframes.isEmpty()) return "-"
-        return timeframes.joinToString(","){ timeframe -> timeframe.toString() }
+    private fun getStringFromTimeframe(timeframe: Timeframe?): String{
+        if(timeframe == null) return "-"
+        return timeframe.toString()
     }
 
     private fun getStringFromActions(actions: List<DetailAction>): String{

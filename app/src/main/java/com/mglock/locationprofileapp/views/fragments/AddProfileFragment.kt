@@ -14,12 +14,13 @@ import com.mglock.locationprofileapp.R
 import com.mglock.locationprofileapp.TimePickerFragment
 import com.mglock.locationprofileapp.database.entities.Place
 import com.mglock.locationprofileapp.database.entities.Profile
+import com.mglock.locationprofileapp.database.entities.relations.ProfileWithRelations
 import com.mglock.locationprofileapp.databinding.FragmentAddProfileBinding
 import com.mglock.locationprofileapp.util.enums.Weekday
 import com.mglock.locationprofileapp.viewmodels.AddProfileViewModel
 import java.util.Locale
 
-class AddProfileFragment(private val profile: Profile?) : Fragment() {
+class AddProfileFragment(private val editableProfile: ProfileWithRelations?) : Fragment() {
 
     private var _binding: FragmentAddProfileBinding? = null
     private val binding get(): FragmentAddProfileBinding = _binding!!
@@ -39,10 +40,12 @@ class AddProfileFragment(private val profile: Profile?) : Fragment() {
 
         // set dropdown values for place
         mViewModel.places.observe(viewLifecycleOwner){ places ->
+            val options = if(places.isEmpty()) emptyList()
+                else places.map { place -> place.title }
             binding.addPlaceDropdown.adapter = ArrayAdapter(
                 requireContext(),
                 R.layout.dropdown_item,
-                places.map { place -> place.title }
+                options
             )
         }
 
@@ -77,42 +80,46 @@ class AddProfileFragment(private val profile: Profile?) : Fragment() {
             createProfileFromInput()
         }
 
+        // set values (if available)
+        setValues()
+        if(editableProfile != null){
+            mViewModel.profile.value = editableProfile
+            mViewModel.buttonText.value = "Done"
+        }
+
         return binding.root
     }
 
     private fun createProfileFromInput(){
         val useTimeframe = binding.checkBoxTime.isChecked
         val usePlace = binding.checkBoxPlace.isChecked
-        val selectedPlace: Place? = binding.addPlaceDropdown.selectedItem as? Place
+        val selectedPlaceTitle = binding.addPlaceDropdown.selectedItem as String?
 
         // if any of the necessary fields are not set, display alert
         // else save data in DB and close Activity
-        if(allInputsSet(usePlace, useTimeframe, selectedPlace)){
+        if(allInputsSet(usePlace, useTimeframe)){
+            val title = binding.editTextTitleProfile.text.toString()
+            mViewModel.addProfile(title, selectedPlaceTitle, getWeekdays(), useTimeframe, usePlace)
+            requireActivity().finish()
+        } else {
             AlertDialog.Builder(context)
                 .setTitle("Missing Information")
                 .setMessage("TODO")
                 .setPositiveButton("Understood", null)
                 .show()
-        } else {
-            val title = binding.editTextTitleProfile.text.toString()
-            val place = if(usePlace) selectedPlace as Place else null
-            mViewModel.addProfile(title, place, getWeekdays(), useTimeframe, usePlace)
-            requireActivity().finish()
         }
     }
 
     private fun allInputsSet(
         usePlace: Boolean,
-        useTimeframe: Boolean,
-        selectedPlace: Place?
+        useTimeframe: Boolean
     ): Boolean{
-        // TODO check that at least one of place and time is checked
-        val isTitleNotSet = binding.editTextTitleProfile.text.isNullOrBlank()
-        val isPlaceNotSet = if(usePlace) selectedPlace == null else usePlace
-        val isTimeNotSet = if(useTimeframe) {
-            mViewModel.timeStart.value == null || mViewModel.timeEnd.value == null
+        val atLeastOneChecked = usePlace || useTimeframe
+        val isTitleSet = binding.editTextTitleProfile.text?.isNotBlank()
+        val isTimeSet = if(useTimeframe) {
+            mViewModel.timeStart.value != null && mViewModel.timeEnd.value != null
         } else useTimeframe
-        return isTitleNotSet || isPlaceNotSet || isTimeNotSet
+        return atLeastOneChecked && (isTitleSet ?: false || isTimeSet)
     }
 
     private fun getWeekdays(): Set<Weekday>{
@@ -125,5 +132,26 @@ class AddProfileFragment(private val profile: Profile?) : Fragment() {
             }
         }
         return weekdaySet
+    }
+
+    private fun setValues(){
+        mViewModel.buttonText.observe(viewLifecycleOwner){ text ->
+            binding.addProfileButton.text = text
+        }
+        mViewModel.profile.observe(viewLifecycleOwner){ profile ->
+            if(profile != null){
+                binding.editTextTitleProfile.setText(profile.profile.title)
+                if(profile.profile.placeId != null){
+                    binding.addPlaceDropdown.setSelection(profile.profile.placeId.toInt())
+                }
+                if(profile.timeframe != null){
+                    mViewModel.timeStart.value = profile.timeframe.from
+                    mViewModel.timeEnd.value = profile.timeframe.to
+                    //TODO weekdays
+                }
+
+                //TODO add actions
+            }
+        }
     }
 }

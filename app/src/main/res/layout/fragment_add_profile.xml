@@ -123,7 +123,6 @@
                     android:id="@+id/timeLayout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:clickable="false"
                     app:layout_constraintBottom_toTopOf="@+id/weekdayLayout"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/checkBoxTime"

@@ -12,6 +12,7 @@ import com.mglock.locationprofileapp.database.entities.DetailAction
 import com.mglock.locationprofileapp.database.entities.Place
 import com.mglock.locationprofileapp.database.entities.Profile
 import com.mglock.locationprofileapp.database.entities.Timeframe
+import com.mglock.locationprofileapp.database.entities.relations.ProfileWithRelations
 import com.mglock.locationprofileapp.util.Time
 import com.mglock.locationprofileapp.util.enums.Weekday
 import kotlinx.coroutines.launch
@@ -29,6 +30,9 @@ class AddProfileViewModel(app: Application): AndroidViewModel(app)  {
 
     private var _timeEnd: MutableLiveData<Time> = MutableLiveData()
     val timeEnd get() = _timeEnd
+
+    var profile: MutableLiveData<ProfileWithRelations> = MutableLiveData()
+    var buttonText: MutableLiveData<String> = MutableLiveData("Add Profile")
 
     init {
         viewModelScope.launch {
@@ -51,7 +55,7 @@ class AddProfileViewModel(app: Application): AndroidViewModel(app)  {
 
     fun addProfile(
         title: String,
-        place: Place?,
+        placeTitle: String?,
         weekdays: Set<Weekday>,
         useTimeframe: Boolean,
         usePlace: Boolean
@@ -74,8 +78,9 @@ class AddProfileViewModel(app: Application): AndroidViewModel(app)  {
 
                 // get ID of place if chosen
                 var placeUID: Long? = null
-                if(usePlace && place != null){
-                    placeUID = place.placeUID
+                if(usePlace && !placeTitle.isNullOrBlank()){
+                    val place = places.value?.find { place -> place.title == placeTitle }
+                    placeUID = place?.placeUID
                 }
 
                 // add profile to DB
