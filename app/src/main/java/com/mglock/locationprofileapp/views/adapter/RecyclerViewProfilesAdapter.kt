@@ -95,6 +95,6 @@ class RecyclerViewProfilesAdapter(
 
     private fun getStringFromActions(actions: List<DetailAction>): String{
         if(actions.isEmpty()) return "-"
-        return actions.joinToString(","){ action -> action.title}
+        return actions.joinToString(","){ action -> action.title.toString()}
     }
 }

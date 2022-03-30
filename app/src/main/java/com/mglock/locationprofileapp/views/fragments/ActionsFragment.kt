@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.mglock.locationprofileapp.databinding.FragmentActionsBinding
+import com.mglock.locationprofileapp.util.enums.DetailActionTitle
 import com.mglock.locationprofileapp.viewmodels.ActionsViewModel
 import com.mglock.locationprofileapp.views.adapter.RecyclerViewActionsAdapter
 
@@ -30,13 +31,9 @@ class ActionsFragment : Fragment() {
 
         // set the adapter for the recyclerview to display the list items
         val recyclerView = binding.recyclerViewActions
-        mViewModel.actions.observe(viewLifecycleOwner) { actions ->
-            recyclerView.adapter = RecyclerViewActionsAdapter(
-                actions,
-                mViewModel,
-                requireContext()
-            )
-        }
+        recyclerView.adapter = RecyclerViewActionsAdapter(
+            DetailActionTitle.values()
+        )
 
         return binding.root
     }

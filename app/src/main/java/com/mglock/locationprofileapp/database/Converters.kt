@@ -2,6 +2,7 @@ package com.mglock.locationprofileapp.database
 
 import androidx.room.TypeConverter
 import com.mglock.locationprofileapp.util.Time
+import com.mglock.locationprofileapp.util.enums.DetailActionTitle
 import com.mglock.locationprofileapp.util.enums.Weekday
 import java.util.Locale
 
@@ -32,6 +33,16 @@ class Converters {
             Weekday.valueOf(wU)
         }
         return weekdays.toSet()
+    }
+
+    @TypeConverter
+    fun detailActionTitleToString(detailActionTitle: DetailActionTitle): String{
+        return detailActionTitle.title
+    }
+
+    @TypeConverter
+    fun stringTitleToDetailAction(title: String): DetailActionTitle{
+        return DetailActionTitle.valueOf(title.uppercase())
     }
 
 }

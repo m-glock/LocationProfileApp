@@ -38,20 +38,6 @@ abstract class AppDatabase : RoomDatabase() {
         private fun buildDatabase(context: Context) =
             Room.databaseBuilder(context.applicationContext,
                 AppDatabase::class.java, DATABASE_NAME)
-                // prepopulate the database after onCreate was called
-                .addCallback(object : Callback() {
-                    override fun onCreate(db: SupportSQLiteDatabase) {
-                        super.onCreate(db)
-                        // insert the data on the IO Thread
-                        ioThread {
-                            getInstance(context).detailActionDao().insertAll(*PREPOPULATE_DETAIL_ACTIONS)
-                        }
-                    }
-                })
                 .build()
-
-        private val PREPOPULATE_DETAIL_ACTIONS = Array(DetailActionTitle.values().size){ position ->
-            DetailAction(0, DetailActionTitle.values()[position].title, false)
-        }
     }
 }

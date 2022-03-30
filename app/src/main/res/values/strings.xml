@@ -8,7 +8,7 @@
 
     <!-- Actions Tab -->
     <string name="info_button_content_description">Info button</string>
-    <string name="activate_all_actions">Activate All</string>
+    <string name="actions_explanation_text">Click on the info button for more details.</string>
 
     <!-- Profiles Tab Main -->
     <string name="add_profile_content_description">Add a new profile</string>

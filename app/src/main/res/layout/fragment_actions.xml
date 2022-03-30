@@ -17,15 +17,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/activateAllActionsButton"
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/actionsExplanationText"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/transparent"
-                android:textColor="@color/textColorDark"
-                android:text="@string/activate_all_actions"
-                app:layout_constraintBottom_toTopOf="@+id/recyclerViewActions"
+                android:padding="@dimen/actions_explanation_text_padding"
+                android:text="@string/actions_explanation_text"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.recyclerview.widget.RecyclerView

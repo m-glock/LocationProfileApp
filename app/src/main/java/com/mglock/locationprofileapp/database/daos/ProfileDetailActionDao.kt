@@ -11,9 +11,6 @@ interface ProfileDetailActionDao {
     @Query("SELECT * FROM profile_detail_action")
     suspend fun getAll(): List<ProfileDetailAction>
 
-    @Query("SELECT * FROM profile_detail_action WHERE profile_detail_action_uid IN (:profileDetailActionIds)")
-    suspend fun getByIds(profileDetailActionIds: LongArray): List<ProfileDetailAction>
-
     @Query("SELECT * FROM profile_detail_action WHERE profile_uid LIKE (:profileId)")
     suspend fun getByProfile(profileId: Long): List<ProfileDetailAction>
 
