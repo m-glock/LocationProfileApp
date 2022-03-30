@@ -28,8 +28,17 @@ interface DetailActionDao {
     @Query("SELECT * FROM detail_action WHERE profile_uid IS NULL")
     fun getByNoProfile(): Flow<List<DetailAction>>
 
+    @Query("UPDATE detail_action SET profile_uid = (:profileID) WHERE profile_uid IS NULL")
+    suspend fun addProfileId(profileID: Long)
+
+    @Query("DELETE FROM detail_action WHERE profile_uid IS NULL")
+    suspend fun deleteAllWithNoProfile()
+
     @Update
     suspend fun update(detailAction: DetailAction)
+
+    @Update
+    suspend fun updateAll(vararg detailActions: DetailAction)
 
     @Insert
     fun insertAll(vararg detailActions: DetailAction)

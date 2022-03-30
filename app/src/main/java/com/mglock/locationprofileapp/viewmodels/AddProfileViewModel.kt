@@ -53,6 +53,18 @@ class AddProfileViewModel(app: Application): AndroidViewModel(app)  {
         _timeEnd.value = timeEnd
     }
 
+    fun setActions(){
+        viewModelScope.launch {
+            try{
+                val db = AppDatabase.getInstance(getApplication())
+                _actions = db.detailActionDao().getByProfile(profile.value!!.profile.profileUID)
+                    .asLiveData(this.coroutineContext)
+            } catch(e: Exception){
+                Log.e("Error", e.stackTraceToString())
+            }
+        }
+    }
+
     fun allInputsSet(
         usePlace: Boolean,
         useTimeframe: Boolean,
@@ -127,8 +139,9 @@ class AddProfileViewModel(app: Application): AndroidViewModel(app)  {
                 }
                 profileWithRelations.profile.title = title
 
+                db.detailActionDao().updateAll(*profileWithRelations.actions.toTypedArray())
+
                 db.profileDao().update(profileWithRelations.profile)
-                return@launch
             } catch (e: Exception) {
                 Log.e("Error", e.stackTraceToString())
             }
@@ -166,7 +179,7 @@ class AddProfileViewModel(app: Application): AndroidViewModel(app)  {
                 }
 
                 // add profile to DB
-                db.profileDao().insert(Profile(
+                val profileId = db.profileDao().insert(Profile(
                     0,
                     title,
                     placeUID,
@@ -174,8 +187,8 @@ class AddProfileViewModel(app: Application): AndroidViewModel(app)  {
                     false
                 ))
 
-                //TODO add profile id to all actions
-                //db.profileDetailActionDao().insertAll()
+                // update profile id for all previously created detail actions
+                db.detailActionDao().addProfileId(profileId)
             } catch(e: Exception){
                 Log.e("Error", e.stackTraceToString())
             }

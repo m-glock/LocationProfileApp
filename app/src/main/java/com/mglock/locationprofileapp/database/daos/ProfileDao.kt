@@ -37,7 +37,7 @@ interface ProfileDao {
     suspend fun update(profile: Profile)
 
     @Insert
-    suspend fun insert(profile: Profile)
+    suspend fun insert(profile: Profile): Long
 
     @Insert
     fun insertAll(vararg profiles: Profile)

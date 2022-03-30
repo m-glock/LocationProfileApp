@@ -58,7 +58,7 @@ class AddProfileFragment(private val editableProfile: ProfileWithRelations?) : F
         }
         mViewModel.actions.observe(viewLifecycleOwner){ actions ->
             val actionValuesText = actions.joinToString(", "){ detailAction ->
-                detailAction.toString() //TODO profiledetailaction
+                detailAction.toString()
             }
             binding.actionsListText.text = actionValuesText
         }
@@ -150,7 +150,7 @@ class AddProfileFragment(private val editableProfile: ProfileWithRelations?) : F
                     }
                 }
 
-                //TODO add actions
+                mViewModel.setActions()
             }
         }
     }
