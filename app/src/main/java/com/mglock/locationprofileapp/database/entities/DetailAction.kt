@@ -11,8 +11,7 @@ data class DetailAction(
     @ColumnInfo(name="detail_action_uid")
     val detailActionUID: Long,
 
-    val name: String,
+    val title: String,
 
-    @ColumnInfo(name="action_group_id")
-    val actionGroupId: Long
+    var active: Boolean
 ): Serializable

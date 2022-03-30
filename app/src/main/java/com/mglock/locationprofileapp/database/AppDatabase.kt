@@ -8,10 +8,9 @@ import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.mglock.locationprofileapp.database.daos.*
 import com.mglock.locationprofileapp.database.entities.*
-import com.mglock.locationprofileapp.util.enums.ActionGroupTitle
+import com.mglock.locationprofileapp.util.enums.DetailActionTitle
 
 @Database(entities = [
-    ActionGroup::class,
     Place::class,
     Profile::class,
     ProfileDetailAction::class,
@@ -20,7 +19,6 @@ import com.mglock.locationprofileapp.util.enums.ActionGroupTitle
 ], version = 1)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun actionGroupDao(): ActionGroupDao
     abstract fun placeDao(): PlaceDao
     abstract fun profileDao(): ProfileDao
     abstract fun profileDetailActionDao(): ProfileDetailActionDao
@@ -46,22 +44,14 @@ abstract class AppDatabase : RoomDatabase() {
                         super.onCreate(db)
                         // insert the data on the IO Thread
                         ioThread {
-                            getInstance(context).actionGroupDao().insertAll(*PREPOPULATE_ACTION_GROUP)
                             getInstance(context).detailActionDao().insertAll(*PREPOPULATE_DETAIL_ACTIONS)
                         }
                     }
                 })
                 .build()
 
-        private val PREPOPULATE_ACTION_GROUP = Array(ActionGroupTitle.values().size){ position ->
-            ActionGroup(0, ActionGroupTitle.values()[position].title, false)
+        private val PREPOPULATE_DETAIL_ACTIONS = Array(DetailActionTitle.values().size){ position ->
+            DetailAction(0, DetailActionTitle.values()[position].title, false)
         }
-
-        //TODO figure out the important ones
-        private val PREPOPULATE_DETAIL_ACTIONS = arrayOf(
-            DetailAction(0, "Volume on/off", 2),
-            DetailAction(0, "Change Ringtone", 2),
-            DetailAction(0, "Change Notification Tone", 2)
-        )
     }
 }

@@ -22,12 +22,14 @@ interface ProfileDao {
     @Query("SELECT * FROM profile WHERE profile_uid IN (:profileIds)")
     suspend fun getByIds(profileIds: LongArray): List<Profile>
 
+    @Transaction
     @Query("SELECT * FROM profile WHERE profile_uid IN (:profileIds)")
     suspend fun getByIdsWithRelations(profileIds: LongArray): List<ProfileWithRelations>
 
     @Query("SELECT * FROM profile WHERE title LIKE (:title)")
     suspend fun getByTitle(title: String): List<Profile>
 
+    @Transaction
     @Query("SELECT * FROM profile WHERE title LIKE (:title)")
     suspend fun getByTitleWithRelations(title: String): List<ProfileWithRelations>
 

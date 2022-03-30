@@ -7,14 +7,14 @@ import android.widget.TextView
 import androidx.appcompat.widget.SwitchCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.karumi.dexter.Dexter
-import com.mglock.locationprofileapp.database.entities.ActionGroup
+import com.mglock.locationprofileapp.database.entities.DetailAction
 import com.mglock.locationprofileapp.databinding.ListTileActionsBinding
 import com.mglock.locationprofileapp.util.PermissionListener
-import com.mglock.locationprofileapp.util.enums.ActionGroupTitle
+import com.mglock.locationprofileapp.util.enums.DetailActionTitle
 import com.mglock.locationprofileapp.viewmodels.ActionsViewModel
 
 class RecyclerViewActionsAdapter(
-    private val dataSet: List<ActionGroup>,
+    private val dataSet: List<DetailAction>,
     private val viewModel: ActionsViewModel,
     private val context: Context
 ) : RecyclerView.Adapter<RecyclerViewActionsAdapter.ViewHolder>() {
@@ -22,12 +22,12 @@ class RecyclerViewActionsAdapter(
     inner class ViewHolder(itemBinding: ListTileActionsBinding) : RecyclerView.ViewHolder(itemBinding.root) {
         private val textView: TextView = itemBinding.textView
         private val switch: SwitchCompat = itemBinding.actionSwitch
-        var actionGroup: ActionGroup? = null
+        var detailAction: DetailAction? = null
 
         fun setValues(){
-            if(actionGroup != null){
-                textView.text = actionGroup!!.title
-                switch.isChecked = actionGroup!!.active
+            if(detailAction != null){
+                textView.text = detailAction!!.title
+                switch.isChecked = detailAction!!.active
             }
         }
 
@@ -37,7 +37,7 @@ class RecyclerViewActionsAdapter(
                 if(isChecked){
                     switch.isChecked = !isChecked
                     val requiredPermissions =
-                        ActionGroupTitle.valueOf(actionGroup!!.title.uppercase())
+                        DetailActionTitle.valueOf(detailAction!!.title.uppercase())
                             .getRequiredPermissions()
                     Dexter.withContext(context)
                         .withPermissions(
@@ -45,18 +45,18 @@ class RecyclerViewActionsAdapter(
                         )
                         .withListener(PermissionListener(context) {
                             //method to be called if permissions are granted
-                            updateElement(actionGroup!!, isChecked)
+                            updateElement(detailAction!!, isChecked)
                         })
                         .check()
                 } else {
-                    updateElement(actionGroup!!, false)
+                    updateElement(detailAction!!, false)
                 }
             }
         }
 
-        private fun updateElement(actionGroup: ActionGroup, isChecked: Boolean){
-            actionGroup.active = isChecked
-            viewModel.updateActionGroup(actionGroup)
+        private fun updateElement(detailAction: DetailAction, isChecked: Boolean){
+            detailAction.active = isChecked
+            viewModel.updateDetailAction(detailAction)
         }
     }
 
@@ -70,7 +70,7 @@ class RecyclerViewActionsAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.actionGroup = dataSet[position]
+        holder.detailAction = dataSet[position]
         holder.setValues()
     }
 
