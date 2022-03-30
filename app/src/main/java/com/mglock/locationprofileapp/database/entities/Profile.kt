@@ -12,7 +12,7 @@ data class Profile(
     @ColumnInfo(name = "profile_uid")
     val profileUID: Long,
 
-    val title: String,
+    var title: String,
 
     @ColumnInfo(name="place_id")
     var placeId: Long?,

@@ -1,4 +1,4 @@
-package com.mglock.locationprofileapp
+package com.mglock.locationprofileapp.views.fragments
 
 import android.app.Dialog
 import android.app.TimePickerDialog

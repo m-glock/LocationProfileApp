@@ -53,15 +53,44 @@ class AddProfileViewModel(app: Application): AndroidViewModel(app)  {
         _timeEnd.value = timeEnd
     }
 
-    //TODO update actions
-    fun updateProfile(
+    fun allInputsSet(
+        usePlace: Boolean,
+        useTimeframe: Boolean,
+        title: String?
+    ): Boolean{
+        val atLeastOneChecked = usePlace || useTimeframe
+        val isTitleSet = title?.isNotBlank()
+        val isTimeSet = if(useTimeframe) {
+            timeStart.value != null && timeEnd.value != null
+        } else useTimeframe
+        return atLeastOneChecked && (isTitleSet ?: false || isTimeSet)
+    }
+
+    fun addOrUpdateProject(
+        projectTitle: String,
         usePlace: Boolean,
         useTimeframe: Boolean,
         selectedPlaceTitle: String,
         weekdays: Set<Weekday>
+    ){
+        if(profile.value != null){
+            updateProfile(projectTitle, selectedPlaceTitle, weekdays, usePlace, useTimeframe)
+        } else {
+            addProfile(projectTitle, selectedPlaceTitle, weekdays, usePlace, useTimeframe)
+        }
+    }
+
+    //TODO update actions
+    private fun updateProfile(
+        title: String,
+        selectedPlaceTitle: String,
+        weekdays: Set<Weekday>,
+        usePlace: Boolean,
+        useTimeframe: Boolean
     ) {
         viewModelScope.launch {
             try {
+                // TODO if time, this logic would belong in a repository
                 // update profile and its relations
                 val db = AppDatabase.getInstance(getApplication())
                 val profileWithRelations = profile.value!!
@@ -96,6 +125,7 @@ class AddProfileViewModel(app: Application): AndroidViewModel(app)  {
                 } else {
                     profileWithRelations.profile.timeframeId = null
                 }
+                profileWithRelations.profile.title = title
 
                 db.profileDao().update(profileWithRelations.profile)
                 return@launch
@@ -105,12 +135,12 @@ class AddProfileViewModel(app: Application): AndroidViewModel(app)  {
         }
     }
 
-    fun addProfile(
+    private fun addProfile(
         title: String,
         placeTitle: String?,
         weekdays: Set<Weekday>,
-        useTimeframe: Boolean,
-        usePlace: Boolean
+        usePlace: Boolean,
+        useTimeframe: Boolean
     ){
         viewModelScope.launch {
             try{

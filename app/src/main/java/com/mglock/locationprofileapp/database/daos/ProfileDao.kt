@@ -32,7 +32,7 @@ interface ProfileDao {
     suspend fun getByTitleWithRelations(title: String): List<ProfileWithRelations>
 
     @Update
-    fun update(profile: Profile)
+    suspend fun update(profile: Profile)
 
     @Insert
     suspend fun insert(profile: Profile)

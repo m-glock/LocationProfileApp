@@ -11,7 +11,6 @@ import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.mglock.locationprofileapp.R
-import com.mglock.locationprofileapp.TimePickerFragment
 import com.mglock.locationprofileapp.database.entities.relations.ProfileWithRelations
 import com.mglock.locationprofileapp.databinding.FragmentAddProfileBinding
 import com.mglock.locationprofileapp.util.enums.Weekday
@@ -92,13 +91,18 @@ class AddProfileFragment(private val editableProfile: ProfileWithRelations?) : F
         val useTimeframe = binding.checkBoxTime.isChecked
         val usePlace = binding.checkBoxPlace.isChecked
         val selectedPlaceTitle = binding.addPlaceDropdown.selectedItem as String
+        val title = binding.editTextTitleProfile.text.toString()
 
         // if any of the necessary fields are not set, display alert
         // else save data in DB and close Activity
-        if(allInputsSet(usePlace, useTimeframe)){
-            val title = binding.editTextTitleProfile.text.toString()
-            if(mViewModel.profile.value != null) mViewModel.updateProfile(usePlace, useTimeframe, selectedPlaceTitle, getWeekdays())
-            else mViewModel.addProfile(title, selectedPlaceTitle, getWeekdays(), useTimeframe, usePlace)
+        if(mViewModel.allInputsSet(usePlace, useTimeframe, title)){
+            mViewModel.addOrUpdateProject(
+                title,
+                usePlace,
+                useTimeframe,
+                selectedPlaceTitle,
+                getSelectedWeekdays()
+            )
             requireActivity().finish()
         } else {
             AlertDialog.Builder(context)
@@ -109,19 +113,7 @@ class AddProfileFragment(private val editableProfile: ProfileWithRelations?) : F
         }
     }
 
-    private fun allInputsSet(
-        usePlace: Boolean,
-        useTimeframe: Boolean
-    ): Boolean{
-        val atLeastOneChecked = usePlace || useTimeframe
-        val isTitleSet = binding.editTextTitleProfile.text?.isNotBlank()
-        val isTimeSet = if(useTimeframe) {
-            mViewModel.timeStart.value != null && mViewModel.timeEnd.value != null
-        } else useTimeframe
-        return atLeastOneChecked && (isTitleSet ?: false || isTimeSet)
-    }
-
-    private fun getWeekdays(): Set<Weekday>{
+    private fun getSelectedWeekdays(): Set<Weekday>{
         val weekdaySet: MutableSet<Weekday> = mutableSetOf()
         binding.weekdayLayout.forEach { child ->
             val checkbox = child as CheckBox
@@ -141,6 +133,7 @@ class AddProfileFragment(private val editableProfile: ProfileWithRelations?) : F
             if(profile != null){
                 binding.editTextTitleProfile.setText(profile.profile.title)
                 if(profile.profile.placeId != null){
+                    binding.checkBoxPlace.isChecked = true
                     binding.addPlaceDropdown.setSelection(profile.profile.placeId!!.toInt())
                 }
                 if(profile.timeframe != null){
