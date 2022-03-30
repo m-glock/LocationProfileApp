@@ -2,6 +2,7 @@ package com.mglock.locationprofileapp.views.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import com.mglock.locationprofileapp.databinding.ActivityAddActionsToProfileBinding
 import com.mglock.locationprofileapp.viewmodels.AddActionsToProfileViewModel
@@ -26,8 +27,14 @@ class AddActionsToProfileActivity : AppCompatActivity(){
         supportActionBar!!.setDisplayShowTitleEnabled(false)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         binding.toolbarAddActionsToProfile.setNavigationOnClickListener {
-            //TODO alert to user that data is lost, if confirmed, remove actions with profileId = null
-            onBackPressed()
+            AlertDialog.Builder(this)
+                .setTitle("Careful!")
+                .setMessage("If you return to the profile screen without saving your data will be lost.")
+                .setPositiveButton("Go back"){ _, _ ->
+                    mViewModel.removeAllActionsWithNoProfile()
+                    onBackPressed()
+                }.setNegativeButton("Stay here", null)
+                .create()
         }
 
         mViewModel.actions.observe(this){ detailActions ->
