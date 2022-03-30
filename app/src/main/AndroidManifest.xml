@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LocationProfileApp">
         <activity
+            android:name=".views.activities.AddActionsToProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".views.activities.EditProfileActivity"
             android:exported="false" />
         <activity

@@ -33,6 +33,10 @@
     <string name="add_profile_time_start_hint">start</string>
     <string name="add_profile_time_end_hint">end</string>
     <string name="add_profile_time_to_label">to</string>
+    <!-- Add actions to profile -->
+    <string name="add_actions_to_profile_title">Add Actions</string>
+    <string name="add_actions_to_profile_content_description">add action</string>
+    <string name="save_button_text">Save</string>
 
     <!-- Places Tab -->
     <string name="places_empty_list_text">There are no places yet. Click on the \'Add\' button in the lower right corner to add a new place.</string>

@@ -1,6 +1,7 @@
 package com.mglock.locationprofileapp.views.fragments
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,7 @@ import com.mglock.locationprofileapp.database.entities.relations.ProfileWithRela
 import com.mglock.locationprofileapp.databinding.FragmentAddProfileBinding
 import com.mglock.locationprofileapp.util.enums.Weekday
 import com.mglock.locationprofileapp.viewmodels.AddProfileViewModel
+import com.mglock.locationprofileapp.views.activities.AddActionsToProfileActivity
 import java.util.Locale
 
 class AddProfileFragment(private val editableProfile: ProfileWithRelations?) : Fragment() {
@@ -48,8 +50,11 @@ class AddProfileFragment(private val editableProfile: ProfileWithRelations?) : F
 
         // open dialog for adding actions to the profile
         binding.addActionButton.setOnClickListener {
-            //TODO open modal to choose action
-            binding.actionsListText.append("fcinwefvoinewpfovicnediovnwe, oviehwf, eoivhew, fewivh, efcius, fosieh")
+            val intent = Intent(requireContext(), AddActionsToProfileActivity::class.java)
+            if(editableProfile != null){
+                intent.putExtra("profileId", editableProfile.profile.profileUID)
+            }
+            startActivity(intent)
         }
         mViewModel.actions.observe(viewLifecycleOwner){ actions ->
             val actionValuesText = actions.joinToString(", "){ detailAction ->
