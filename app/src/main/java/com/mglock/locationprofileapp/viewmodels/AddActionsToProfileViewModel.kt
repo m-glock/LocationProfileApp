@@ -44,7 +44,14 @@ class AddActionsToProfileViewModel(app: Application): AndroidViewModel(app)  {
     }
 
     fun updateAction(detailAction: DetailAction){
-        //TODO
+        viewModelScope.launch {
+            try{
+                val db = AppDatabase.getInstance(getApplication())
+                db.detailActionDao().update(detailAction)
+            } catch(e: Exception){
+                Log.e("Error", e.stackTraceToString())
+            }
+        }
     }
 
     fun deleteAction(detailAction: DetailAction){
@@ -52,6 +59,17 @@ class AddActionsToProfileViewModel(app: Application): AndroidViewModel(app)  {
             try{
                 val db = AppDatabase.getInstance(getApplication())
                 db.detailActionDao().delete(detailAction)
+            } catch(e: Exception){
+                Log.e("Error", e.stackTraceToString())
+            }
+        }
+    }
+
+    fun removeAllActionsWithNoProfile(){
+        viewModelScope.launch {
+            try{
+                val db = AppDatabase.getInstance(getApplication())
+                db.detailActionDao().deleteAllWithNoProfile()
             } catch(e: Exception){
                 Log.e("Error", e.stackTraceToString())
             }
