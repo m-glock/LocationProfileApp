@@ -13,7 +13,6 @@ import com.mglock.locationprofileapp.util.enums.DetailActionTitle
 @Database(entities = [
     Place::class,
     Profile::class,
-    ProfileDetailAction::class,
     DetailAction::class,
     Timeframe::class
 ], version = 1)
@@ -21,7 +20,6 @@ import com.mglock.locationprofileapp.util.enums.DetailActionTitle
 abstract class AppDatabase : RoomDatabase() {
     abstract fun placeDao(): PlaceDao
     abstract fun profileDao(): ProfileDao
-    abstract fun profileDetailActionDao(): ProfileDetailActionDao
     abstract fun detailActionDao(): DetailActionDao
     abstract fun timeframeDao(): TimeframeDao
 

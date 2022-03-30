@@ -6,7 +6,6 @@ import androidx.room.Relation
 import com.mglock.locationprofileapp.database.entities.DetailAction
 import com.mglock.locationprofileapp.database.entities.Place
 import com.mglock.locationprofileapp.database.entities.Profile
-import com.mglock.locationprofileapp.database.entities.ProfileDetailAction
 import com.mglock.locationprofileapp.database.entities.Timeframe
 import java.io.Serializable
 
@@ -22,8 +21,7 @@ data class ProfileWithRelations (
 
     @Relation(
         parentColumn = "profile_uid",
-        entityColumn = "detail_action_uid",
-        associateBy = Junction(ProfileDetailAction::class)
+        entityColumn = "detail_action_uid"
     )
     val actions: List<DetailAction>
 ): Serializable

@@ -80,7 +80,7 @@ class AddProfileViewModel(app: Application): AndroidViewModel(app)  {
         }
     }
 
-    //TODO update actions
+    //TODO update actions (add or remove them)
     private fun updateProfile(
         title: String,
         selectedPlaceTitle: String,
@@ -174,7 +174,7 @@ class AddProfileViewModel(app: Application): AndroidViewModel(app)  {
                     false
                 ))
 
-                //TODO add action and place connection
+                //TODO add profile id to all actions
                 //db.profileDetailActionDao().insertAll()
             } catch(e: Exception){
                 Log.e("Error", e.stackTraceToString())

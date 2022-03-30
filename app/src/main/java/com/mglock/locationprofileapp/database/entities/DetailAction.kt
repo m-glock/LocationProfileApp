@@ -12,6 +12,9 @@ data class DetailAction(
     @ColumnInfo(name="detail_action_uid")
     val detailActionUID: Long,
 
+    @ColumnInfo(name="profile_uid")
+    val profileUID: Long?,
+
     val title: DetailActionTitle,
 
     @ColumnInfo(name="detail_action_value")

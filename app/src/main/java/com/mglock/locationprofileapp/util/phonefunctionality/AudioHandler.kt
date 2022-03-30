@@ -58,10 +58,6 @@ class AudioHandler(private val context: Context) {
     }
 
     // actions
-    fun muteMicrophone(){
-        audioManager.isMicrophoneMute = false
-    }
-
     fun changeVolume(streamType: Int, value: Int){
         audioManager.setStreamVolume(streamType, value, AudioManager.FLAG_SHOW_UI)
     }
