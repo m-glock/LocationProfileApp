@@ -92,7 +92,6 @@ class AddProfileViewModel(app: Application): AndroidViewModel(app)  {
         }
     }
 
-    //TODO update actions (add or remove them)
     private fun updateProfile(
         title: String,
         selectedPlaceTitle: String,
@@ -102,7 +101,6 @@ class AddProfileViewModel(app: Application): AndroidViewModel(app)  {
     ) {
         viewModelScope.launch {
             try {
-                // TODO if time, this logic would belong in a repository
                 // update profile and its relations
                 val db = AppDatabase.getInstance(getApplication())
                 val profileWithRelations = profile.value!!
@@ -138,8 +136,6 @@ class AddProfileViewModel(app: Application): AndroidViewModel(app)  {
                     profileWithRelations.profile.timeframeId = null
                 }
                 profileWithRelations.profile.title = title
-
-                db.detailActionDao().updateAll(*profileWithRelations.actions.toTypedArray())
 
                 db.profileDao().update(profileWithRelations.profile)
             } catch (e: Exception) {

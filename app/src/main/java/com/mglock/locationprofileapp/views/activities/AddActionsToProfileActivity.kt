@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.mglock.locationprofileapp.databinding.ActivityAddActionsToProfileBinding
 import com.mglock.locationprofileapp.viewmodels.AddActionsToProfileViewModel
 import com.mglock.locationprofileapp.views.adapter.RecyclerViewProfileActionsAdapter
+import com.mglock.locationprofileapp.views.fragments.AddDetailActionFragment
 
 class AddActionsToProfileActivity : AppCompatActivity(){
 
@@ -43,7 +44,7 @@ class AddActionsToProfileActivity : AppCompatActivity(){
         }
 
         binding.fabAddActionToProfile.setOnClickListener {
-            //TODO open up fragment/activity/dialog that lets you choose an action
+            AddDetailActionFragment().show(supportFragmentManager, "Add Detail Action")
         }
 
         binding.saveActionsButton.setOnClickListener {
