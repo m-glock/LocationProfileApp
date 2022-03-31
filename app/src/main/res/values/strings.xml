@@ -37,6 +37,8 @@
     <string name="add_actions_to_profile_title">Add Actions</string>
     <string name="add_actions_to_profile_content_description">add action</string>
     <string name="save_button_text">Save</string>
+    <string name="add_action_value_label">Value:</string>
+    <string name="add_action_action_label">Action:</string>
 
     <!-- Places Tab -->
     <string name="places_empty_list_text">There are no places yet. Click on the \'Add\' button in the lower right corner to add a new place.</string>

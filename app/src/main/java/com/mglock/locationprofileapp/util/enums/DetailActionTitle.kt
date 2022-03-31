@@ -1,6 +1,8 @@
 package com.mglock.locationprofileapp.util.enums
 
 import android.Manifest
+import androidx.fragment.app.Fragment
+import com.mglock.locationprofileapp.views.fragments.AddActionValueDropdownFragment
 
 enum class DetailActionTitle(val title: String){
     CHANGE_VOLUME("Change Volume"){
@@ -30,4 +32,21 @@ enum class DetailActionTitle(val title: String){
     };
 
     abstract fun getRequiredPermissions(): List<String>
+
+    companion object{
+        fun getValueSelectionFragment(enum: DetailActionTitle): Fragment{
+            return when(enum){
+                CHANGE_VOLUME_MODE -> AddActionValueDropdownFragment(
+                    VolumeModes.values().map { value -> value.title }
+                )
+                else -> Fragment()
+            }
+        }
+
+        enum class VolumeModes(val title: String){
+            MODE_NORMAL("normal"),
+            MODE_SILENT("do not disturb"),
+            MODE_VIBRATE("vibrate")
+        }
+    }
 }

@@ -31,18 +31,6 @@ class AddActionsToProfileViewModel(app: Application): AndroidViewModel(app)  {
         }
     }
 
-    fun addAction(detailAction: DetailAction){
-        viewModelScope.launch {
-            try{
-                val db = AppDatabase.getInstance(getApplication())
-                // add detail action to DB
-                db.detailActionDao().insert(detailAction)
-            } catch(e: Exception){
-                Log.e("Error", e.stackTraceToString())
-            }
-        }
-    }
-
     fun updateAction(detailAction: DetailAction){
         viewModelScope.launch {
             try{

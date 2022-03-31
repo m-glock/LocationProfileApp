@@ -26,4 +26,7 @@
     <dimen name="empty_list_tab_padding">30dp</dimen>
     <dimen name="profile_details_label_margin">30dp</dimen>
     <dimen name="actions_explanation_text_padding">10dp</dimen>
+    <dimen name="label_input_margin">30dp</dimen>
+    <dimen name="slider_width_fill_parent">0dp</dimen>
+    <dimen name="add_action_fragment_padding">15dp</dimen>
 </resources>
