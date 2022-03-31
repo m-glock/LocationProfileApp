@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
 
-    tools:context=".views.profiles.fragments.AddActionValueDropdownFragment">
+    tools:context=".views.profiles.fragments.AddActionVolumeModeFragment">
 
         <TextView
             android:id="@+id/valueLabel"

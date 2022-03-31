@@ -7,25 +7,26 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import com.mglock.locationprofileapp.R
-import com.mglock.locationprofileapp.databinding.AddActionValueDropdownFragmentBinding
+import com.mglock.locationprofileapp.databinding.AddActionVolumeModeFragmentBinding
+import com.mglock.locationprofileapp.util.phonefunctionality.AudioHandler
 
-class AddActionValueDropdownFragment(private val options: List<String>) : Fragment() {
+class AddActionVolumeModeFragment : Fragment(), BaseDetailActionFragment {
 
-    private var _binding: AddActionValueDropdownFragmentBinding? = null
-    private val binding get(): AddActionValueDropdownFragmentBinding = _binding!!
+    private var _binding: AddActionVolumeModeFragmentBinding? = null
+    private val binding get(): AddActionVolumeModeFragmentBinding = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        _binding = AddActionValueDropdownFragmentBinding.inflate(inflater, container, false)
+        _binding = AddActionVolumeModeFragmentBinding.inflate(inflater, container, false)
 
         // set the adapter for the dropdown
         binding.valueDropdown.adapter = ArrayAdapter(
             requireContext(),
             R.layout.dropdown_item,
-            options
+            AudioHandler.VolumeModes.values().map { mode -> mode.title }
         )
 
         return binding.root
@@ -36,7 +37,7 @@ class AddActionValueDropdownFragment(private val options: List<String>) : Fragme
         _binding = null
     }
 
-    fun getDropdownValue(): String{
+    override fun getValue(): String{
         return binding.valueDropdown.selectedItem as String
     }
 }

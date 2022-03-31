@@ -13,9 +13,21 @@ class AudioHandler(private val context: Context) {
 
     private val audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
 
+    enum class VolumeStreamTypes(val title: String, val value: Int){
+        MEDIA_VOLUME("Media Volume", AudioManager.STREAM_MUSIC),
+        SYSTEM_VOLUME("System Volume", AudioManager.STREAM_SYSTEM),
+        ALARM_VOLUME("Alarm Volume", AudioManager.STREAM_ALARM)
+    }
+
+    enum class VolumeModes(val title: String){
+        MODE_NORMAL("normal"),
+        MODE_SILENT("do not disturb"),
+        MODE_VIBRATE("vibrate")
+    }
+
     // get information
-    fun getStreamMaxVolume(streamType: Int): Int{
-        return audioManager.getStreamMaxVolume(streamType)
+    fun getStreamMaxVolume(streamType: Int): Float{
+        return audioManager.getStreamMaxVolume(streamType).toFloat()
     }
 
     fun chooseNewRingtone(resultLauncher: ActivityResultLauncher<Intent>) {

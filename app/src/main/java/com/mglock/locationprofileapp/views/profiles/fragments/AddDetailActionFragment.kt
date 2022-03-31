@@ -29,14 +29,11 @@ class AddDetailActionFragment : DialogFragment() {
         // show correct fragment for value selection if something in the dropdown is chosen
         binding.actionDropdown.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, pos: Int, id: Long) {
-                val selectedItem = actionOptions[pos]
-                if(selectedItem == DetailActionOption.CHANGE_VOLUME_MODE) {
-                    val fragment = DetailActionOption.getValueSelectionFragment(selectedItem)
-                    val fragmentTransaction = childFragmentManager.beginTransaction()
-                    fragmentTransaction.replace(binding.actionValueFragment.id, fragment)
-                    fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                    fragmentTransaction.commit()
-                }
+                val fragment = DetailActionOption.getValueSelectionFragment(actionOptions[pos])
+                val fragmentTransaction = childFragmentManager.beginTransaction()
+                fragmentTransaction.replace(binding.actionValueFragment.id, fragment)
+                fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                fragmentTransaction.commit()
             }
             override fun onNothingSelected(p0: AdapterView<*>?) {}
         }
@@ -49,26 +46,23 @@ class AddDetailActionFragment : DialogFragment() {
         val view = binding.root
 
         return activity?.let { fragmentActivity ->
-            // Use the Builder class for convenient dialog construction
             return AlertDialog.Builder(fragmentActivity)
                 .setTitle("Title")
                 .setView(view)
-                .setPositiveButton("yes"){ _, _ ->
-                    val valueFragment = childFragmentManager.fragments[0] as? AddActionValueDropdownFragment
+                .setPositiveButton("Add"){ _, _ ->
+                    val valueFragment = childFragmentManager.fragments[0] as? BaseDetailActionFragment
                     if(valueFragment != null){
                         val selectedAction = binding.actionDropdown.selectedItem as String
                         val detailActionTitle = DetailActionOption.valueOf(
                             selectedAction.replace(" ", "_").uppercase()
                         )
-                        val selectedValue = valueFragment.getDropdownValue()
+                        val selectedValue = valueFragment.getValue()
                         mViewModel.addAction(
                             DetailAction(0, null, detailActionTitle, selectedValue),
                             requireContext()
                         )
                     }
-                }.setNegativeButton("no"){ _, _ ->
-
-                }.create()
+                }.setNegativeButton("Back"){ _, _ -> }.create()
         } ?: throw IllegalStateException("Activity cannot be null")
     }
 
