@@ -54,12 +54,14 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <Button
-                    android:id="@+id/addActionButton"
-                    style="@style/SecondaryButton"
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/addActionsButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/add_profile_add_action_button_text"
+                    android:padding="@dimen/image_button_no_padding"
+                    android:src="@drawable/ic_action_edit"
+                    android:backgroundTint="@color/transparent"
+                    android:contentDescription="@string/add_profile_add_action_button_text"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -68,7 +70,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/text_icon_margin"
-                    app:layout_constraintTop_toBottomOf="@+id/addActionButton"
+                    app:layout_constraintTop_toBottomOf="@+id/addActionsButton"
                     tools:layout_editor_absoluteX="0dp"
                     tools:text="Bluetooth on, Volume to 2, Wifi disabled" />
 

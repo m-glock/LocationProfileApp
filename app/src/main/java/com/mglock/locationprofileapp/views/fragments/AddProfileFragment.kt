@@ -39,17 +39,23 @@ class AddProfileFragment(private val editableProfile: ProfileWithRelations?) : F
 
         // set dropdown values for place
         mViewModel.places.observe(viewLifecycleOwner){ places ->
-            val options = if(places.isEmpty()) emptyList()
-                else places.map { place -> place.title }
+            var options: List<String> = emptyList()
+            if(places.isEmpty()){
+                binding.checkBoxPlace.isEnabled = false
+            } else {
+                options = places.map { place -> place.title }
+                binding.checkBoxPlace.isEnabled = true
+            }
             binding.addPlaceDropdown.adapter = ArrayAdapter(
                 requireContext(),
                 R.layout.dropdown_item,
                 options
             )
+
         }
 
         // open dialog for adding actions to the profile
-        binding.addActionButton.setOnClickListener {
+        binding.addActionsButton.setOnClickListener {
             val intent = Intent(requireContext(), AddActionsToProfileActivity::class.java)
             if(editableProfile != null){
                 intent.putExtra("profileId", editableProfile.profile.profileUID)
@@ -96,7 +102,7 @@ class AddProfileFragment(private val editableProfile: ProfileWithRelations?) : F
     private fun createProfileFromInput(){
         val useTimeframe = binding.checkBoxTime.isChecked
         val usePlace = binding.checkBoxPlace.isChecked
-        val selectedPlaceTitle = binding.addPlaceDropdown.selectedItem as String
+        val selectedPlaceTitle = binding.addPlaceDropdown.selectedItem as String?
         val title = binding.editTextTitleProfile.text.toString()
 
         // if any of the necessary fields are not set, display alert
@@ -106,14 +112,15 @@ class AddProfileFragment(private val editableProfile: ProfileWithRelations?) : F
                 title,
                 usePlace,
                 useTimeframe,
-                selectedPlaceTitle,
+                selectedPlaceTitle ?: "",
                 getSelectedWeekdays()
             )
             requireActivity().finish()
         } else {
             AlertDialog.Builder(context)
                 .setTitle("Missing Information")
-                .setMessage("TODO")
+                .setMessage("The profile needs a title and at least one action. " +
+                        "It also needs at least one of the place or time triggers")
                 .setPositiveButton("Understood", null)
                 .show()
         }

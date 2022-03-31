@@ -25,7 +25,7 @@
     <!-- Add new Profile -->
     <string name="add_new_profile_title">Add new profile</string>
     <string name="add_profile_actions_label">Actions</string>
-    <string name="add_profile_add_action_button_text">Add Action</string>
+    <string name="add_profile_add_action_button_text">Edit Profile Actions</string>
     <string name="add_profile_place_label">Place</string>
     <string name="add_profile_timeframe_label">Time</string>
     <string name="add_profile_button_text">Add Profile</string>

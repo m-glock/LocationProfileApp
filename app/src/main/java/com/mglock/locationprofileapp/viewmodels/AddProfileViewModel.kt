@@ -78,7 +78,8 @@ class AddProfileViewModel(app: Application): AndroidViewModel(app)  {
         val isTimeSet = if(useTimeframe) {
             timeStart.value != null && timeEnd.value != null
         } else useTimeframe
-        return atLeastOneChecked && (isTitleSet ?: false || isTimeSet)
+        val atLeastOneAction = actions.value!!.isNotEmpty()
+        return atLeastOneChecked && atLeastOneAction && (isTitleSet ?: false || isTimeSet)
     }
 
     fun addOrUpdateProject(
