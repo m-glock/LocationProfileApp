@@ -2,7 +2,7 @@ package com.mglock.locationprofileapp.database
 
 import androidx.room.TypeConverter
 import com.mglock.locationprofileapp.util.Time
-import com.mglock.locationprofileapp.util.enums.DetailActionTitle
+import com.mglock.locationprofileapp.util.enums.DetailActionOption
 import com.mglock.locationprofileapp.util.enums.Weekday
 import java.util.Locale
 
@@ -36,13 +36,13 @@ class Converters {
     }
 
     @TypeConverter
-    fun detailActionTitleToString(detailActionTitle: DetailActionTitle): String{
-        return detailActionTitle.title
+    fun detailActionOptionToString(detailActionOption: DetailActionOption): String{
+        return detailActionOption.title
     }
 
     @TypeConverter
-    fun stringTitleToDetailAction(title: String): DetailActionTitle{
-        return DetailActionTitle.valueOf(title.uppercase().replace(" ", "_"))
+    fun titleToDetailAction(title: String): DetailActionOption{
+        return DetailActionOption.valueOf(title.uppercase().replace(" ", "_"))
     }
 
 }

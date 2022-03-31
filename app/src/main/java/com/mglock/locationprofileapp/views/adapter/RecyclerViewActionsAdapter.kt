@@ -5,19 +5,19 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.mglock.locationprofileapp.databinding.ListTileActionsBinding
-import com.mglock.locationprofileapp.util.enums.DetailActionTitle
+import com.mglock.locationprofileapp.util.enums.DetailActionOption
 
 class RecyclerViewActionsAdapter(
-    private val dataSet: Array<DetailActionTitle>
+    private val dataSet: Array<DetailActionOption>
 ) : RecyclerView.Adapter<RecyclerViewActionsAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemBinding: ListTileActionsBinding) : RecyclerView.ViewHolder(itemBinding.root) {
         private val textView: TextView = itemBinding.textView
-        var detailActionTitle: DetailActionTitle? = null
+        var detailActionOption: DetailActionOption? = null
 
         fun setValues(){
-            if(detailActionTitle != null){
-                textView.text = detailActionTitle!!.title
+            if(detailActionOption != null){
+                textView.text = detailActionOption!!.title
             }
         }
     }
@@ -32,7 +32,7 @@ class RecyclerViewActionsAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.detailActionTitle = dataSet[position]
+        holder.detailActionOption = dataSet[position]
         holder.setValues()
     }
 

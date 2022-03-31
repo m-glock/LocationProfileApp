@@ -9,7 +9,6 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.mglock.locationprofileapp.R
 import com.mglock.locationprofileapp.database.entities.DetailAction
-import com.mglock.locationprofileapp.database.entities.Profile
 import com.mglock.locationprofileapp.database.entities.Timeframe
 import com.mglock.locationprofileapp.database.entities.relations.ProfileWithRelations
 import com.mglock.locationprofileapp.databinding.ListTileProfilesBinding
