@@ -10,27 +10,28 @@
     android:background="@drawable/list_tile_background">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/buttonEdit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/placeTitle"
+            android:id="@+id/listTileTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/placeholder_string"
             android:textSize="@dimen/text_size_title" />
 
         <TextView
-            android:id="@+id/placeAddress"
+            android:id="@+id/listTileSubtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/placeholder_string"
-            app:layout_constraintTop_toBottomOf="@+id/placeTitle"
-            android:textSize="@dimen/text_size_subtitle"/>
+            android:textSize="@dimen/text_size_subtitle"
+            app:layout_constraintTop_toBottomOf="@+id/listTileTitle" />
 
     </LinearLayout>
 
@@ -39,7 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/image_button_no_padding"
-        android:layout_marginEnd="@dimen/icon_margin"
+        android:layout_marginHorizontal="@dimen/icon_margin"
         android:src="@drawable/ic_action_edit"
         android:backgroundTint="@color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"

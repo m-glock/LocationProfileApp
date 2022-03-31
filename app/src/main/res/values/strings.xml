@@ -36,6 +36,7 @@
     <!-- Add actions to profile -->
     <string name="add_actions_to_profile_title">Add Actions</string>
     <string name="add_actions_to_profile_content_description">add action</string>
+    <string name="add_action_to_profile_action_value_subtitle">to: %s</string>
     <string name="save_button_text">Save</string>
     <string name="add_action_value_label">Value:</string>
     <string name="add_action_action_label">Action:</string>

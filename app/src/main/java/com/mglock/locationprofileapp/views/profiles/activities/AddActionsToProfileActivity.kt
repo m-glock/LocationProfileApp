@@ -40,7 +40,7 @@ class AddActionsToProfileActivity : AppCompatActivity(){
 
         mViewModel.actions.observe(this){ detailActions ->
             binding.profileActionsRecyclerView.adapter =
-                RecyclerViewProfileActionsAdapter(detailActions, mViewModel)
+                RecyclerViewProfileActionsAdapter(detailActions, mViewModel, baseContext)
         }
 
         binding.fabAddActionToProfile.setOnClickListener {

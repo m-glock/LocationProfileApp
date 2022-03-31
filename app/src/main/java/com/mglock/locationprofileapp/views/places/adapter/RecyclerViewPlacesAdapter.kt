@@ -5,15 +5,15 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.mglock.locationprofileapp.database.entities.Place
-import com.mglock.locationprofileapp.databinding.ListTilePlacesBinding
+import com.mglock.locationprofileapp.databinding.ListTileWithSubtitleBinding
 import com.mglock.locationprofileapp.viewmodels.places.PlacesViewModel
 
 class RecyclerViewPlacesAdapter(private val dataSet: List<Place>, private val viewModel: PlacesViewModel, val adapterOnClick : (Place) -> Unit) :
     RecyclerView.Adapter<RecyclerViewPlacesAdapter.ViewHolder>() {
 
-    inner class ViewHolder(itemBinding: ListTilePlacesBinding) : RecyclerView.ViewHolder(itemBinding.root) {
-        private val placeTitle: TextView = itemBinding.placeTitle
-        private val placeAddress: TextView = itemBinding.placeAddress
+    inner class ViewHolder(itemBinding: ListTileWithSubtitleBinding) : RecyclerView.ViewHolder(itemBinding.root) {
+        private val placeTitle: TextView = itemBinding.listTileTitle
+        private val placeAddress: TextView = itemBinding.listTileSubtitle
         var place: Place? = null
 
         fun setValues(){
@@ -37,7 +37,7 @@ class RecyclerViewPlacesAdapter(private val dataSet: List<Place>, private val vi
         parent: ViewGroup,
         viewType: Int
     ): ViewHolder {
-        val itemBinding = ListTilePlacesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val itemBinding = ListTileWithSubtitleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         return ViewHolder(itemBinding)
     }
