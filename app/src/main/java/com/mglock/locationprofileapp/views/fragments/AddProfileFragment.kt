@@ -56,6 +56,7 @@ class AddProfileFragment(private val editableProfile: ProfileWithRelations?) : F
             }
             startActivity(intent)
         }
+        mViewModel.setActions()
         mViewModel.actions.observe(viewLifecycleOwner){ actions ->
             val actionValuesText = actions.joinToString(", "){ detailAction ->
                 detailAction.toString()
@@ -149,7 +150,6 @@ class AddProfileFragment(private val editableProfile: ProfileWithRelations?) : F
                         checkbox?.isChecked = true
                     }
                 }
-
                 mViewModel.setActions()
             }
         }

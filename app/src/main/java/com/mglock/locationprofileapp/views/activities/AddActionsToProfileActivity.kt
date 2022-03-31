@@ -35,7 +35,7 @@ class AddActionsToProfileActivity : AppCompatActivity(){
                     mViewModel.removeAllActionsWithNoProfile()
                     onBackPressed()
                 }.setNegativeButton("Stay here", null)
-                .create()
+                .show()
         }
 
         mViewModel.actions.observe(this){ detailActions ->
@@ -48,7 +48,7 @@ class AddActionsToProfileActivity : AppCompatActivity(){
         }
 
         binding.saveActionsButton.setOnClickListener {
-            //TODO go back to profile and return current list of actions
+            finish()
         }
     }
 }

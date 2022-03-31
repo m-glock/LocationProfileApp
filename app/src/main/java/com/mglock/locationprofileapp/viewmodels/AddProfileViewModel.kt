@@ -22,7 +22,7 @@ class AddProfileViewModel(app: Application): AndroidViewModel(app)  {
     private var _places: LiveData<List<Place>> = MutableLiveData()
     val places get() = _places
 
-    private var _actions: LiveData<List<DetailAction>> = MutableLiveData()
+    private var _actions: LiveData<List<DetailAction>> = MutableLiveData(mutableListOf())
     val actions get() = _actions
 
     private var _timeStart: MutableLiveData<Time> = MutableLiveData()
@@ -57,8 +57,11 @@ class AddProfileViewModel(app: Application): AndroidViewModel(app)  {
         viewModelScope.launch {
             try{
                 val db = AppDatabase.getInstance(getApplication())
-                _actions = db.detailActionDao().getByProfile(profile.value!!.profile.profileUID)
-                    .asLiveData(this.coroutineContext)
+                _actions = if(profile.value == null){
+                    db.detailActionDao().getByNoProfile().asLiveData(coroutineContext)
+                } else {
+                    db.detailActionDao().getByProfile(profile.value!!.profile.profileUID).asLiveData(coroutineContext)
+                }
             } catch(e: Exception){
                 Log.e("Error", e.stackTraceToString())
             }

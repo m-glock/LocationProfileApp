@@ -20,10 +20,10 @@ class AddActionsToProfileViewModel(app: Application): AndroidViewModel(app)  {
         viewModelScope.launch {
             try{
                 val db = AppDatabase.getInstance(getApplication())
-                if(profileId == -1L){
-                    _actions = db.detailActionDao().getByNoProfile().asLiveData(coroutineContext)
+                _actions = if(profileId == -1L){
+                    db.detailActionDao().getByNoProfile().asLiveData(coroutineContext)
                 } else {
-                    _actions = db.detailActionDao().getByProfile(profileId).asLiveData(coroutineContext)
+                    db.detailActionDao().getByProfile(profileId).asLiveData(coroutineContext)
                 }
             } catch(e: Exception){
                 Log.e("Error", e.stackTraceToString())
