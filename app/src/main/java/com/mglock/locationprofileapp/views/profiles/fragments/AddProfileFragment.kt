@@ -63,6 +63,15 @@ class AddProfileFragment(private val editableProfile: ProfileWithRelations?) : F
             startActivity(intent)
         }
         mViewModel.setActions()
+
+        // set values (if available)
+        setValues()
+        if(editableProfile != null){
+            mViewModel.profile.value = editableProfile
+            mViewModel.buttonText.value = "Done"
+        }
+
+        // set text for all detail actions
         mViewModel.actions.observe(viewLifecycleOwner){ actions ->
             val actionValuesText = actions.joinToString(", "){ detailAction ->
                 detailAction.toString()
@@ -87,13 +96,6 @@ class AddProfileFragment(private val editableProfile: ProfileWithRelations?) : F
         // get all input values and call the ViewModel's method to add the profile to the DB
         binding.addProfileButton.setOnClickListener {
             createProfileFromInput()
-        }
-
-        // set values (if available)
-        setValues()
-        if(editableProfile != null){
-            mViewModel.profile.value = editableProfile
-            mViewModel.buttonText.value = "Done"
         }
 
         return binding.root
@@ -145,11 +147,12 @@ class AddProfileFragment(private val editableProfile: ProfileWithRelations?) : F
         mViewModel.profile.observe(viewLifecycleOwner){ profile ->
             if(profile != null){
                 binding.editTextTitleProfile.setText(profile.profile.title)
-                if(profile.profile.placeId != null){
+                if(profile.place != null){
                     binding.checkBoxPlace.isChecked = true
-                    binding.addPlaceDropdown.setSelection(profile.profile.placeId!!.toInt())
+                    binding.addPlaceDropdown.setSelection(profile.place.placeUID.toInt())
                 }
                 if(profile.timeframe != null){
+                    binding.checkBoxTime.isChecked = true
                     mViewModel.timeStart.value = profile.timeframe.from
                     mViewModel.timeEnd.value = profile.timeframe.to
                     profile.timeframe.weekdays.forEach { weekday ->

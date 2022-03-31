@@ -22,7 +22,7 @@ interface TimeframeDao {
     fun insertAll(vararg timeframes: Timeframe)
 
     @Update
-    fun update(timeframe: Timeframe)
+    suspend fun update(timeframe: Timeframe)
 
     @Delete
     suspend fun delete(timeframe: Timeframe)
