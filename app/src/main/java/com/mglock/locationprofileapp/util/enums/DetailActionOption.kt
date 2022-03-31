@@ -2,7 +2,7 @@ package com.mglock.locationprofileapp.util.enums
 
 import android.Manifest
 import androidx.fragment.app.Fragment
-import com.mglock.locationprofileapp.views.fragments.AddActionValueDropdownFragment
+import com.mglock.locationprofileapp.views.profiles.fragments.AddActionValueDropdownFragment
 
 enum class DetailActionOption(val title: String){
     CHANGE_VOLUME("Change Volume"){

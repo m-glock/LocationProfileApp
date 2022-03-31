@@ -16,22 +16,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LocationProfileApp">
         <activity
-            android:name=".views.activities.AddActionsToProfileActivity"
+            android:name=".views.profiles.activities.AddActionsToProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".views.activities.EditProfileActivity"
+            android:name=".views.profiles.activities.EditProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".views.activities.AddProfileActivity"
+            android:name=".views.profiles.activities.AddProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".views.activities.EditPlaceActivity"
+            android:name=".views.places.activities.EditPlaceActivity"
             android:exported="false" />
         <activity
-            android:name=".views.activities.AddPlaceActivity"
+            android:name=".views.places.activities.AddPlaceActivity"
             android:exported="false" />
         <activity
-            android:name=".views.activities.MainActivity"
+            android:name=".views.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

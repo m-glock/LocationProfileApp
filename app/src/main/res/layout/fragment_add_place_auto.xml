@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:paddingHorizontal="@dimen/fragment_padding_horizontal"
     android:paddingVertical="@dimen/fragment_padding_vertical"
-    tools:context=".views.fragments.AddPlaceAutoFragment">
+    tools:context=".views.places.fragments.AddPlaceAutoFragment">
 
     <TextView
         android:id="@+id/automaticModeExplanationText"

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="@dimen/add_action_fragment_padding"
-    tools:context=".views.fragments.AddDetailActionFragment">
+    tools:context=".views.profiles.fragments.AddDetailActionFragment">
 
     <TextView
         android:id="@+id/actionLabel"

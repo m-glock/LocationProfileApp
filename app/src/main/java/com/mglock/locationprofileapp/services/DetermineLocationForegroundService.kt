@@ -11,7 +11,7 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
-import com.mglock.locationprofileapp.views.activities.MainActivity
+import com.mglock.locationprofileapp.views.MainActivity
 import com.mglock.locationprofileapp.R
 import com.mglock.locationprofileapp.database.AppDatabase
 import com.mglock.locationprofileapp.database.entities.Place
