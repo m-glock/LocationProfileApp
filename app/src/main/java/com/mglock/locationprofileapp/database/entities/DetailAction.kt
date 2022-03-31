@@ -21,6 +21,6 @@ data class DetailAction(
     val detailActionValue: String
 ): Serializable {
     override fun toString(): String {
-        return "$title $detailActionValue"
+        return "${title.title}: $detailActionValue"
     }
 }

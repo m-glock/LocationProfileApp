@@ -19,7 +19,7 @@ class RecyclerViewProfileActionsAdapter(
 
         fun setValues(){
             if(detailAction != null){
-                textView.text = detailAction!!.title.toString()
+                textView.text = detailAction!!.toString()
             }
         }
 
