@@ -61,7 +61,10 @@ class AddDetailActionFragment : DialogFragment() {
                             selectedAction.replace(" ", "_").uppercase()
                         )
                         val selectedValue = valueFragment.getDropdownValue()
-                        mViewModel.addAction(DetailAction(0, null, detailActionTitle, selectedValue))
+                        mViewModel.addAction(
+                            DetailAction(0, null, detailActionTitle, selectedValue),
+                            requireContext()
+                        )
                     }
                 }.setNegativeButton("no"){ _, _ ->
 
