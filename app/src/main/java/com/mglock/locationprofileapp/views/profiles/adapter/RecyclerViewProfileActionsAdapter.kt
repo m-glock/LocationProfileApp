@@ -2,6 +2,7 @@ package com.mglock.locationprofileapp.views.profiles.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -35,9 +36,8 @@ class RecyclerViewProfileActionsAdapter(
             itemBinding.buttonDelete.setOnClickListener {
                 viewModel.deleteAction(detailAction!!)
             }
-            itemBinding.buttonEdit.setOnClickListener {
-                //TODO
-            }
+            // do not show edit button, actions can only be created or deleted
+            itemBinding.buttonEdit.visibility = View.GONE
         }
     }
 
