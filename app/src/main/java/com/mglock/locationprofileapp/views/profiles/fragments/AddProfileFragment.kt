@@ -106,10 +106,11 @@ class AddProfileFragment(private val editableProfile: ProfileWithRelations?) : F
         val usePlace = binding.checkBoxPlace.isChecked
         val selectedPlaceTitle = binding.addPlaceDropdown.selectedItem as String?
         val title = binding.editTextTitleProfile.text.toString()
+        val atLeastOneAction = binding.actionsListText.text.toString().isNotBlank()
 
         // if any of the necessary fields are not set, display alert
         // else save data in DB and close Activity
-        if(mViewModel.allInputsSet(usePlace, useTimeframe, title)){
+        if(mViewModel.allInputsSet(usePlace, useTimeframe, title, atLeastOneAction)){
             mViewModel.addOrUpdateProject(
                 title,
                 usePlace,

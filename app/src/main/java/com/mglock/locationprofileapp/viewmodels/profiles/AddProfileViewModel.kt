@@ -71,15 +71,15 @@ class AddProfileViewModel(app: Application): AndroidViewModel(app)  {
     fun allInputsSet(
         usePlace: Boolean,
         useTimeframe: Boolean,
-        title: String?
+        title: String?,
+        atLeastOneAction: Boolean
     ): Boolean{
         val atLeastOneChecked = usePlace || useTimeframe
         val isTitleSet = title?.isNotBlank()
         val isTimeSet = if(useTimeframe) {
             timeStart.value != null && timeEnd.value != null
         } else useTimeframe
-        val atLeastOneAction = actions.value?.isNotEmpty()
-        return atLeastOneChecked && atLeastOneAction ?: false && (isTitleSet ?: false || isTimeSet)
+        return atLeastOneChecked && atLeastOneAction && (isTitleSet ?: false || isTimeSet)
     }
 
     fun addOrUpdateProject(
