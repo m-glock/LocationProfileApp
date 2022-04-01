@@ -37,30 +37,15 @@ class AudioHandler(private val context: Context) {
         )
         val intent = Intent(RingtoneManager.ACTION_RINGTONE_PICKER)
         intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_RINGTONE)
-        intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, "Select Tone")
+        intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, "Select new Ringtone")
         intent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, currentTone)
         intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT, false)
         intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, true)
 
         resultLauncher.launch(intent)
-
-        /*
-        resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                // There are no request codes
-                val data: Intent? = result.data
-                if(data != null){
-                    val uri: Uri? = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI)
-                    if (uri != null) {
-                        val ringTonePath = uri.toString()
-                    }
-                }
-            }
-        }
-         */
     }
 
-    fun checkIfToDoNotDisturbIsAllowed(resultLauncher: ActivityResultLauncher<Intent>){
+    fun checkIfDoNotDisturbIsAllowed(resultLauncher: ActivityResultLauncher<Intent>){
         val notificationManager =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager?
         if (!notificationManager!!.isNotificationPolicyAccessGranted) {

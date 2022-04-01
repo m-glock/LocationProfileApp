@@ -2,6 +2,7 @@ package com.mglock.locationprofileapp.util.enums
 
 import android.Manifest
 import androidx.fragment.app.Fragment
+import com.mglock.locationprofileapp.views.profiles.fragments.AddActionRingtoneFragment
 import com.mglock.locationprofileapp.views.profiles.fragments.AddActionVolumeModeFragment
 import com.mglock.locationprofileapp.views.profiles.fragments.AddActionVolumeFragment
 
@@ -39,7 +40,7 @@ enum class DetailActionOption(val title: String){
             return when(enum){
                 CHANGE_VOLUME_MODE -> AddActionVolumeModeFragment()
                 CHANGE_VOLUME -> AddActionVolumeFragment()
-                CHANGE_RINGTONE -> Fragment()
+                CHANGE_RINGTONE -> AddActionRingtoneFragment()
                 else -> Fragment()
             }
         }
