@@ -4,9 +4,11 @@ import android.Manifest
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import com.mglock.locationprofileapp.views.profiles.fragments.AddActionRingtoneFragment
-import com.mglock.locationprofileapp.views.profiles.fragments.AddActionVolumeModeFragment
-import com.mglock.locationprofileapp.views.profiles.fragments.AddActionVolumeFragment
+import com.mglock.locationprofileapp.AddActionBluetoothDeviceConnectedFragment
+import com.mglock.locationprofileapp.views.profiles.fragments.detailactionfragments.AddActionBluetoothEnabledFragment
+import com.mglock.locationprofileapp.views.profiles.fragments.detailactionfragments.AddActionRingtoneFragment
+import com.mglock.locationprofileapp.views.profiles.fragments.detailactionfragments.AddActionVolumeModeFragment
+import com.mglock.locationprofileapp.views.profiles.fragments.detailactionfragments.AddActionVolumeFragment
 
 enum class DetailActionOption(val title: String){
     CHANGE_VOLUME("Change Volume"){
@@ -24,25 +26,30 @@ enum class DetailActionOption(val title: String){
             return listOf(Manifest.permission.ACCESS_NOTIFICATION_POLICY)
         }
     },
-    NOTIFY_BLUETOOTH_ENABLED("Bluetooth state notification"){
+    NOTIFY_BLUETOOTH_ENABLED("Check Bluetooth state"){
         override fun getRequiredPermissions(): List<String> {
             return listOf(Manifest.permission.BLUETOOTH)
         }
     },
-    NOTIFY_BLUETOOTH_DEVICE_CONNECTED("Bluetooth connected to Device"){
-        @RequiresApi(Build.VERSION_CODES.S)
+    NOTIFY_BLUETOOTH_DEVICE_CONNECTED("Connect to device"){
         override fun getRequiredPermissions(): List<String> {
-            return listOf(
-                Manifest.permission.BLUETOOTH,
-                Manifest.permission.BLUETOOTH_CONNECT
-            )
+            return listOf(Manifest.permission.BLUETOOTH)
         }
     },
     NOTIFY_WIFI_ENABLED("Wi-Fi state notification"){
         override fun getRequiredPermissions(): List<String> {
             TODO("Not yet implemented")
         }
-    };
+    },
+    NOTIFY_LOCATION_ENTERED_EXITED("Enter/Exit Location"){
+        override fun getRequiredPermissions(): List<String> {
+            return listOf(
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            )
+        }
+    },
+    ;
 
     abstract fun getRequiredPermissions(): List<String>
 
@@ -52,8 +59,8 @@ enum class DetailActionOption(val title: String){
                 CHANGE_VOLUME_MODE -> AddActionVolumeModeFragment()
                 CHANGE_VOLUME -> AddActionVolumeFragment()
                 CHANGE_RINGTONE -> AddActionRingtoneFragment()
-                NOTIFY_BLUETOOTH_ENABLED -> Fragment()
-                NOTIFY_BLUETOOTH_DEVICE_CONNECTED -> Fragment()
+                NOTIFY_BLUETOOTH_ENABLED -> AddActionBluetoothEnabledFragment()
+                NOTIFY_BLUETOOTH_DEVICE_CONNECTED -> AddActionBluetoothDeviceConnectedFragment()
                 else -> Fragment()
             }
         }

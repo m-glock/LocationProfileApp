@@ -14,6 +14,7 @@ import com.mglock.locationprofileapp.R
 import com.mglock.locationprofileapp.database.entities.DetailAction
 import com.mglock.locationprofileapp.databinding.FragmentAddDetailActionBinding
 import com.mglock.locationprofileapp.util.enums.DetailActionOption
+import com.mglock.locationprofileapp.util.phonefunctionality.BluetoothHandler
 import com.mglock.locationprofileapp.viewmodels.profiles.AddDetailActionViewModel
 
 class AddDetailActionFragment(private val profileId: Long) : DialogFragment() {
@@ -29,11 +30,19 @@ class AddDetailActionFragment(private val profileId: Long) : DialogFragment() {
         // show correct fragment for value selection if something in the dropdown is chosen
         binding.actionDropdown.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, pos: Int, id: Long) {
-                val fragment = DetailActionOption.getValueSelectionFragment(actionOptions[pos])
-                val fragmentTransaction = childFragmentManager.beginTransaction()
-                fragmentTransaction.replace(binding.actionValueFragment.id, fragment)
-                fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                fragmentTransaction.commit()
+                val option = actionOptions[pos]
+                if(option == DetailActionOption.NOTIFY_BLUETOOTH_DEVICE_CONNECTED
+                    && !BluetoothHandler(requireContext()).checkIfBluetoothEnabled()){
+                    AlertDialog.Builder(requireContext())
+                        .setTitle("Bluetooth not enabled.")
+                        .setMessage("Please (temporarily) enable bluetooth so that " +
+                                "the app can access the list of paired devices.")
+                        .setPositiveButton("Understood", null)
+                        .show()
+                    binding.actionDropdown.setSelection(0)
+                } else {
+                    startFragment(binding, option)
+                }
             }
             override fun onNothingSelected(p0: AdapterView<*>?) {}
         }
@@ -53,18 +62,24 @@ class AddDetailActionFragment(private val profileId: Long) : DialogFragment() {
                     val valueFragment = childFragmentManager.fragments[0] as? BaseDetailActionFragment
                     if(valueFragment != null){
                         val selectedAction = binding.actionDropdown.selectedItem as String
-                        val detailActionTitle = DetailActionOption.valueOf(
-                            selectedAction.replace(" ", "_").uppercase()
-                        )
+                        val detailActionTitle = DetailActionOption.values().find { option -> option.title == selectedAction }
                         val selectedValue = valueFragment.getValue()
                         val profileIdForAction = if(profileId > 0) profileId else null
                         mViewModel.addAction(
-                            DetailAction(0, profileIdForAction, detailActionTitle, selectedValue),
+                            DetailAction(0, profileIdForAction, detailActionTitle!!, selectedValue),
                             requireContext()
                         )
                     }
                 }.setNegativeButton("Back"){ _, _ -> }.create()
         } ?: throw IllegalStateException("Activity cannot be null")
+    }
+
+    private fun startFragment(binding: FragmentAddDetailActionBinding, option: DetailActionOption){
+        val fragment = DetailActionOption.getValueSelectionFragment(option)
+        val fragmentTransaction = childFragmentManager.beginTransaction()
+        fragmentTransaction.replace(binding.actionValueFragment.id, fragment)
+        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+        fragmentTransaction.commit()
     }
 
 }

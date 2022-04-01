@@ -42,7 +42,7 @@ class Converters {
 
     @TypeConverter
     fun titleToDetailAction(title: String): DetailActionOption{
-        return DetailActionOption.valueOf(title.uppercase().replace(" ", "_"))
+        return DetailActionOption.values().find { option -> option.title == title }!!
     }
 
 }
