@@ -45,13 +45,10 @@ class AudioHandler(private val context: Context) {
         resultLauncher.launch(intent)
     }
 
-    fun checkIfDoNotDisturbIsAllowed(resultLauncher: ActivityResultLauncher<Intent>){
+    fun isDoNotDisturbAllowed(): Boolean{
         val notificationManager =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager?
-        if (!notificationManager!!.isNotificationPolicyAccessGranted) {
-            val intent = Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
-            resultLauncher.launch(intent)
-        }
+        return notificationManager!!.isNotificationPolicyAccessGranted
     }
 
     // actions
