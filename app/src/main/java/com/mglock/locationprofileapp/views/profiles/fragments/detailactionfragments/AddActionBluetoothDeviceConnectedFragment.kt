@@ -1,4 +1,4 @@
-package com.mglock.locationprofileapp
+package com.mglock.locationprofileapp.views.profiles.fragments.detailactionfragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
+import com.mglock.locationprofileapp.R
 import com.mglock.locationprofileapp.databinding.FragmentAddActionBluetoothDeviceConnectedBinding
 import com.mglock.locationprofileapp.util.phonefunctionality.BluetoothHandler
 import com.mglock.locationprofileapp.views.profiles.fragments.BaseDetailActionFragment

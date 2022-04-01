@@ -1,10 +1,8 @@
 package com.mglock.locationprofileapp.util.enums
 
 import android.Manifest
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import com.mglock.locationprofileapp.AddActionBluetoothDeviceConnectedFragment
+import com.mglock.locationprofileapp.views.profiles.fragments.detailactionfragments.AddActionBluetoothDeviceConnectedFragment
 import com.mglock.locationprofileapp.views.profiles.fragments.detailactionfragments.AddActionBluetoothEnabledFragment
 import com.mglock.locationprofileapp.views.profiles.fragments.detailactionfragments.AddActionRingtoneFragment
 import com.mglock.locationprofileapp.views.profiles.fragments.detailactionfragments.AddActionVolumeModeFragment
