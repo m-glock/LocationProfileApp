@@ -54,6 +54,13 @@ class AddProfileFragment(private val editableProfile: ProfileWithRelations?) : F
 
         }
 
+        // set values (if available)
+        setValues()
+        if(editableProfile != null){
+            mViewModel.profile.value = editableProfile
+            mViewModel.buttonText.value = "Done"
+        }
+
         // open dialog for adding actions to the profile
         binding.addActionsButton.setOnClickListener {
             val intent = Intent(requireContext(), AddActionsToProfileActivity::class.java)
@@ -63,13 +70,6 @@ class AddProfileFragment(private val editableProfile: ProfileWithRelations?) : F
             startActivity(intent)
         }
         mViewModel.setActions()
-
-        // set values (if available)
-        setValues()
-        if(editableProfile != null){
-            mViewModel.profile.value = editableProfile
-            mViewModel.buttonText.value = "Done"
-        }
 
         // set text for all detail actions
         mViewModel.actions.observe(viewLifecycleOwner){ actions ->
