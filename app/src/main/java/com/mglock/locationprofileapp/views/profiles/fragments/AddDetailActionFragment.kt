@@ -16,7 +16,7 @@ import com.mglock.locationprofileapp.databinding.AddDetailActionFragmentBinding
 import com.mglock.locationprofileapp.util.enums.DetailActionOption
 import com.mglock.locationprofileapp.viewmodels.profiles.AddDetailActionViewModel
 
-class AddDetailActionFragment : DialogFragment() {
+class AddDetailActionFragment(private val profileId: Long) : DialogFragment() {
 
     private lateinit var mViewModel: AddDetailActionViewModel
 
@@ -57,8 +57,9 @@ class AddDetailActionFragment : DialogFragment() {
                             selectedAction.replace(" ", "_").uppercase()
                         )
                         val selectedValue = valueFragment.getValue()
+                        val profileIdForAction = if(profileId > 0) profileId else null
                         mViewModel.addAction(
-                            DetailAction(0, null, detailActionTitle, selectedValue),
+                            DetailAction(0, profileIdForAction, detailActionTitle, selectedValue),
                             requireContext()
                         )
                     }

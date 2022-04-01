@@ -28,14 +28,7 @@ class AddActionsToProfileActivity : AppCompatActivity(){
         supportActionBar!!.setDisplayShowTitleEnabled(false)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         binding.toolbarAddActionsToProfile.setNavigationOnClickListener {
-            AlertDialog.Builder(this)
-                .setTitle("Careful!")
-                .setMessage("If you return to the profile screen without saving your data will be lost.")
-                .setPositiveButton("Go back"){ _, _ ->
-                    mViewModel.removeAllActionsWithNoProfile()
-                    onBackPressed()
-                }.setNegativeButton("Stay here", null)
-                .show()
+            onBackPressed()
         }
 
         mViewModel.actions.observe(this){ detailActions ->
@@ -44,11 +37,7 @@ class AddActionsToProfileActivity : AppCompatActivity(){
         }
 
         binding.fabAddActionToProfile.setOnClickListener {
-            AddDetailActionFragment().show(supportFragmentManager, "Add Detail Action")
-        }
-
-        binding.saveActionsButton.setOnClickListener {
-            finish()
+            AddDetailActionFragment(profileId).show(supportFragmentManager, "Add Detail Action")
         }
     }
 }
