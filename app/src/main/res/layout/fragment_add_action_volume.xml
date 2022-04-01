@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".views.profiles.fragments.AddActionVolumeFragment">
+    tools:context=".views.profiles.fragments.detailactionfragments.AddActionVolumeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/typeLayout"

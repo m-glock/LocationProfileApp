@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".views.profiles.fragments.AddActionRingtoneFragment">
+    tools:context=".views.profiles.fragments.detailactionfragments.AddActionRingtoneFragment">
 
     <TextView
         android:id="@+id/valueLabel"

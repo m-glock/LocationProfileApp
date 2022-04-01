@@ -1,4 +1,4 @@
-package com.mglock.locationprofileapp.views.profiles.fragments
+package com.mglock.locationprofileapp.views.profiles.fragments.detailactionfragments
 
 import android.app.AlertDialog
 import android.content.Intent
@@ -15,6 +15,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import com.mglock.locationprofileapp.R
 import com.mglock.locationprofileapp.databinding.FragmentAddActionVolumeModeBinding
 import com.mglock.locationprofileapp.util.phonefunctionality.AudioHandler
+import com.mglock.locationprofileapp.views.profiles.fragments.BaseDetailActionFragment
 
 class AddActionVolumeModeFragment : Fragment(), BaseDetailActionFragment {
 
