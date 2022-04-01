@@ -7,20 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import com.mglock.locationprofileapp.R
-import com.mglock.locationprofileapp.databinding.AddActionVolumeModeFragmentBinding
+import com.mglock.locationprofileapp.databinding.FragmentAddActionVolumeModeBinding
 import com.mglock.locationprofileapp.util.phonefunctionality.AudioHandler
 
 class AddActionVolumeModeFragment : Fragment(), BaseDetailActionFragment {
 
-    private var _binding: AddActionVolumeModeFragmentBinding? = null
-    private val binding get(): AddActionVolumeModeFragmentBinding = _binding!!
+    private var _binding: FragmentAddActionVolumeModeBinding? = null
+    private val binding get(): FragmentAddActionVolumeModeBinding = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        _binding = AddActionVolumeModeFragmentBinding.inflate(inflater, container, false)
+        _binding = FragmentAddActionVolumeModeBinding.inflate(inflater, container, false)
 
         // set the adapter for the dropdown
         binding.valueDropdown.adapter = ArrayAdapter(

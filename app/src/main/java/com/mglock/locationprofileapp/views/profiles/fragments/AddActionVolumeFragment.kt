@@ -8,13 +8,13 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.mglock.locationprofileapp.R
-import com.mglock.locationprofileapp.databinding.AddActionVolumeFragmentBinding
+import com.mglock.locationprofileapp.databinding.FragmentAddActionVolumeBinding
 import com.mglock.locationprofileapp.util.phonefunctionality.AudioHandler
 
 class AddActionVolumeFragment : Fragment(), BaseDetailActionFragment {
 
-    private var _binding: AddActionVolumeFragmentBinding? = null
-    private val binding get(): AddActionVolumeFragmentBinding = _binding!!
+    private var _binding: FragmentAddActionVolumeBinding? = null
+    private val binding get(): FragmentAddActionVolumeBinding = _binding!!
     private lateinit var audioHandler: AudioHandler
 
     override fun onCreateView(
@@ -22,7 +22,7 @@ class AddActionVolumeFragment : Fragment(), BaseDetailActionFragment {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        _binding = AddActionVolumeFragmentBinding.inflate(inflater, container, false)
+        _binding = FragmentAddActionVolumeBinding.inflate(inflater, container, false)
 
         audioHandler = AudioHandler(requireContext())
 

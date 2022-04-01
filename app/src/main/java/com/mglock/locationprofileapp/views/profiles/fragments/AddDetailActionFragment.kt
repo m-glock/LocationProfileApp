@@ -12,7 +12,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentTransaction
 import com.mglock.locationprofileapp.R
 import com.mglock.locationprofileapp.database.entities.DetailAction
-import com.mglock.locationprofileapp.databinding.AddDetailActionFragmentBinding
+import com.mglock.locationprofileapp.databinding.FragmentAddDetailActionBinding
 import com.mglock.locationprofileapp.util.enums.DetailActionOption
 import com.mglock.locationprofileapp.viewmodels.profiles.AddDetailActionViewModel
 
@@ -24,7 +24,7 @@ class AddDetailActionFragment(private val profileId: Long) : DialogFragment() {
         mViewModel = ViewModelProvider(this)[AddDetailActionViewModel::class.java]
         val actionOptions = DetailActionOption.values()
 
-        val binding = AddDetailActionFragmentBinding.inflate(LayoutInflater.from(context))
+        val binding = FragmentAddDetailActionBinding.inflate(LayoutInflater.from(context))
 
         // show correct fragment for value selection if something in the dropdown is chosen
         binding.actionDropdown.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
