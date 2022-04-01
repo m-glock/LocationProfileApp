@@ -28,6 +28,18 @@ class ProfilesViewModel(app: Application): AndroidViewModel(app) {
         }
     }
 
+    // the relations are not automatically removed if the profile has changed, so we have to do it manually
+    fun updateRelationsOfProfiles(){
+        _profiles.value?.forEach { profile ->
+            if(profile.profile.placeId == null){
+                profile.place = null
+            }
+            if(profile.profile.timeframeId == null){
+                profile.timeframe = null
+            }
+        }
+    }
+
     fun deleteProfile(profile: Profile){
         viewModelScope.launch {
             try{

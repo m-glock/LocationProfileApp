@@ -78,8 +78,8 @@ class AddProfileViewModel(app: Application): AndroidViewModel(app)  {
         val isTimeSet = if(useTimeframe) {
             timeStart.value != null && timeEnd.value != null
         } else useTimeframe
-        val atLeastOneAction = actions.value!!.isNotEmpty()
-        return atLeastOneChecked && atLeastOneAction && (isTitleSet ?: false || isTimeSet)
+        val atLeastOneAction = actions.value?.isNotEmpty()
+        return atLeastOneChecked && atLeastOneAction ?: false && (isTitleSet ?: false || isTimeSet)
     }
 
     fun addOrUpdateProject(
@@ -119,7 +119,7 @@ class AddProfileViewModel(app: Application): AndroidViewModel(app)  {
                 }
 
                 if(useTimeframe){
-                    if(profileWithRelations.profile.timeframeId == null){
+                    if(profileWithRelations.timeframe == null){
                         // new timeframe, add it to db
                         val timeframeUID = db.timeframeDao().insert(Timeframe(
                             0,
@@ -131,13 +131,16 @@ class AddProfileViewModel(app: Application): AndroidViewModel(app)  {
                         profileWithRelations.profile.timeframeId = timeframeUID
                     } else {
                         // old timeframe, update it
-                        profileWithRelations.timeframe!!.from = timeStart.value!!
-                        profileWithRelations.timeframe.to = timeEnd.value!!
-                        profileWithRelations.timeframe.weekdays = weekdays
-                        db.timeframeDao().update(profileWithRelations.timeframe)
+                        val oldTimeframe = profileWithRelations.timeframe!!
+                        oldTimeframe.from = timeStart.value!!
+                        oldTimeframe.to = timeEnd.value!!
+                        oldTimeframe.weekdays = weekdays
+                        db.timeframeDao().update(oldTimeframe)
                     }
                 } else {
                     profileWithRelations.profile.timeframeId = null
+                    val timeframeToBeDeleted = profileWithRelations.timeframe
+                    if(timeframeToBeDeleted != null) db.timeframeDao().delete(timeframeToBeDeleted)
                 }
                 profileWithRelations.profile.title = title
 

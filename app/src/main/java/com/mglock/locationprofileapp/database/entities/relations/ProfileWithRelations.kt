@@ -14,10 +14,10 @@ data class ProfileWithRelations (
     val profile: Profile,
 
     @Relation(parentColumn = "profile_uid", entityColumn = "place_uid")
-    val place: Place?,
+    var place: Place?,
 
     @Relation(parentColumn = "profile_uid", entityColumn = "timeframe_uid")
-    val timeframe: Timeframe?,
+    var timeframe: Timeframe?,
 
     @Relation(
         parentColumn = "profile_uid",

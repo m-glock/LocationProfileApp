@@ -147,15 +147,17 @@ class AddProfileFragment(private val editableProfile: ProfileWithRelations?) : F
         mViewModel.profile.observe(viewLifecycleOwner){ profile ->
             if(profile != null){
                 binding.editTextTitleProfile.setText(profile.profile.title)
-                if(profile.place != null){
+                val place = profile.place
+                val timeframe = profile.timeframe
+                if(place != null){
                     binding.checkBoxPlace.isChecked = true
-                    binding.addPlaceDropdown.setSelection(profile.place.placeUID.toInt())
+                    binding.addPlaceDropdown.setSelection(place.placeUID.toInt())
                 }
-                if(profile.timeframe != null){
+                if(timeframe != null){
                     binding.checkBoxTime.isChecked = true
-                    mViewModel.timeStart.value = profile.timeframe.from
-                    mViewModel.timeEnd.value = profile.timeframe.to
-                    profile.timeframe.weekdays.forEach { weekday ->
+                    mViewModel.timeStart.value = timeframe.from
+                    mViewModel.timeEnd.value = timeframe.to
+                    timeframe.weekdays.forEach { weekday ->
                         val checkbox = binding.root.findViewWithTag(weekday.title) as? CheckBox
                         checkbox?.isChecked = true
                     }

@@ -43,6 +43,7 @@ class ProfilesFragment : Fragment() {
             } else {
                 recyclerView.visibility = View.VISIBLE
                 textViewNoProfiles.visibility = View.GONE
+                mViewModel.updateRelationsOfProfiles()
                 recyclerView.adapter = RecyclerViewProfilesAdapter(profiles, mViewModel){ profile ->
                     clickEditButton(profile)
                 }
