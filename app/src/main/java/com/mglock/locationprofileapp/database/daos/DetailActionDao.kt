@@ -22,16 +22,19 @@ interface DetailActionDao {
     @Query("SELECT * FROM detail_action WHERE title LIKE (:title)")
     suspend fun getByTitle(title: String): List<DetailAction>
 
-    @Query("SELECT * FROM detail_action WHERE profile_uid LIKE (:profileID)")
+    @Query("SELECT * FROM detail_action WHERE profile_id LIKE (:profileID)")
     fun getByProfile(profileID: Long): Flow<List<DetailAction>>
 
-    @Query("SELECT * FROM detail_action WHERE profile_uid IS NULL")
+    @Query("SELECT * FROM detail_action WHERE profile_id LIKE (:profileID)")
+    suspend fun getByProfileOnce(profileID: Long): List<DetailAction>
+
+    @Query("SELECT * FROM detail_action WHERE profile_id IS NULL")
     fun getByNoProfile(): Flow<List<DetailAction>>
 
-    @Query("UPDATE detail_action SET profile_uid = (:profileID) WHERE profile_uid IS NULL")
+    @Query("UPDATE detail_action SET profile_id = (:profileID) WHERE profile_id IS NULL")
     suspend fun addProfileId(profileID: Long)
 
-    @Query("DELETE FROM detail_action WHERE profile_uid IS NULL")
+    @Query("DELETE FROM detail_action WHERE profile_id IS NULL")
     suspend fun deleteAllWithNoProfile()
 
     @Update

@@ -13,15 +13,15 @@ data class ProfileWithRelations (
     @Embedded
     val profile: Profile,
 
-    @Relation(parentColumn = "profile_uid", entityColumn = "place_uid")
+    @Relation(parentColumn = "place_id", entityColumn = "place_uid")
     var place: Place?,
 
-    @Relation(parentColumn = "profile_uid", entityColumn = "timeframe_uid")
+    @Relation(parentColumn = "timeframe_id", entityColumn = "timeframe_uid")
     var timeframe: Timeframe?,
 
     @Relation(
         parentColumn = "profile_uid",
-        entityColumn = "detail_action_uid"
+        entityColumn = "profile_id"
     )
-    val actions: List<DetailAction>
+    var actions: List<DetailAction>
 ): Serializable

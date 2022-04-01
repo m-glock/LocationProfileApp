@@ -21,7 +21,7 @@ class AddDetailActionViewModel(app: Application): AndroidViewModel(app) {
                 // check if there is already an action with the same title and project in the db
                 val allActions = db.detailActionDao().getByTitle(detailAction.title.toString())
                 val actionAlreadySetForProject =
-                    allActions.any { action ->  action.profileUID == detailAction.profileUID}
+                    allActions.any { action ->  action.profileId == detailAction.profileId}
 
                 if(!actionAlreadySetForProject){
                     db.detailActionDao().insert(detailAction)
