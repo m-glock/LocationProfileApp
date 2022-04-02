@@ -1,19 +1,12 @@
 package com.mglock.locationprofileapp.util.phonefunctionality
 
-import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothManager
-import android.content.BroadcastReceiver
 import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
-import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.karumi.dexter.Dexter
 import com.mglock.locationprofileapp.R
-import com.mglock.locationprofileapp.receiver.BluetoothBroadcastReceiver
 import com.mglock.locationprofileapp.util.PermissionListener
 import com.mglock.locationprofileapp.util.enums.DetailActionOption
 
@@ -29,7 +22,7 @@ class BluetoothHandler(private val context: Context): BaseHandler {
     init {
         Dexter.withContext(context)
             .withPermissions(
-                DetailActionOption.NOTIFY_BLUETOOTH_DEVICE_CONNECTED.getRequiredPermissions()
+                DetailActionOption.NOTIFY_BLUETOOTH_ENABLED.getRequiredPermissions()
             ).withListener(PermissionListener(context){
                 val adapter = bluetoothManager.adapter
                 isBluetoothEnabled = adapter?.isEnabled ?: false
@@ -38,36 +31,13 @@ class BluetoothHandler(private val context: Context): BaseHandler {
     }
 
     // get information
-    @SuppressLint("MissingPermission")
-    fun getBondedBluetoothDevices(): MutableSet<BluetoothDevice>?{
-        return if(isBluetoothEnabled){
-            val adapter = bluetoothManager.adapter
-            adapter.bondedDevices
-        } else {
-            null
-        }
-    }
-
-    @SuppressLint("MissingPermission")
-    fun getBondedBluetoothDeviceNames(): List<String>{
-        val bondedDevices = getBondedBluetoothDevices()
-        val bondedDeviceNames = bondedDevices?.map{ device -> device.name }
-
-        return bondedDeviceNames ?: emptyList()
-    }
-
-    // actions
-    fun isConnectedToDevice(): Boolean{
-        //TODO
-        return false
-    }
-
     fun checkIfBluetoothEnabled(): Boolean{
         val adapter = bluetoothManager.adapter
         isBluetoothEnabled = adapter?.isEnabled ?: false
         return isBluetoothEnabled
     }
 
+    // actions
     private fun sendBluetoothNotificationStatus(enabledMode: String){
         val shouldBeEnabled = enabledMode == "enabled"
         if(checkIfBluetoothEnabled() != shouldBeEnabled){
@@ -99,8 +69,8 @@ class BluetoothHandler(private val context: Context): BaseHandler {
 
     override fun executeTask(option: DetailActionOption, optionValue: String, optionMode: String?) {
         when(option){
-            DetailActionOption.NOTIFY_BLUETOOTH_ENABLED -> sendBluetoothNotificationStatus(optionValue)
-            DetailActionOption.NOTIFY_BLUETOOTH_DEVICE_CONNECTED -> isConnectedToDevice(optionValue)
+            DetailActionOption.NOTIFY_BLUETOOTH_ENABLED ->
+                sendBluetoothNotificationStatus(optionValue)
             else -> return
         }
     }

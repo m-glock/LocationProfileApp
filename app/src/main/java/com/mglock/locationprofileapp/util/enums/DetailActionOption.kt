@@ -4,7 +4,6 @@ import android.Manifest
 import android.content.Context
 import androidx.fragment.app.Fragment
 import com.mglock.locationprofileapp.util.phonefunctionality.*
-import com.mglock.locationprofileapp.views.profiles.fragments.detailactionfragments.AddActionBluetoothDeviceConnectedFragment
 import com.mglock.locationprofileapp.views.profiles.fragments.detailactionfragments.AddActionBluetoothEnabledFragment
 import com.mglock.locationprofileapp.views.profiles.fragments.detailactionfragments.AddActionRingtoneFragment
 import com.mglock.locationprofileapp.views.profiles.fragments.detailactionfragments.AddActionVolumeModeFragment
@@ -31,11 +30,6 @@ enum class DetailActionOption(val title: String){
             return listOf(Manifest.permission.BLUETOOTH)
         }
     },
-    NOTIFY_BLUETOOTH_DEVICE_CONNECTED("Connected to device"){
-        override fun getRequiredPermissions(): List<String> {
-            return listOf(Manifest.permission.BLUETOOTH)
-        }
-    },
     NOTIFY_WIFI_ENABLED("Wi-Fi state notification"){
         override fun getRequiredPermissions(): List<String> {
             TODO("Not yet implemented")
@@ -48,8 +42,7 @@ enum class DetailActionOption(val title: String){
                 Manifest.permission.ACCESS_FINE_LOCATION
             )
         }
-    },
-    ;
+    };
 
     abstract fun getRequiredPermissions(): List<String>
 
@@ -60,7 +53,6 @@ enum class DetailActionOption(val title: String){
                 CHANGE_VOLUME -> AddActionVolumeFragment()
                 CHANGE_RINGTONE -> AddActionRingtoneFragment()
                 NOTIFY_BLUETOOTH_ENABLED -> AddActionBluetoothEnabledFragment()
-                NOTIFY_BLUETOOTH_DEVICE_CONNECTED -> AddActionBluetoothDeviceConnectedFragment()
                 else -> Fragment()
             }
         }
@@ -71,8 +63,7 @@ enum class DetailActionOption(val title: String){
                 CHANGE_VOLUME,
                 CHANGE_RINGTONE -> AudioHandler(context)
 
-                NOTIFY_BLUETOOTH_ENABLED,
-                NOTIFY_BLUETOOTH_DEVICE_CONNECTED -> BluetoothHandler(context)
+                NOTIFY_BLUETOOTH_ENABLED -> BluetoothHandler(context)
 
                 NOTIFY_WIFI_ENABLED -> WifiHandler(context)
 

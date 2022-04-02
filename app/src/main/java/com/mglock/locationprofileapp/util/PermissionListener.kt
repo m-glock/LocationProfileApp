@@ -17,12 +17,11 @@ class PermissionListener(private val activityContext: Context, val onPermissions
         if(!report!!.areAllPermissionsGranted()){
             AlertDialog.Builder(activityContext)
                 .setTitle("Permissions required")
-                .setMessage("The App needs access to your location in order to determine " +
-                        "where you are and which profile to use. " +
-                        "Without the permissions most functions of the app are not working.")
+                .setMessage("If you want to use this feature, you have to grant the permission.")
                 .setPositiveButton(
                     "Edit permissions"
                 ) { _, _ ->
+                    //TODO
                     val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
                     intent.data = Uri.fromParts("package", activityContext.packageName, null)
                     activityContext.startActivity(intent)

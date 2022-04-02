@@ -19,7 +19,6 @@ import com.mglock.locationprofileapp.R
 import com.mglock.locationprofileapp.database.entities.DetailAction
 import com.mglock.locationprofileapp.databinding.FragmentAddDetailActionBinding
 import com.mglock.locationprofileapp.util.enums.DetailActionOption
-import com.mglock.locationprofileapp.util.phonefunctionality.BluetoothHandler
 import com.mglock.locationprofileapp.viewmodels.profiles.AddDetailActionViewModel
 
 class AddDetailActionFragment(private val profileId: Long) : DialogFragment() {
@@ -47,10 +46,7 @@ class AddDetailActionFragment(private val profileId: Long) : DialogFragment() {
         binding.actionDropdown.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, pos: Int, id: Long) {
                 val option = actionOptions[pos]
-                if(option == DetailActionOption.NOTIFY_BLUETOOTH_DEVICE_CONNECTED
-                    && !BluetoothHandler(requireContext()).checkIfBluetoothEnabled()){
-                    showBluetoothAlert()
-                } else if(option == DetailActionOption.CHANGE_RINGTONE){
+                if(option == DetailActionOption.CHANGE_RINGTONE){
                     val canWrite = Settings.System.canWrite(requireContext())
                     if(!canWrite){
                         showRingtoneAlert()
@@ -87,16 +83,6 @@ class AddDetailActionFragment(private val profileId: Long) : DialogFragment() {
         fragmentTransaction.replace(binding.actionValueFragment.id, fragment)
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
         fragmentTransaction.commit()
-    }
-
-    private fun showBluetoothAlert(){
-        AlertDialog.Builder(requireContext())
-            .setTitle("Bluetooth not enabled.")
-            .setMessage("Please (temporarily) enable bluetooth so that " +
-                    "the app can access the list of paired devices.")
-            .setPositiveButton("Understood", null)
-            .show()
-        binding.actionDropdown.setSelection(DetailActionOption.CHANGE_VOLUME.ordinal)
     }
 
     private fun showRingtoneAlert(){
