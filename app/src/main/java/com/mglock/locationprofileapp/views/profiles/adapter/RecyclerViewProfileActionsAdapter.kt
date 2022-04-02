@@ -25,10 +25,7 @@ class RecyclerViewProfileActionsAdapter(
         fun setValues(){
             if(detailAction != null){
                 textViewTitle.text = detailAction!!.title.title
-                textViewSubtitle.text = context.resources.getString(
-                    R.string.add_action_to_profile_action_value_subtitle,
-                    detailAction!!.detailActionValue
-                )
+                textViewSubtitle.text = detailAction!!.valueToString()
             }
         }
 

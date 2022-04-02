@@ -28,9 +28,16 @@ data class DetailAction(
     val title: DetailActionOption,
 
     @ColumnInfo(name="detail_action_value")
-    val detailActionValue: String
+    val detailActionValue: String,
+
+    val mode: String?
 ): Serializable {
     override fun toString(): String {
-        return "${title.title}: $detailActionValue"
+        val modeText = valueToString()
+        return "${title.title}: $modeText"
+    }
+
+    fun valueToString(): String{
+        return if(mode != null) "$mode to $detailActionValue" else detailActionValue
     }
 }

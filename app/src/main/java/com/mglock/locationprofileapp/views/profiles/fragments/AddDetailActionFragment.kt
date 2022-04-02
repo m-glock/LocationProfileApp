@@ -64,9 +64,10 @@ class AddDetailActionFragment(private val profileId: Long) : DialogFragment() {
                         val selectedAction = binding.actionDropdown.selectedItem as String
                         val detailActionTitle = DetailActionOption.values().find { option -> option.title == selectedAction }
                         val selectedValue = valueFragment.getValue()
+                        val selectedMode = valueFragment.getMode()
                         val profileIdForAction = if(profileId > 0) profileId else null
                         mViewModel.addAction(
-                            DetailAction(0, profileIdForAction, detailActionTitle!!, selectedValue),
+                            DetailAction(0, profileIdForAction, detailActionTitle!!, selectedValue, selectedMode),
                             requireContext()
                         )
                     }

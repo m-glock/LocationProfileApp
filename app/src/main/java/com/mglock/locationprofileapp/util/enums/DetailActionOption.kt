@@ -65,7 +65,7 @@ enum class DetailActionOption(val title: String){
             }
         }
 
-        fun delegateTaskToHandler(enum: DetailActionOption, optionValue: String, context: Context){
+        fun delegateTaskToHandler(enum: DetailActionOption, optionValue: String, optionMode: String?, context: Context){
             val handler = when(enum){
                 CHANGE_VOLUME_MODE,
                 CHANGE_VOLUME,
@@ -78,7 +78,7 @@ enum class DetailActionOption(val title: String){
 
                 NOTIFY_LOCATION_ENTERED_EXITED -> LocationHandler(context)
             }
-            handler.executeTask(enum, optionValue)
+            handler.executeTask(enum, optionValue, optionMode)
         }
     }
 }
