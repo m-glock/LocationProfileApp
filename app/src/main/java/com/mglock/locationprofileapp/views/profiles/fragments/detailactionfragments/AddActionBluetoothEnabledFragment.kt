@@ -31,4 +31,8 @@ class AddActionBluetoothEnabledFragment : Fragment(), BaseDetailActionFragment {
     override fun getValue(): String {
         return if(binding.switchEnable.isChecked) "enabled" else "disabled"
     }
+
+    override fun getMode(): String? {
+        TODO("Not yet implemented")
+    }
 }

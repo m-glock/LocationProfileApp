@@ -66,4 +66,8 @@ class AddActionVolumeFragment : Fragment(), BaseDetailActionFragment {
         return binding.valueSlider.value.toInt().toString()
     }
 
+    override fun getMode(): String {
+        return binding.valueDropdown.selectedItem as String
+    }
+
 }

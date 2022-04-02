@@ -41,4 +41,8 @@ class AddActionBluetoothDeviceConnectedFragment : Fragment(), BaseDetailActionFr
     override fun getValue(): String {
         return binding.deviceDropdown.selectedItem.toString()
     }
+
+    override fun getMode(): String? {
+        TODO("Not yet implemented")
+    }
 }

@@ -83,4 +83,8 @@ class AddActionVolumeModeFragment : Fragment(), BaseDetailActionFragment {
     override fun getValue(): String{
         return binding.valueDropdown.selectedItem as String
     }
+
+    override fun getMode(): String? {
+        return null
+    }
 }
