@@ -7,22 +7,32 @@
     android:padding="@dimen/add_action_fragment_padding"
     tools:context=".views.profiles.fragments.AddDetailActionFragment">
 
-    <TextView
-        android:id="@+id/actionLabel"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/detailActionLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/add_action_action_label"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Spinner
-        android:id="@+id/actionDropdown"
-        android:layout_width="@dimen/slider_width_fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/label_input_margin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/actionLabel"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/actionLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_action_action_label"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+            android:id="@+id/actionDropdown"
+            android:layout_width="@dimen/slider_width_fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/label_input_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/actionLabel"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/actionValueFragment"
@@ -31,6 +41,6 @@
         android:layout_marginTop="@dimen/input_margin_top"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/actionDropdown" />
+        app:layout_constraintTop_toBottomOf="@+id/detailActionLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
