@@ -2,6 +2,7 @@ package com.mglock.locationprofileapp.views.profiles.fragments
 
 import android.Manifest
 import android.app.AlertDialog
+import android.app.PendingIntent
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,10 +11,14 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.gms.location.GeofencingClient
+import com.google.android.gms.location.LocationServices
 import com.karumi.dexter.Dexter
 import com.mglock.locationprofileapp.database.entities.relations.ProfileWithRelations
 import com.mglock.locationprofileapp.databinding.FragmentProfilesBinding
+import com.mglock.locationprofileapp.receiver.GeofenceBroadcastReceiver
 import com.mglock.locationprofileapp.services.LocationUpdateService
+import com.mglock.locationprofileapp.util.GeofenceManager
 import com.mglock.locationprofileapp.util.PermissionListener
 import com.mglock.locationprofileapp.viewmodels.profiles.ProfilesViewModel
 import com.mglock.locationprofileapp.views.profiles.activities.AddProfileActivity
@@ -25,10 +30,17 @@ class ProfilesFragment : Fragment() {
     private var _binding: FragmentProfilesBinding? = null
     private val binding get(): FragmentProfilesBinding = _binding!!
     private lateinit var mViewModel: ProfilesViewModel
+    private lateinit var mGeofenceManager: GeofenceManager
+    private lateinit var mGeofencingClient: GeofencingClient
+    private val geofencePendingIntent: PendingIntent by lazy {
+        val intent = Intent(requireContext(), GeofenceBroadcastReceiver::class.java)
+        PendingIntent.getBroadcast(requireContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mViewModel = ViewModelProvider(this)[ProfilesViewModel::class.java]
+        mGeofencingClient = LocationServices.getGeofencingClient(requireContext())
     }
 
     override fun onCreateView(
@@ -112,7 +124,8 @@ class ProfilesFragment : Fragment() {
     }
 
     private fun startService(){
-        // start service to update location
+        // ask for background permission separately
+        // start the service to update location and the geofencing
         Dexter.withContext(requireContext())
             .withPermissions(
                 Manifest.permission.ACCESS_BACKGROUND_LOCATION
@@ -121,7 +134,10 @@ class ProfilesFragment : Fragment() {
                 val serviceIntent = Intent(requireContext(), LocationUpdateService::class.java)
                 ContextCompat.startForegroundService(requireContext(), serviceIntent)
 
-                // TODO start geofencing
+                // start geofencing
+                val places = mViewModel.profiles.value!!.mapNotNull { profile -> profile.place }
+                mGeofenceManager = GeofenceManager()
+                mGeofenceManager.startGeofencing(places, mGeofencingClient, geofencePendingIntent)
             })
             .check()
     }
@@ -129,6 +145,7 @@ class ProfilesFragment : Fragment() {
     private fun stopProfiles(){
         val serviceIntent = Intent(requireContext(), LocationUpdateService::class.java)
         requireActivity().stopService(serviceIntent)
-        // TODO stop geofencing
+        // stop geofencing
+        mGeofenceManager.stopGeofencing(mGeofencingClient, geofencePendingIntent)
     }
 }
