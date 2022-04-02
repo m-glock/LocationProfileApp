@@ -61,15 +61,4 @@ class ProfilesViewModel(app: Application): AndroidViewModel(app) {
             }
         }
     }
-
-    fun addProfile(profile: Profile){
-        viewModelScope.launch {
-            try{
-                val db = AppDatabase.getInstance(getApplication())
-                db.profileDao().insert(profile)
-            } catch(e: Exception){
-                Log.e("Error", e.stackTraceToString())
-            }
-        }
-    }
 }
