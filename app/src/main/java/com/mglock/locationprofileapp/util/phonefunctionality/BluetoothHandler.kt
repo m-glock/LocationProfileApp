@@ -8,7 +8,7 @@ import com.karumi.dexter.Dexter
 import com.mglock.locationprofileapp.util.PermissionListener
 import com.mglock.locationprofileapp.util.enums.DetailActionOption
 
-class BluetoothHandler(context: Context) {
+class BluetoothHandler(context: Context): BaseHandler {
 
     private val bluetoothManager = context.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
     // will be false unless permissions are granted
@@ -51,6 +51,10 @@ class BluetoothHandler(context: Context) {
 
     fun checkIfBluetoothEnabled(): Boolean{
         return isBluetoothEnabled
+    }
+
+    override fun executeTask(option: DetailActionOption, optionValue: String) {
+        TODO("Not yet implemented")
     }
 
 }

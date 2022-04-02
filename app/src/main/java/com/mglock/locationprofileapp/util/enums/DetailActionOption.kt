@@ -1,7 +1,9 @@
 package com.mglock.locationprofileapp.util.enums
 
 import android.Manifest
+import android.content.Context
 import androidx.fragment.app.Fragment
+import com.mglock.locationprofileapp.util.phonefunctionality.*
 import com.mglock.locationprofileapp.views.profiles.fragments.detailactionfragments.AddActionBluetoothDeviceConnectedFragment
 import com.mglock.locationprofileapp.views.profiles.fragments.detailactionfragments.AddActionBluetoothEnabledFragment
 import com.mglock.locationprofileapp.views.profiles.fragments.detailactionfragments.AddActionRingtoneFragment
@@ -61,6 +63,22 @@ enum class DetailActionOption(val title: String){
                 NOTIFY_BLUETOOTH_DEVICE_CONNECTED -> AddActionBluetoothDeviceConnectedFragment()
                 else -> Fragment()
             }
+        }
+
+        fun delegateTaskToHandler(enum: DetailActionOption, optionValue: String, context: Context){
+            val handler = when(enum){
+                CHANGE_VOLUME_MODE,
+                CHANGE_VOLUME,
+                CHANGE_RINGTONE -> AudioHandler(context)
+
+                NOTIFY_BLUETOOTH_ENABLED,
+                NOTIFY_BLUETOOTH_DEVICE_CONNECTED -> BluetoothHandler(context)
+
+                NOTIFY_WIFI_ENABLED -> WifiHandler(context)
+
+                NOTIFY_LOCATION_ENTERED_EXITED -> LocationHandler(context)
+            }
+            handler.executeTask(enum, optionValue)
         }
     }
 }

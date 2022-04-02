@@ -6,10 +6,10 @@ import android.content.Intent
 import android.media.AudioManager
 import android.media.RingtoneManager
 import android.net.Uri
-import android.provider.Settings
 import androidx.activity.result.ActivityResultLauncher
+import com.mglock.locationprofileapp.util.enums.DetailActionOption
 
-class AudioHandler(private val context: Context) {
+class AudioHandler(private val context: Context): BaseHandler {
 
     private val audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
 
@@ -52,15 +52,28 @@ class AudioHandler(private val context: Context) {
     }
 
     // actions
-    fun changeVolume(streamType: Int, value: Int){
-        audioManager.setStreamVolume(streamType, value, AudioManager.FLAG_SHOW_UI)
+    private fun changeVolume(value: String){
+        val streamType: Int = -1
+        val volume: Int = -1
+        audioManager.setStreamVolume(streamType, volume, AudioManager.FLAG_SHOW_UI)
     }
 
-    fun changeVolumeMode(ringerMode: Int){
-        audioManager.ringerMode = ringerMode
+    private fun changeVolumeMode(ringerMode: String){
+        audioManager.ringerMode = ringerMode.toInt()
     }
 
-    fun changeRingtone(newRingtone: Uri, ringtoneType: Int){
+    private fun changeRingtone(value: String){
+        val ringtoneType: Int = -1
+        val newRingtone: Uri = Uri.parse("")
         RingtoneManager.setActualDefaultRingtoneUri(context, ringtoneType, newRingtone)
+    }
+
+    override fun executeTask(option: DetailActionOption, optionValue: String) {
+        when(option){
+            DetailActionOption.CHANGE_VOLUME -> changeVolume(optionValue)
+            DetailActionOption.CHANGE_VOLUME_MODE -> changeVolumeMode(optionValue)
+            DetailActionOption.CHANGE_RINGTONE -> changeRingtone(optionValue)
+            else -> return
+        }
     }
 }
