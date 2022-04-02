@@ -33,6 +33,10 @@ interface ProfileDao {
     @Query("SELECT * FROM profile WHERE title LIKE (:title)")
     suspend fun getByTitleWithRelations(title: String): List<ProfileWithRelations>
 
+    @Transaction
+    @Query("SELECT * FROM profile WHERE place_id LIKE (:placeId)")
+    suspend fun getByPlaceWithRelations(placeId: Long): List<ProfileWithRelations>
+
     @Update
     suspend fun update(profile: Profile)
 

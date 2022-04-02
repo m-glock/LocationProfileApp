@@ -7,6 +7,9 @@ import android.util.Log
 import com.google.android.gms.location.Geofence
 import com.google.android.gms.location.GeofenceStatusCodes
 import com.google.android.gms.location.GeofencingEvent
+import com.mglock.locationprofileapp.database.AppDatabase
+import com.mglock.locationprofileapp.util.enums.DetailActionOption
+import kotlinx.coroutines.runBlocking
 
 class GeofenceBroadcastReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
@@ -20,19 +23,34 @@ class GeofenceBroadcastReceiver : BroadcastReceiver() {
 
         // Get the transition type.
         val geofenceTransition = geofencingEvent.geofenceTransition
+        val triggeringGeofences = geofencingEvent.triggeringGeofences
 
-        if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER ||
-            geofenceTransition == Geofence.GEOFENCE_TRANSITION_EXIT
-        ) {
-            val triggeringGeofences = geofencingEvent.triggeringGeofences
-
+        if(geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER){
             triggeringGeofences.forEach { geofence ->
-                Log.i("Geofence detected", "Geofence ${geofence.requestId} was triggered. " +
-                        "You ${if(geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER) "entered" else "exited"} the location")
+                val receiverContext = context!!
+                runBlocking {
+                    executeProfileActions(geofence, receiverContext)
+                }
             }
+        } else if(geofenceTransition == Geofence.GEOFENCE_TRANSITION_EXIT){
+            // TODO rest or just ifnore?
         } else {
             // Log the error.
             Log.e("Unknown Geofence Event", "The geofence event that was triggered is unknown.")
+        }
+    }
+
+    private suspend fun executeProfileActions(geofence: Geofence, context: Context){
+        val db = AppDatabase.getInstance(context)
+        val profiles = db.profileDao().getByPlaceWithRelations(geofence.requestId.toLong())
+        profiles.forEach { profile ->
+            profile.actions.forEach { action ->
+                DetailActionOption.delegateTaskToHandler(
+                    action.title,
+                    action.detailActionValue,
+                    context
+                )
+            }
         }
     }
 }

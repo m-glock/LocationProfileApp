@@ -13,11 +13,11 @@ class GeofenceManager {
     fun startGeofencing(places: List<Place>, geofencingClient: GeofencingClient, geofencePendingIntent: PendingIntent){
         val geofenceList = places.map { place ->
             Geofence.Builder()
-                .setRequestId(place.title)
+                .setRequestId(place.placeUID.toString())
                 .setCircularRegion(
                     place.latitude,
                     place.longitude,
-                    place.range //100F
+                    place.range
                 )
                 .setExpirationDuration(Geofence.NEVER_EXPIRE)
                 .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER or Geofence.GEOFENCE_TRANSITION_EXIT)
