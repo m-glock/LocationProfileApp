@@ -11,20 +11,18 @@ class GeofenceManager {
 
     @SuppressLint("MissingPermission")
     fun startGeofencing(places: List<Place>, geofencingClient: GeofencingClient, geofencePendingIntent: PendingIntent){
-        val geofenceList: MutableList<Geofence> = mutableListOf()
-        geofenceList.add(
-            //TODO built geofences from profiles
+        val geofenceList = places.map { place ->
             Geofence.Builder()
-                .setRequestId("Strausberger Platz")
+                .setRequestId(place.title)
                 .setCircularRegion(
-                    52.5190,
-                    13.4285,
-                    100F
+                    place.latitude,
+                    place.longitude,
+                    place.range //100F
                 )
                 .setExpirationDuration(Geofence.NEVER_EXPIRE)
                 .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER or Geofence.GEOFENCE_TRANSITION_EXIT)
                 .build()
-        )
+        }.toMutableList()
 
         geofencingClient.addGeofences(getGeofencingRequest(geofenceList), geofencePendingIntent).run{
             addOnSuccessListener {

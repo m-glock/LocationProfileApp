@@ -73,7 +73,7 @@ class AddPlaceManualFragment(private val editablePlace: com.mglock.locationprofi
         }
 
         // check permissions when trying to access the autocomplete for address
-        binding.editTextAddress.setOnClickListener { _ ->
+        binding.editTextAddress.setOnClickListener {
             Dexter.withContext(requireContext())
                 .withPermissions(
                     Manifest.permission.ACCESS_COARSE_LOCATION,
@@ -117,9 +117,13 @@ class AddPlaceManualFragment(private val editablePlace: com.mglock.locationprofi
         mViewModel.place.observe(viewLifecycleOwner){ place ->
             if(place != null){
                 binding.editTextTitleManual.setText(place.title)
-                binding.rangeSlider.value = place.range.toFloat()
+                binding.rangeSlider.value = place.range
                 if(place.address.isNullOrBlank()){
-                    binding.editTextAddress.setText(getString(R.string.lat_long_as_text, place.latitude, place.longitude))
+                    binding.editTextAddress.setText(getString(
+                        R.string.lat_long_as_text,
+                        place.latitude.toString(),
+                        place.longitude.toString()
+                    ))
                 } else {
                     binding.editTextAddress.setText(place.address)
                 }
@@ -145,7 +149,7 @@ class AddPlaceManualFragment(private val editablePlace: com.mglock.locationprofi
     private fun addOrUpdatePlace(){
         val newPlaceTitle = binding.editTextTitleManual.text.toString()
         val address = binding.editTextAddress.text.toString()
-        val range = binding.rangeSlider.value.toInt()
+        val range = binding.rangeSlider.value
         if(address.isNotBlank() && newPlaceTitle.isNotBlank()){
             mViewModel.addOrUpdatePlace(newPlaceTitle, address, range)
             requireActivity().finish()

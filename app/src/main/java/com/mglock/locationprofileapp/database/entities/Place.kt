@@ -16,9 +16,9 @@ data class Place (
 
     var address: String?,
 
-    val latitude: String?,
+    val latitude: Double,
 
-    val longitude: String?,
+    val longitude: Double,
 
-    var range: Int
+    var range: Float
 ): Serializable

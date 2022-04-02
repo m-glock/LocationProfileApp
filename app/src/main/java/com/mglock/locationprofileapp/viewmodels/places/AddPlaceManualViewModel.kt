@@ -19,7 +19,7 @@ class AddPlaceManualViewModel(app: Application): AndroidViewModel(app) {
     var place: MutableLiveData<Place> = MutableLiveData()
     var buttonText: MutableLiveData<String> = MutableLiveData("Add Place")
 
-    private fun addPlace(title: String, address: String, range: Int){
+    private fun addPlace(title: String, address: String, range: Float){
         viewModelScope.launch {
             try{
                 val db = AppDatabase.getInstance(getApplication())
@@ -27,8 +27,8 @@ class AddPlaceManualViewModel(app: Application): AndroidViewModel(app) {
                     0,
                     title,
                     address,
-                    mLatitude.toString(),
-                    mLongitude.toString(),
+                    mLatitude!!,
+                    mLongitude!!,
                     range
                 ))
             } catch(e: Exception){
@@ -53,7 +53,7 @@ class AddPlaceManualViewModel(app: Application): AndroidViewModel(app) {
         mLongitude = latLng.longitude
     }
 
-    fun addOrUpdatePlace(newPlaceTitle: String, address: String, range: Int) {
+    fun addOrUpdatePlace(newPlaceTitle: String, address: String, range: Float) {
         val place = place.value
         if(place != null){
             place.title = newPlaceTitle

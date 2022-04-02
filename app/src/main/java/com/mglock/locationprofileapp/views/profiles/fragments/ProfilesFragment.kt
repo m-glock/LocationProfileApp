@@ -135,7 +135,9 @@ class ProfilesFragment : Fragment() {
                 ContextCompat.startForegroundService(requireContext(), serviceIntent)
 
                 // start geofencing
-                val places = mViewModel.profiles.value!!.mapNotNull { profile -> profile.place }
+                val places = mViewModel.profiles.value!!
+                    .filter { profile -> profile.profile.active }
+                    .mapNotNull { profile -> profile.place }
                 mGeofenceManager = GeofenceManager()
                 mGeofenceManager.startGeofencing(places, mGeofencingClient, geofencePendingIntent)
             })
