@@ -42,7 +42,9 @@
             </intent-filter>
         </activity>
 
+        <receiver android:name=".receiver.GeofenceBroadcastReceiver"/>
         <service android:name=".services.DetermineLocationForegroundService" />
+        <service android:name=".services.LocationUpdateService"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
