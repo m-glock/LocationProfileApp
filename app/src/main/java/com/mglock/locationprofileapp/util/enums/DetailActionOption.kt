@@ -18,7 +18,7 @@ enum class DetailActionOption(val title: String){
     },
     CHANGE_RINGTONE("Change Ringtone"){
         override fun getRequiredPermissions(): List<String> {
-            return emptyList()
+            return listOf(Manifest.permission.WRITE_SETTINGS)
         }
     },
     CHANGE_VOLUME_MODE("Change Volume Mode"){

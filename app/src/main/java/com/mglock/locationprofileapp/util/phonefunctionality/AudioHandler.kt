@@ -6,7 +6,6 @@ import android.content.Intent
 import android.media.AudioManager
 import android.media.RingtoneManager
 import android.net.Uri
-import android.util.Log
 import androidx.activity.result.ActivityResultLauncher
 import com.mglock.locationprofileapp.util.enums.DetailActionOption
 
@@ -60,19 +59,24 @@ class AudioHandler(private val context: Context): BaseHandler {
     }
 
     // actions
-    private fun changeVolume(value: String){
-        val streamType: Int = -1
-        val volume: Int = -1
-        audioManager.setStreamVolume(streamType, volume, AudioManager.FLAG_SHOW_UI)
+    private fun changeVolume(volumeValue: String, streamTypeName: String){
+        val streamType = VolumeStreamTypes.values()
+            .find { type -> type.title == streamTypeName}
+        val volume = volumeValue.toInt()
+        if(streamType != null)
+            audioManager.setStreamVolume(streamType.id, volume, AudioManager.FLAG_SHOW_UI)
     }
 
-    private fun changeVolumeMode(ringerMode: String){
-        audioManager.ringerMode = ringerMode.toInt()
+    private fun changeVolumeMode(ringerModeName: String){
+        val ringerMode = VolumeModes.values().find { mode -> mode.title == ringerModeName}
+        if(ringerMode != null)
+            audioManager.ringerMode = ringerMode.id
     }
 
-    private fun changeRingtone(value: String){
-        val ringtoneType: Int = -1
-        val newRingtone: Uri = Uri.parse("")
+    private fun changeRingtone(value: String, ringtoneTypeName: String){
+        val ringtoneType: Int = RingtoneTypes.values()
+            .find { type -> type.title == ringtoneTypeName }!!.id
+        val newRingtone: Uri = Uri.parse(value)
         RingtoneManager.setActualDefaultRingtoneUri(context, ringtoneType, newRingtone)
     }
 
