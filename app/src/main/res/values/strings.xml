@@ -68,12 +68,11 @@
     <string name="add_place_duration_third_option">4 hours</string>
     <string name="add_place_duration_fourth_option">8 hours</string>
     <string name="add_place_manual_button_text">Add Place</string>
-    <string name="range_unit">km</string>
+    <string name="range_unit">m</string>
     <string name="range_label">Range:</string>
-    <!-- TODO find correct range values -->
-    <string name="slider_start_value">1</string>
-    <string name="slider_end_value">10</string>
-    <string name="slider_current_value">3</string>
+    <string name="slider_start_value">100</string>
+    <string name="slider_end_value">300</string>
+    <string name="slider_current_value">150</string>
     <string name="slider_step_size">1</string>
 
     <!-- other -->

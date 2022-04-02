@@ -100,30 +100,43 @@ class ProfilesFragment : Fragment() {
 
     private fun startProfiles() {
         // ask for general location permissions
-        Dexter.withContext(requireContext())
-            .withPermissions(
-                Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            )
-            .withListener(PermissionListener(requireContext()){
-                AlertDialog.Builder(requireContext())
-                    .setTitle("Start location tracking")
-                    .setMessage("The location tracking will now be started. " +
-                            "Make sure that the app has access to the location " +
-                            "even when closed and not only while in use")
-                    .setPositiveButton("Start"){ _, _ ->
-                        startService()
-                    }
-                    .setNegativeButton("Don't start"){ _, _ ->
-                        // deactivate again if user denies
-                        binding.activateProfilesSwitch.isChecked = false
-                    }
-                    .show()
-            })
-            .check()
+        val profiles = mViewModel.profiles.value!!
+        val activeProfiles = profiles.filter { profile -> profile.profile.active }
+        if(activeProfiles.isNotEmpty()) {
+            Dexter.withContext(requireContext())
+                .withPermissions(
+                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                )
+                .withListener(PermissionListener(requireContext()) {
+                    AlertDialog.Builder(requireContext())
+                        .setTitle("Start location tracking")
+                        .setMessage(
+                            "The location tracking will now be started. " +
+                                    "Make sure that the app has access to the location " +
+                                    "even when closed and not only while in use"
+                        )
+                        .setPositiveButton("Start") { _, _ ->
+                            startService(activeProfiles)
+                        }
+                        .setNegativeButton("Don't start") { _, _ ->
+                            // deactivate again if user denies
+                            binding.activateProfilesSwitch.isChecked = false
+                        }
+                        .show()
+                })
+                .check()
+        } else {
+            binding.activateProfilesSwitch.isChecked = false
+            AlertDialog.Builder(requireContext())
+                .setTitle("No active profiles")
+                .setMessage("There are no active profiles. Please activate at least one profile.")
+                .setPositiveButton("Okay", null)
+                .show()
+        }
     }
 
-    private fun startService(){
+    private fun startService(activeProfiles: List<ProfileWithRelations>){
         // ask for background permission separately
         // start the service to update location and the geofencing
         Dexter.withContext(requireContext())
@@ -135,11 +148,23 @@ class ProfilesFragment : Fragment() {
                 ContextCompat.startForegroundService(requireContext(), serviceIntent)
 
                 // start geofencing
-                val places = mViewModel.profiles.value!!
-                    .filter { profile -> profile.profile.active }
-                    .mapNotNull { profile -> profile.place }
-                mGeofenceManager = GeofenceManager()
-                mGeofenceManager.startGeofencing(places, mGeofencingClient, geofencePendingIntent)
+
+                val placesOfActiveProfiles = activeProfiles.mapNotNull { profile -> profile.place }
+
+                if(placesOfActiveProfiles.isNotEmpty()) {
+                    mGeofenceManager = GeofenceManager()
+                    mGeofenceManager.startGeofencing(
+                        placesOfActiveProfiles,
+                        mGeofencingClient,
+                        geofencePendingIntent
+                    )
+                } else {
+                    AlertDialog.Builder(requireContext())
+                        .setTitle("No place triggers found")
+                        .setMessage("There are no active profiles that are triggered by location.")
+                        .setPositiveButton("Okay", null)
+                        .show()
+                }
             })
             .check()
     }
