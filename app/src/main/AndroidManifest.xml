@@ -46,6 +46,8 @@
         </activity>
 
         <receiver android:name=".receiver.GeofenceBroadcastReceiver"/>
+        <receiver android:name=".receiver.BluetoothBroadcastReceiver">
+        </receiver>
         <service android:name=".services.DetermineLocationForegroundService" />
         <service android:name=".services.LocationUpdateService"/>
 

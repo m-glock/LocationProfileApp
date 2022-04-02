@@ -21,6 +21,8 @@ import com.mglock.locationprofileapp.util.enums.DetailActionOption
 class BluetoothHandler(private val context: Context): BaseHandler {
 
     private val bluetoothManager = context.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
+    @SuppressLint("MissingPermission")
+    private val mReceiver: BroadcastReceiver = BluetoothBroadcastReceiver()
     // will be false unless permissions are granted
     private var isBluetoothEnabled: Boolean = false
     private val notificationChannelId = "Bluetooth Notification"
@@ -57,8 +59,14 @@ class BluetoothHandler(private val context: Context): BaseHandler {
     }
 
     // actions
-    fun isConnectedToDevice(): Boolean{
-        //TODO
+    private fun isConnectedToDevice(deviceName: String): Boolean{
+        if(checkIfBluetoothEnabled()){
+            val filter = IntentFilter()
+            filter.addAction(BluetoothDevice.ACTION_ACL_CONNECTED)
+            //filter.addAction(BluetoothDevice.ACTION_ACL_DISCONNECT_REQUESTED)
+            //filter.addAction(BluetoothDevice.ACTION_ACL_DISCONNECTED)
+            context.registerReceiver(mReceiver, filter)
+        }
         return false
     }
 
