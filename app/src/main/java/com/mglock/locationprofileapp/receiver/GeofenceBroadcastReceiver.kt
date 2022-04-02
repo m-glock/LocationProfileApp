@@ -48,6 +48,7 @@ class GeofenceBroadcastReceiver : BroadcastReceiver() {
                 DetailActionOption.delegateTaskToHandler(
                     action.title,
                     action.detailActionValue,
+                    action.mode,
                     context
                 )
             }

@@ -16,7 +16,7 @@ class WifiHandler(private val context: Context): BaseHandler {
         //TODO
     }
 
-    override fun executeTask(option: DetailActionOption, optionValue: String) {
+    override fun executeTask(option: DetailActionOption, optionValue: String, optionMode: String?) {
         TODO("Not yet implemented")
     }
 }

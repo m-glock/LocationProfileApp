@@ -8,9 +8,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import com.mglock.locationprofileapp.R
 import com.mglock.locationprofileapp.databinding.FragmentAddActionRingtoneBinding
 import com.mglock.locationprofileapp.util.phonefunctionality.AudioHandler
 import com.mglock.locationprofileapp.views.profiles.fragments.BaseDetailActionFragment
@@ -49,6 +51,12 @@ class AddActionRingtoneFragment : Fragment(), BaseDetailActionFragment {
 
         audioHandler = AudioHandler(requireContext())
 
+        binding.ringtoneTypeDropdown.adapter = ArrayAdapter(
+            requireContext(),
+            R.layout.dropdown_item,
+            AudioHandler.RingtoneTypes.values().map { type -> type.title }
+        )
+
         binding.chooseRingtoneButton.setOnClickListener {
             audioHandler.chooseNewRingtone(resultLauncher)
         }
@@ -63,6 +71,10 @@ class AddActionRingtoneFragment : Fragment(), BaseDetailActionFragment {
 
     override fun getValue(): String {
         return ringtoneURL ?: ""
+    }
+
+    override fun getMode(): String {
+        return binding.ringtoneTypeDropdown.selectedItem as String
     }
 
 }

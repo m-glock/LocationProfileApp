@@ -40,7 +40,7 @@ class AddActionVolumeFragment : Fragment(), BaseDetailActionFragment {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, pos: Int, id: Long) {
                 val volumeStreamType = options[pos]
                 binding.valueSlider.value = 0F
-                val maxVal = audioHandler.getStreamMaxVolume(volumeStreamType.value)
+                val maxVal = audioHandler.getStreamMaxVolume(volumeStreamType.id)
                 binding.valueSlider.valueTo = maxVal
                 binding.sliderEndValue.text = maxVal.toInt().toString()
             }
@@ -52,7 +52,7 @@ class AddActionVolumeFragment : Fragment(), BaseDetailActionFragment {
         }
 
         // default max for slider for the first stream type in the dropdown
-        binding.valueSlider.valueTo = audioHandler.getStreamMaxVolume(options[0].value)
+        binding.valueSlider.valueTo = audioHandler.getStreamMaxVolume(options[0].id)
 
         return binding.root
     }

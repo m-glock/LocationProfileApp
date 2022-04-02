@@ -6,33 +6,70 @@
     android:layout_height="wrap_content"
     tools:context=".views.profiles.fragments.detailactionfragments.AddActionRingtoneFragment">
 
-    <TextView
-        android:id="@+id/valueLabel"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ringtoneTypeLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/select_ringtone_label_text"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/valueSelected"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/text_icon_margin"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/chooseRingtoneButton"
-        app:layout_constraintStart_toEndOf="@+id/valueLabel"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/placeholder_string" />
+        <TextView
+            android:id="@+id/typeLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Type: "
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/chooseRingtoneButton"
-        android:layout_width="wrap_content"
+        <Spinner
+            android:id="@+id/ringtoneTypeDropdown"
+            android:layout_width="@dimen/slider_width_fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/text_icon_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/typeLabel"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ringtonePickerLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/select_ringtone_button_text"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="@dimen/label_input_margin"
+        app:layout_constraintTop_toBottomOf="@+id/ringtoneTypeLayout">
+
+        <TextView
+            android:id="@+id/valueLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/select_ringtone_label_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/valueSelected"
+            android:layout_width="243dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/text_icon_margin"
+            android:layout_marginStart="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/chooseRingtoneButton"
+            app:layout_constraintStart_toEndOf="@+id/valueLabel"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/placeholder_string" />
+
+        <Button
+            android:id="@+id/chooseRingtoneButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/select_ringtone_button_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

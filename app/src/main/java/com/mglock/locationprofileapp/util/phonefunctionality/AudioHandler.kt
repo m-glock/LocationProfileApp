@@ -6,6 +6,7 @@ import android.content.Intent
 import android.media.AudioManager
 import android.media.RingtoneManager
 import android.net.Uri
+import android.util.Log
 import androidx.activity.result.ActivityResultLauncher
 import com.mglock.locationprofileapp.util.enums.DetailActionOption
 
@@ -13,16 +14,23 @@ class AudioHandler(private val context: Context): BaseHandler {
 
     private val audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
 
-    enum class VolumeStreamTypes(val title: String, val value: Int){
+    enum class VolumeStreamTypes(val title: String, val id: Int){
         MEDIA_VOLUME("Media Volume", AudioManager.STREAM_MUSIC),
         SYSTEM_VOLUME("System Volume", AudioManager.STREAM_SYSTEM),
         ALARM_VOLUME("Alarm Volume", AudioManager.STREAM_ALARM)
     }
 
-    enum class VolumeModes(val title: String){
-        MODE_NORMAL("normal"),
-        MODE_SILENT("do not disturb"),
-        MODE_VIBRATE("vibrate")
+    enum class VolumeModes(val title: String, val id: Int){
+        MODE_NORMAL("normal", AudioManager.RINGER_MODE_NORMAL),
+        MODE_SILENT("do not disturb", AudioManager.RINGER_MODE_SILENT),
+        MODE_VIBRATE("vibrate", AudioManager.RINGER_MODE_VIBRATE)
+    }
+
+    enum class RingtoneTypes(val title: String, val id: Int){
+        ALL("All", RingtoneManager.TYPE_ALL),
+        ALARM("Alarm", RingtoneManager.TYPE_ALARM),
+        NOTIFICATION("Notification", RingtoneManager.TYPE_NOTIFICATION),
+        RINGTONE("Ringtone", RingtoneManager.TYPE_RINGTONE)
     }
 
     // get information
@@ -68,11 +76,11 @@ class AudioHandler(private val context: Context): BaseHandler {
         RingtoneManager.setActualDefaultRingtoneUri(context, ringtoneType, newRingtone)
     }
 
-    override fun executeTask(option: DetailActionOption, optionValue: String) {
+    override fun executeTask(option: DetailActionOption, optionValue: String, optionMode: String?) {
         when(option){
-            DetailActionOption.CHANGE_VOLUME -> changeVolume(optionValue)
+            DetailActionOption.CHANGE_VOLUME -> changeVolume(optionValue,optionMode!!)
             DetailActionOption.CHANGE_VOLUME_MODE -> changeVolumeMode(optionValue)
-            DetailActionOption.CHANGE_RINGTONE -> changeRingtone(optionValue)
+            DetailActionOption.CHANGE_RINGTONE -> changeRingtone(optionValue,optionMode!!)
             else -> return
         }
     }

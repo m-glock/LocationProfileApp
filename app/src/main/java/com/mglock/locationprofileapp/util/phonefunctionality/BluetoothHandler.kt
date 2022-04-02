@@ -53,7 +53,7 @@ class BluetoothHandler(context: Context): BaseHandler {
         return isBluetoothEnabled
     }
 
-    override fun executeTask(option: DetailActionOption, optionValue: String) {
+    override fun executeTask(option: DetailActionOption, optionValue: String, optionMode: String?) {
         TODO("Not yet implemented")
     }
 
