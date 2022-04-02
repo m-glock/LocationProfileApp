@@ -33,7 +33,7 @@ class GeofenceBroadcastReceiver : BroadcastReceiver() {
                 }
             }
         } else if(geofenceTransition == Geofence.GEOFENCE_TRANSITION_EXIT){
-            // TODO rest or just ifnore?
+            // TODO reset or just ignore?
         } else {
             // Log the error.
             Log.e("Unknown Geofence Event", "The geofence event that was triggered is unknown.")

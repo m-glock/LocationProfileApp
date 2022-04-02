@@ -31,7 +31,7 @@ enum class DetailActionOption(val title: String){
             return listOf(Manifest.permission.BLUETOOTH)
         }
     },
-    NOTIFY_BLUETOOTH_DEVICE_CONNECTED("Connect to device"){
+    NOTIFY_BLUETOOTH_DEVICE_CONNECTED("Connected to device"){
         override fun getRequiredPermissions(): List<String> {
             return listOf(Manifest.permission.BLUETOOTH)
         }

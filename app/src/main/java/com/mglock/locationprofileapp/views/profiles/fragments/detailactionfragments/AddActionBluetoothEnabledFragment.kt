@@ -33,6 +33,6 @@ class AddActionBluetoothEnabledFragment : Fragment(), BaseDetailActionFragment {
     }
 
     override fun getMode(): String? {
-        TODO("Not yet implemented")
+        return null
     }
 }
