@@ -13,12 +13,6 @@ interface PlaceDao {
     @Query("SELECT * FROM place")
     fun getAll(): Flow<List<Place>>
 
-    @Query("SELECT * FROM place WHERE place_uid IN (:placeIds)")
-    suspend fun getByIds(placeIds: LongArray): List<Place>
-
-    @Query("SELECT * FROM place WHERE title LIKE (:title)")
-    suspend fun getByTitle(title: String): List<Place>
-
     @Update
     suspend fun update(place: Place)
 

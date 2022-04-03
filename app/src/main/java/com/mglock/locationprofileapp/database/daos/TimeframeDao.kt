@@ -12,9 +12,6 @@ interface TimeframeDao {
     @Query("SELECT * FROM timeframe")
     suspend fun getAll(): List<Timeframe>
 
-    @Query("SELECT * FROM timeframe WHERE timeframe_uid IN (:timeframeIds)")
-    suspend fun getByIds(timeframeIds: LongArray): List<Timeframe>
-
     @Insert
     suspend fun insert(timeframe: Timeframe): Long
 

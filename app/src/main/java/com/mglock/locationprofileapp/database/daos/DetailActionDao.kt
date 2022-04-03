@@ -13,20 +13,11 @@ interface DetailActionDao {
     @Query("SELECT * FROM detail_action")
     fun getAll(): Flow<List<DetailAction>>
 
-    @Query("SELECT * FROM detail_action")
-    suspend fun getAllExtra(): List<DetailAction>
-
-    @Query("SELECT * FROM detail_action WHERE detail_action_uid IN (:actionIds)")
-    suspend fun getByIds(actionIds: LongArray): List<DetailAction>
-
     @Query("SELECT * FROM detail_action WHERE title LIKE (:title)")
     suspend fun getByTitle(title: String): List<DetailAction>
 
     @Query("SELECT * FROM detail_action WHERE profile_id LIKE (:profileID)")
     fun getByProfile(profileID: Long): Flow<List<DetailAction>>
-
-    @Query("SELECT * FROM detail_action WHERE profile_id LIKE (:profileID)")
-    suspend fun getByProfileOnce(profileID: Long): List<DetailAction>
 
     @Query("SELECT * FROM detail_action WHERE profile_id IS NULL")
     fun getByNoProfile(): Flow<List<DetailAction>>
