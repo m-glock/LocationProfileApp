@@ -47,13 +47,13 @@ class Converters {
     }
 
     @TypeConverter
-    fun placeTransitionToId(placeTransition: PlaceTransition): Int{
-        return placeTransition.id
+    fun placeTransitionToId(placeTransition: PlaceTransition?): Int?{
+        return placeTransition?.id
     }
 
     @TypeConverter
-    fun idToPlaceTransition(id: Int): PlaceTransition{
-        return PlaceTransition.values().find { option -> option.id == id }!!
+    fun idToPlaceTransition(id: Int?): PlaceTransition?{
+        return PlaceTransition.values().find { option -> option.id == id }
     }
 
 }
