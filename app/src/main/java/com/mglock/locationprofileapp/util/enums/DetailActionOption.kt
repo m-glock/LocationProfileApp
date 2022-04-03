@@ -50,7 +50,7 @@ enum class DetailActionOption(val title: String){
                 CHANGE_VOLUME -> AddActionVolumeFragment()
                 CHANGE_RINGTONE -> AddActionRingtoneFragment()
                 NOTIFY_BLUETOOTH_ENABLED, NOTIFY_WIFI_ENABLED -> AddActionBluetoothEnabledFragment()
-                else -> Fragment()
+                NOTIFY_LOCATION_ENTERED_EXITED -> AddActionNotificationFragment()
             }
         }
 

@@ -46,6 +46,7 @@
     <string name="bluetooth_device_label">Device:</string>
     <string name="disable_bluetooth_label">Disable</string>
     <string name="enable_bluetooth_label">Enable</string>
+    <string name="add_action_notification_hint">Notification Content</string>
 
     <!-- Places Tab -->
     <string name="places_empty_list_text">There are no places yet. Click on the \'Add\' button in the lower right corner to add a new place.</string>
