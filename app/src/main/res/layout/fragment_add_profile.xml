@@ -90,7 +90,6 @@
                     android:layout_height="wrap_content"
                     android:text="@string/add_profile_place_label"
                     android:textSize="@dimen/text_size_title"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -98,9 +97,34 @@
                     android:id="@+id/addPlaceDropdown"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <RadioGroup
+                    android:id="@+id/radioGroupPlaceTransition"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_radio_group"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/addPlaceDropdown">
+
+                    <RadioButton
+                        android:id="@+id/radioButtonPlaceEnter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="@string/enter_place_label"/>
+
+                    <RadioButton
+                        android:id="@+id/radioButtonPlaceExit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_radio_buttons"
+                        android:text="@string/exit_place_label"/>
+                </RadioGroup>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

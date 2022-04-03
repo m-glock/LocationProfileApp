@@ -14,6 +14,7 @@ import com.mglock.locationprofileapp.database.entities.Profile
 import com.mglock.locationprofileapp.database.entities.Timeframe
 import com.mglock.locationprofileapp.database.entities.relations.ProfileWithRelations
 import com.mglock.locationprofileapp.util.Time
+import com.mglock.locationprofileapp.util.enums.PlaceTransition
 import com.mglock.locationprofileapp.util.enums.Weekday
 import kotlinx.coroutines.launch
 
@@ -87,18 +88,20 @@ class AddProfileViewModel(app: Application): AndroidViewModel(app)  {
         usePlace: Boolean,
         useTimeframe: Boolean,
         selectedPlaceTitle: String,
+        placeTransition: PlaceTransition?,
         weekdays: Set<Weekday>
     ){
         if(profile.value != null){
-            updateProfile(projectTitle, selectedPlaceTitle, weekdays, usePlace, useTimeframe)
+            updateProfile(projectTitle, selectedPlaceTitle, placeTransition, weekdays, usePlace, useTimeframe)
         } else {
-            addProfile(projectTitle, selectedPlaceTitle, weekdays, usePlace, useTimeframe)
+            addProfile(projectTitle, selectedPlaceTitle, placeTransition, weekdays, usePlace, useTimeframe)
         }
     }
 
     private fun updateProfile(
         title: String,
         selectedPlaceTitle: String,
+        placeTransition: PlaceTransition?,
         weekdays: Set<Weekday>,
         usePlace: Boolean,
         useTimeframe: Boolean
@@ -114,8 +117,10 @@ class AddProfileViewModel(app: Application): AndroidViewModel(app)  {
                     profileWithRelations.profile.placeId = places.value!!.find { place ->
                         place.title == selectedPlaceTitle
                     }?.placeUID
+                    profileWithRelations.profile.placeTransition = placeTransition
                 } else {
                     profileWithRelations.profile.placeId = null
+                    profileWithRelations.profile.placeTransition = null
                 }
 
                 if(useTimeframe){
@@ -154,6 +159,7 @@ class AddProfileViewModel(app: Application): AndroidViewModel(app)  {
     private fun addProfile(
         title: String,
         placeTitle: String?,
+        placeTransition: PlaceTransition?,
         weekdays: Set<Weekday>,
         usePlace: Boolean,
         useTimeframe: Boolean
@@ -186,6 +192,7 @@ class AddProfileViewModel(app: Application): AndroidViewModel(app)  {
                     0,
                     title,
                     placeUID,
+                    placeTransition,
                     timeframeUID,
                     false
                 ))

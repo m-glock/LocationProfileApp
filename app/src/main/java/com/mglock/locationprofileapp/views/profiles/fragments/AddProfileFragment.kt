@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.mglock.locationprofileapp.R
 import com.mglock.locationprofileapp.database.entities.relations.ProfileWithRelations
 import com.mglock.locationprofileapp.databinding.FragmentAddProfileBinding
+import com.mglock.locationprofileapp.util.enums.PlaceTransition
 import com.mglock.locationprofileapp.util.enums.Weekday
 import com.mglock.locationprofileapp.viewmodels.profiles.AddProfileViewModel
 import com.mglock.locationprofileapp.views.profiles.activities.AddActionsToProfileActivity
@@ -107,6 +108,15 @@ class AddProfileFragment(private val editableProfile: ProfileWithRelations?) : F
         val selectedPlaceTitle = binding.addPlaceDropdown.selectedItem as String?
         val title = binding.editTextTitleProfile.text.toString()
         val atLeastOneAction = binding.actionsListText.text.toString().isNotBlank()
+        var placeTransition: PlaceTransition? = null
+
+        if(usePlace) {
+            placeTransition = if (binding.radioButtonPlaceEnter.isChecked) {
+                PlaceTransition.TRANSITION_ENTER
+            } else {
+                PlaceTransition.TRANSITION_EXIT
+            }
+        }
 
         // if any of the necessary fields are not set, display alert
         // else save data in DB and close Activity
@@ -116,6 +126,7 @@ class AddProfileFragment(private val editableProfile: ProfileWithRelations?) : F
                 usePlace,
                 useTimeframe,
                 selectedPlaceTitle ?: "",
+                placeTransition,
                 getSelectedWeekdays()
             )
             requireActivity().finish()
@@ -153,6 +164,9 @@ class AddProfileFragment(private val editableProfile: ProfileWithRelations?) : F
                 if(place != null){
                     binding.checkBoxPlace.isChecked = true
                     binding.addPlaceDropdown.setSelection(place.placeUID.toInt())
+                    if(profile.profile.placeTransition == PlaceTransition.TRANSITION_EXIT){
+                        binding.radioButtonPlaceExit.isChecked = true
+                    }
                 }
                 if(timeframe != null){
                     binding.checkBoxTime.isChecked = true

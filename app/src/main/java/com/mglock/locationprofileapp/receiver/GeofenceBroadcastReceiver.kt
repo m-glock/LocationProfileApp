@@ -25,32 +25,37 @@ class GeofenceBroadcastReceiver : BroadcastReceiver() {
         val geofenceTransition = geofencingEvent.geofenceTransition
         val triggeringGeofences = geofencingEvent.triggeringGeofences
 
-        if(geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER){
+        if(geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER
+            || geofenceTransition == Geofence.GEOFENCE_TRANSITION_EXIT){
+
             triggeringGeofences.forEach { geofence ->
                 val receiverContext = context!!
                 runBlocking {
-                    executeProfileActions(geofence, receiverContext)
+                    executeProfileActions(geofence, receiverContext, geofenceTransition)
                 }
             }
-        } else if(geofenceTransition == Geofence.GEOFENCE_TRANSITION_EXIT){
-            // TODO reset or just ignore?
+
         } else {
             // Log the error.
             Log.e("Unknown Geofence Event", "The geofence event that was triggered is unknown.")
         }
     }
 
-    private suspend fun executeProfileActions(geofence: Geofence, context: Context){
+    private suspend fun executeProfileActions(geofence: Geofence, context: Context, geofenceTransition: Int){
         val db = AppDatabase.getInstance(context)
         val profiles = db.profileDao().getByPlaceWithRelations(geofence.requestId.toLong())
         profiles.forEach { profile ->
-            profile.actions.forEach { action ->
-                DetailActionOption.delegateTaskToHandler(
-                    action.title,
-                    action.detailActionValue,
-                    action.mode,
-                    context
-                )
+            // only execute actions if the geofence transition is
+            // the expected one saved in the profile
+            if(geofenceTransition == profile.profile.placeTransition?.id) {
+                profile.actions.forEach { action ->
+                    DetailActionOption.delegateTaskToHandler(
+                        action.title,
+                        action.detailActionValue,
+                        action.mode,
+                        context
+                    )
+                }
             }
         }
     }

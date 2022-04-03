@@ -3,6 +3,7 @@ package com.mglock.locationprofileapp.database
 import androidx.room.TypeConverter
 import com.mglock.locationprofileapp.util.Time
 import com.mglock.locationprofileapp.util.enums.DetailActionOption
+import com.mglock.locationprofileapp.util.enums.PlaceTransition
 import com.mglock.locationprofileapp.util.enums.Weekday
 import java.util.Locale
 
@@ -43,6 +44,16 @@ class Converters {
     @TypeConverter
     fun titleToDetailAction(title: String): DetailActionOption{
         return DetailActionOption.values().find { option -> option.title == title }!!
+    }
+
+    @TypeConverter
+    fun placeTransitionToId(placeTransition: PlaceTransition): Int{
+        return placeTransition.id
+    }
+
+    @TypeConverter
+    fun idToPlaceTransition(id: Int): PlaceTransition{
+        return PlaceTransition.values().find { option -> option.id == id }!!
     }
 
 }

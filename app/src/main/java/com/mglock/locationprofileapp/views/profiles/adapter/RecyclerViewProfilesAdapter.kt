@@ -9,9 +9,11 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.mglock.locationprofileapp.R
 import com.mglock.locationprofileapp.database.entities.DetailAction
+import com.mglock.locationprofileapp.database.entities.Place
 import com.mglock.locationprofileapp.database.entities.Timeframe
 import com.mglock.locationprofileapp.database.entities.relations.ProfileWithRelations
 import com.mglock.locationprofileapp.databinding.ListTileProfilesBinding
+import com.mglock.locationprofileapp.util.enums.PlaceTransition
 import com.mglock.locationprofileapp.viewmodels.profiles.ProfilesViewModel
 
 class RecyclerViewProfilesAdapter(
@@ -29,7 +31,7 @@ class RecyclerViewProfilesAdapter(
             itemBinding.activeProfileCheck.visibility = if(profile.profile.active) View.VISIBLE else View.INVISIBLE
             itemBinding.profileTitle.text = profile.profile.title
             itemBinding.profileTimeText.text = getStringFromTimeframe(profile.timeframe)
-            itemBinding.profilePlaceText.text = profile.place?.title ?: "-"
+            itemBinding.profilePlaceText.text = getStringFromPlace(profile.place, profile.profile.placeTransition)
             itemBinding.profileActionText.text = getStringFromActions(profile.actions)
             itemBinding.activateProfileButton.text = if(profile.profile.active) "Deactivate" else "Activate"
         }
@@ -51,6 +53,21 @@ class RecyclerViewProfilesAdapter(
             itemBinding.deleteProfileButton.setOnClickListener {
                 viewModel.deleteProfile(profile.profile)
             }
+        }
+
+        private fun getStringFromTimeframe(timeframe: Timeframe?): String{
+            if(timeframe == null) return "-"
+            return timeframe.toString()
+        }
+
+        private fun getStringFromPlace(place: Place?, placeTransition: PlaceTransition?): String{
+            if(place == null || placeTransition == null) return "-"
+            return "${placeTransition.title} ${place.title}"
+        }
+
+        private fun getStringFromActions(actions: List<DetailAction>): String{
+            if(actions.isEmpty()) return "-"
+            return actions.joinToString(","){ action -> action.toString()}
         }
     }
 
@@ -85,15 +102,5 @@ class RecyclerViewProfilesAdapter(
 
     private fun editProfile(profile: ProfileWithRelations){
         adapterOnClick(profile)
-    }
-
-    private fun getStringFromTimeframe(timeframe: Timeframe?): String{
-        if(timeframe == null) return "-"
-        return timeframe.toString()
-    }
-
-    private fun getStringFromActions(actions: List<DetailAction>): String{
-        if(actions.isEmpty()) return "-"
-        return actions.joinToString(","){ action -> action.toString()}
     }
 }

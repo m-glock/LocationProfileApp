@@ -29,4 +29,6 @@
     <dimen name="label_input_margin">30dp</dimen>
     <dimen name="slider_width_fill_parent">0dp</dimen>
     <dimen name="add_action_fragment_padding">15dp</dimen>
+    <dimen name="margin_radio_group">15dp</dimen>
+    <dimen name="margin_radio_buttons">40dp</dimen>
 </resources>

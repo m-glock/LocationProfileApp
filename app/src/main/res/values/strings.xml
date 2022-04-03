@@ -33,6 +33,8 @@
     <string name="add_profile_time_start_hint">start</string>
     <string name="add_profile_time_end_hint">end</string>
     <string name="add_profile_time_to_label">to</string>
+    <string name="enter_place_label">Enter</string>
+    <string name="exit_place_label">Exit</string>
     <!-- Add actions to profile -->
     <string name="add_actions_to_profile_title">Add Actions</string>
     <string name="add_actions_to_profile_content_description">add action</string>
