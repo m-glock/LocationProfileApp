@@ -28,7 +28,7 @@ class LocationUpdateService: Service() {
     private lateinit var mFusedLocationClient: FusedLocationProviderClient
     private val mLocationRequest = LocationRequest
         .create()
-        .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+        .setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY)
         .setInterval(20000) //TODO 5-15min?
     private val mLocationCallback = object : LocationCallback() {
         override fun onLocationResult(locationResult: LocationResult) {
