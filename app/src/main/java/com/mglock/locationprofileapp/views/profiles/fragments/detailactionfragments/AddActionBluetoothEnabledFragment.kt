@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.mglock.locationprofileapp.databinding.FragmentAddActionBluetoothEnabledBinding
-import com.mglock.locationprofileapp.views.profiles.fragments.BaseDetailActionFragment
 
 class AddActionBluetoothEnabledFragment : Fragment(), BaseDetailActionFragment {
 

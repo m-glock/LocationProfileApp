@@ -15,7 +15,6 @@ import androidx.fragment.app.Fragment
 import com.mglock.locationprofileapp.R
 import com.mglock.locationprofileapp.databinding.FragmentAddActionRingtoneBinding
 import com.mglock.locationprofileapp.util.phonefunctionality.AudioHandler
-import com.mglock.locationprofileapp.views.profiles.fragments.BaseDetailActionFragment
 
 class AddActionRingtoneFragment : Fragment(), BaseDetailActionFragment {
 

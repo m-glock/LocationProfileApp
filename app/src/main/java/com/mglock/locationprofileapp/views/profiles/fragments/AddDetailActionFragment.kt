@@ -20,6 +20,7 @@ import com.mglock.locationprofileapp.database.entities.DetailAction
 import com.mglock.locationprofileapp.databinding.FragmentAddDetailActionBinding
 import com.mglock.locationprofileapp.util.enums.DetailActionOption
 import com.mglock.locationprofileapp.viewmodels.profiles.AddDetailActionViewModel
+import com.mglock.locationprofileapp.views.profiles.fragments.detailactionfragments.BaseDetailActionFragment
 
 class AddDetailActionFragment(private val profileId: Long) : DialogFragment() {
 

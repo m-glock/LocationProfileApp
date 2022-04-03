@@ -10,7 +10,6 @@ import android.widget.ArrayAdapter
 import com.mglock.locationprofileapp.R
 import com.mglock.locationprofileapp.databinding.FragmentAddActionVolumeBinding
 import com.mglock.locationprofileapp.util.phonefunctionality.AudioHandler
-import com.mglock.locationprofileapp.views.profiles.fragments.BaseDetailActionFragment
 
 class AddActionVolumeFragment : Fragment(), BaseDetailActionFragment {
 
