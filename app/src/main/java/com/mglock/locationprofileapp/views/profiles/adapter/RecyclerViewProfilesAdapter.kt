@@ -24,7 +24,7 @@ class RecyclerViewProfilesAdapter(
 
     private var context: Context? = null
 
-    inner class ViewHolder(val itemBinding: ListTileProfilesBinding) : RecyclerView.ViewHolder(itemBinding.root) {
+    inner class ViewHolder(private val itemBinding: ListTileProfilesBinding) : RecyclerView.ViewHolder(itemBinding.root) {
         lateinit var profile: ProfileWithRelations
 
         fun setValues(){

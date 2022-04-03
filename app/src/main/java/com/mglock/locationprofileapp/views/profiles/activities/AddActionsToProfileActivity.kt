@@ -2,7 +2,6 @@ package com.mglock.locationprofileapp.views.profiles.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import com.mglock.locationprofileapp.databinding.ActivityAddActionsToProfileBinding
 import com.mglock.locationprofileapp.viewmodels.profiles.AddActionsToProfileViewModel
@@ -33,7 +32,7 @@ class AddActionsToProfileActivity : AppCompatActivity(){
 
         mViewModel.actions.observe(this){ detailActions ->
             binding.profileActionsRecyclerView.adapter =
-                RecyclerViewProfileActionsAdapter(detailActions, mViewModel, baseContext)
+                RecyclerViewProfileActionsAdapter(detailActions, mViewModel)
         }
 
         binding.fabAddActionToProfile.setOnClickListener {

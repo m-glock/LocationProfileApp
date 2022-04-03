@@ -9,8 +9,6 @@ import android.app.PendingIntent
 import android.content.Intent
 import android.os.IBinder
 import android.os.Looper
-import android.util.Log
-import android.widget.Toast
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationRequest
