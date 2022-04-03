@@ -32,7 +32,8 @@ class ActionsFragment : Fragment() {
         // set the adapter for the recyclerview to display the list items
         val recyclerView = binding.recyclerViewActions
         recyclerView.adapter = RecyclerViewActionsAdapter(
-            DetailActionOption.values()
+            DetailActionOption.values(),
+            requireContext()
         )
 
         return binding.root
