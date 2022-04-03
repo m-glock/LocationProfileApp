@@ -29,7 +29,7 @@ enum class DetailActionOption(val title: String){
     },
     NOTIFY_WIFI_ENABLED("Wi-Fi state notification"){
         override fun getRequiredPermissions(): List<String> {
-            TODO("Not yet implemented")
+            return emptyList()
         }
     },
     NOTIFY_LOCATION_ENTERED_EXITED("Get notification"){
