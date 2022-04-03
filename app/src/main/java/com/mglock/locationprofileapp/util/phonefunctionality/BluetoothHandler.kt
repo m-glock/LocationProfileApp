@@ -31,7 +31,7 @@ class BluetoothHandler(private val context: Context): BaseHandler {
     }
 
     // get information
-    fun checkIfBluetoothEnabled(): Boolean{
+    private fun checkIfBluetoothEnabled(): Boolean{
         val adapter = bluetoothManager.adapter
         isBluetoothEnabled = adapter?.isEnabled ?: false
         return isBluetoothEnabled

@@ -4,10 +4,7 @@ import android.Manifest
 import android.content.Context
 import androidx.fragment.app.Fragment
 import com.mglock.locationprofileapp.util.phonefunctionality.*
-import com.mglock.locationprofileapp.views.profiles.fragments.detailactionfragments.AddActionBluetoothEnabledFragment
-import com.mglock.locationprofileapp.views.profiles.fragments.detailactionfragments.AddActionRingtoneFragment
-import com.mglock.locationprofileapp.views.profiles.fragments.detailactionfragments.AddActionVolumeModeFragment
-import com.mglock.locationprofileapp.views.profiles.fragments.detailactionfragments.AddActionVolumeFragment
+import com.mglock.locationprofileapp.views.profiles.fragments.detailactionfragments.*
 
 enum class DetailActionOption(val title: String){
     CHANGE_VOLUME("Change Volume"){
@@ -35,7 +32,7 @@ enum class DetailActionOption(val title: String){
             TODO("Not yet implemented")
         }
     },
-    NOTIFY_LOCATION_ENTERED_EXITED("Enter/Exit Location"){
+    NOTIFY_LOCATION_ENTERED_EXITED("Get notification"){
         override fun getRequiredPermissions(): List<String> {
             return listOf(
                 Manifest.permission.ACCESS_COARSE_LOCATION,
@@ -52,7 +49,7 @@ enum class DetailActionOption(val title: String){
                 CHANGE_VOLUME_MODE -> AddActionVolumeModeFragment()
                 CHANGE_VOLUME -> AddActionVolumeFragment()
                 CHANGE_RINGTONE -> AddActionRingtoneFragment()
-                NOTIFY_BLUETOOTH_ENABLED -> AddActionBluetoothEnabledFragment()
+                NOTIFY_BLUETOOTH_ENABLED, NOTIFY_WIFI_ENABLED -> AddActionBluetoothEnabledFragment()
                 else -> Fragment()
             }
         }
@@ -67,7 +64,7 @@ enum class DetailActionOption(val title: String){
 
                 NOTIFY_WIFI_ENABLED -> WifiHandler(context)
 
-                NOTIFY_LOCATION_ENTERED_EXITED -> LocationHandler(context)
+                NOTIFY_LOCATION_ENTERED_EXITED -> NotificationHandler(context)
             }
             handler.executeTask(enum, optionValue, optionMode)
         }
