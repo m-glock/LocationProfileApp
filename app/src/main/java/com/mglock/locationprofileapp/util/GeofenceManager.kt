@@ -28,25 +28,14 @@ class GeofenceManager {
                 .build()
         }.toMutableList()
 
-        geofencingClient.addGeofences(getGeofencingRequest(geofenceList), geofencePendingIntent).run{
-            addOnSuccessListener {
-                // TODO
-            }
-            addOnFailureListener {
-                // TODO
-            }
-        }
+        geofencingClient.addGeofences(
+            getGeofencingRequest(geofenceList),
+            geofencePendingIntent
+        ).run{}
     }
 
     fun stopGeofencing(geofencingClient: GeofencingClient, geofencePendingIntent: PendingIntent){
-        geofencingClient.removeGeofences(geofencePendingIntent).run {
-            addOnSuccessListener {
-                // TODO
-            }
-            addOnFailureListener {
-                // TODO
-            }
-        }
+        geofencingClient.removeGeofences(geofencePendingIntent).run{}
     }
 
     // add the known geofence location to monitor them
