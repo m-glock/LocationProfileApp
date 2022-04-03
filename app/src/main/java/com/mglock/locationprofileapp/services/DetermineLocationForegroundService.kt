@@ -27,7 +27,7 @@ class DetermineLocationForegroundService: Service() {
     private val mLocationRequest = LocationRequest
         .create()
         .setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY)
-        .setInterval(20000) //TODO find right interval so that location is not requested too often
+        .setInterval(900000) //15 mins
 
     private val mLocationCallback = object : LocationCallback() {
         override fun onLocationResult(locationResult: LocationResult) {
@@ -46,14 +46,13 @@ class DetermineLocationForegroundService: Service() {
         return null
     }
 
-    //TODO stop other foreground service so that they don't interfere?
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         // create notification that is shown while the service is running
         createNotificationChannel()
         val notificationIntent = Intent(this, MainActivity::class.java)
         val pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE)
         val notification = Notification.Builder(this, mChannelId)
-            .setSmallIcon(R.drawable.ic_launcher_foreground) //TODO replace
+            .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setContentTitle(getText(R.string.app_name))
             .setContentText("The App is currently tracking you location to create a new place.")
             .setContentIntent(pendingIntent)
@@ -66,7 +65,6 @@ class DetermineLocationForegroundService: Service() {
         val myTask: TimerTask = object : TimerTask() {
             override fun run() {
                 val db = AppDatabase.getInstance(this@DetermineLocationForegroundService)
-                // TODO create place object from information
                 val latAndLong = locationList.last().split("/")
                 val place = Place(
                     0,

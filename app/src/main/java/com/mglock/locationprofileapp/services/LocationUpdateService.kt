@@ -29,18 +29,10 @@ class LocationUpdateService: Service() {
     private val mLocationRequest = LocationRequest
         .create()
         .setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY)
-        .setInterval(20000) //TODO 5-15min?
+        .setInterval(900000) //15 mins
     private val mLocationCallback = object : LocationCallback() {
         override fun onLocationResult(locationResult: LocationResult) {
             super.onLocationResult(locationResult)
-            //TODO remove this when finished, only for testing
-            val lastLocation = locationResult.lastLocation
-            Toast.makeText(
-                applicationContext,
-                "Location: ${lastLocation.latitude}/${lastLocation.longitude}",
-                Toast.LENGTH_SHORT
-            ).show()
-            Log.i("new location", "${lastLocation.latitude}/${lastLocation.longitude}")
         }
     }
     private val mChannelId = "LocationNotificationChannel"

@@ -21,7 +21,6 @@ class PermissionListener(private val activityContext: Context, val onPermissions
                 .setPositiveButton(
                     "Edit permissions"
                 ) { _, _ ->
-                    //TODO
                     val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
                     intent.data = Uri.fromParts("package", activityContext.packageName, null)
                     activityContext.startActivity(intent)
