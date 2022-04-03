@@ -5,22 +5,26 @@ import android.app.PendingIntent
 import com.google.android.gms.location.Geofence
 import com.google.android.gms.location.GeofencingClient
 import com.google.android.gms.location.GeofencingRequest
-import com.mglock.locationprofileapp.database.entities.Place
+import com.mglock.locationprofileapp.database.entities.relations.ProfileWithRelations
 
 class GeofenceManager {
 
     @SuppressLint("MissingPermission")
-    fun startGeofencing(places: List<Place>, geofencingClient: GeofencingClient, geofencePendingIntent: PendingIntent){
-        val geofenceList = places.map { place ->
+    fun startGeofencing(
+        activeProfiles: List<ProfileWithRelations>,
+        geofencingClient: GeofencingClient,
+        geofencePendingIntent: PendingIntent
+    ){
+        val geofenceList = activeProfiles.map { profile ->
             Geofence.Builder()
-                .setRequestId(place.placeUID.toString())
+                .setRequestId(profile.place!!.placeUID.toString())
                 .setCircularRegion(
-                    place.latitude,
-                    place.longitude,
-                    place.range
+                    profile.place!!.latitude,
+                    profile.place!!.longitude,
+                    profile.place!!.range
                 )
                 .setExpirationDuration(Geofence.NEVER_EXPIRE)
-                .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER or Geofence.GEOFENCE_TRANSITION_EXIT)
+                .setTransitionTypes(profile.profile.placeTransition!!.id)
                 .build()
         }.toMutableList()
 
@@ -43,7 +47,6 @@ class GeofenceManager {
                 // TODO
             }
         }
-
     }
 
     // add the known geofence location to monitor them

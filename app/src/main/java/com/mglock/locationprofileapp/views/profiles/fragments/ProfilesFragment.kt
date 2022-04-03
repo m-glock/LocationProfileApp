@@ -1,6 +1,7 @@
 package com.mglock.locationprofileapp.views.profiles.fragments
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.PendingIntent
 import android.content.Intent
@@ -19,12 +20,14 @@ import com.mglock.locationprofileapp.databinding.FragmentProfilesBinding
 import com.mglock.locationprofileapp.receiver.GeofenceBroadcastReceiver
 import com.mglock.locationprofileapp.services.LocationUpdateService
 import com.mglock.locationprofileapp.util.GeofenceManager
+import com.mglock.locationprofileapp.util.LocationUtil
 import com.mglock.locationprofileapp.util.PermissionListener
 import com.mglock.locationprofileapp.viewmodels.profiles.ProfilesViewModel
 import com.mglock.locationprofileapp.views.profiles.activities.AddProfileActivity
 import com.mglock.locationprofileapp.views.profiles.activities.EditProfileActivity
 import com.mglock.locationprofileapp.views.profiles.adapter.RecyclerViewProfilesAdapter
 
+@SuppressLint("UnspecifiedImmutableFlag")
 class ProfilesFragment : Fragment() {
 
     private var _binding: FragmentProfilesBinding? = null
@@ -74,10 +77,16 @@ class ProfilesFragment : Fragment() {
         }
 
         binding.activateProfilesSwitch.isChecked = LocationUpdateService.isRunning
-        binding.activateProfilesSwitch.setOnCheckedChangeListener { _, isChecked ->
+        binding.activateProfilesSwitch.setOnClickListener {
             val serviceAlreadyRunning = LocationUpdateService.isRunning
+            val isChecked = binding.activateProfilesSwitch.isChecked
             if(isChecked && !serviceAlreadyRunning){
-                startProfiles()
+                // set switch to false until we are sure all necessary location requirements are met
+                binding.activateProfilesSwitch.isChecked = false
+                LocationUtil.checkCurrentLocationSettings(this){
+                    binding.activateProfilesSwitch.isChecked = true
+                    startProfiles()
+                }
             }
             if (!isChecked && serviceAlreadyRunning){
                 stopProfiles()
@@ -148,13 +157,11 @@ class ProfilesFragment : Fragment() {
                 ContextCompat.startForegroundService(requireContext(), serviceIntent)
 
                 // start geofencing
-
-                val placesOfActiveProfiles = activeProfiles.mapNotNull { profile -> profile.place }
-
-                if(placesOfActiveProfiles.isNotEmpty()) {
+                val activeProfilesWithPlace = activeProfiles.filter { profile -> profile.place != null }
+                if(activeProfilesWithPlace.isNotEmpty()) {
                     mGeofenceManager = GeofenceManager()
                     mGeofenceManager.startGeofencing(
-                        placesOfActiveProfiles,
+                        activeProfilesWithPlace,
                         mGeofencingClient,
                         geofencePendingIntent
                     )
