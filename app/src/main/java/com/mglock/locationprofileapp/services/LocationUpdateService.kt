@@ -2,13 +2,13 @@ package com.mglock.locationprofileapp.services
 
 import android.annotation.SuppressLint
 import android.app.Service
-import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Intent
 import android.os.IBinder
 import android.os.Looper
+import androidx.core.app.NotificationCompat
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationRequest
@@ -47,7 +47,7 @@ class LocationUpdateService: Service() {
             notificationIntent,
             PendingIntent.FLAG_IMMUTABLE
         )
-        val notification = Notification.Builder(this, mChannelId)
+        val notification = NotificationCompat.Builder(this, mChannelId)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setContentTitle(getText(R.string.app_name))
             .setContentText("The App is currently tracking you location " +

@@ -30,10 +30,10 @@ class WifiHandler(private val context: Context): BaseHandler {
         val shouldBeEnabled = enabledMode == "enabled"
         if(checkIfWifiEnabled() != shouldBeEnabled){
             val notification = NotificationCompat.Builder(context, notificationChannelId)
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setContentTitle("Wifi is not $enabledMode")
                 .setContentText("Your Wifi is not $enabledMode as expected. " +
                         "You might want to change this.")
-                .setSmallIcon(R.drawable.ic_action_check)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .build()
 
