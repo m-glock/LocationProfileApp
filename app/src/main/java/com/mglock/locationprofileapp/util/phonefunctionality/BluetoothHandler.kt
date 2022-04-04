@@ -42,10 +42,10 @@ class BluetoothHandler(private val context: Context): BaseHandler {
         val shouldBeEnabled = enabledMode == "enabled"
         if(checkIfBluetoothEnabled() != shouldBeEnabled){
             val notification = NotificationCompat.Builder(context, notificationChannelId)
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setContentTitle("Bluetooth is not $enabledMode")
                 .setContentText("Your bluetooth is not $enabledMode as expected. " +
                         "You might want to change this.")
-                .setSmallIcon(R.drawable.ic_action_check)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .build()
 

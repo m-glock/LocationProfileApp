@@ -160,25 +160,25 @@
                 android:id="@+id/activateProfileButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/transparent"
                 android:textColor="@color/textColorDark"
-                android:text="@string/deactivate_profile_button_text" />
+                android:text="@string/deactivate_profile_button_text"
+                style="@style/SecondaryButton"/>
 
             <Button
                 android:id="@+id/editProfileButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/transparent"
                 android:textColor="@color/textColorDark"
-                android:text="@string/edit_button_text" />
+                android:text="@string/edit_button_text"
+                style="@style/SecondaryButton"/>
 
             <Button
                 android:id="@+id/deleteProfileButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/transparent"
                 android:textColor="@color/textColorDark"
-                android:text="@string/delete_button_text" />
+                android:text="@string/delete_button_text"
+                style="@style/SecondaryButton"/>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

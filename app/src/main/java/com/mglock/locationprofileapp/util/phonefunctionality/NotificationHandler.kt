@@ -15,9 +15,9 @@ class NotificationHandler(private val context: Context): BaseHandler {
     // actions
     private fun sendNotification(message: String){
         val notification = NotificationCompat.Builder(context, notificationChannelId)
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setContentTitle("Reminder")
                 .setContentText(message)
-                .setSmallIcon(R.drawable.ic_action_check)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .build()
 

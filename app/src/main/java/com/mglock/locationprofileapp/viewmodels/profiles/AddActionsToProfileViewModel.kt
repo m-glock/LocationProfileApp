@@ -41,15 +41,4 @@ class AddActionsToProfileViewModel(app: Application): AndroidViewModel(app)  {
             }
         }
     }
-
-    fun removeAllActionsWithNoProfile(){
-        viewModelScope.launch {
-            try{
-                val db = AppDatabase.getInstance(getApplication())
-                db.detailActionDao().deleteAllWithNoProfile()
-            } catch(e: Exception){
-                Log.e("Error", e.stackTraceToString())
-            }
-        }
-    }
 }

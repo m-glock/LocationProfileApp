@@ -25,7 +25,7 @@ class LocationUtil {
                 LocationServices.getSettingsClient(fragment.requireContext()).checkLocationSettings(builder.build())
 
             // if location services are activated
-            locationSettingsTask.addOnSuccessListener { response ->
+            locationSettingsTask.addOnSuccessListener {
                 onLocationActivated()
             }
 

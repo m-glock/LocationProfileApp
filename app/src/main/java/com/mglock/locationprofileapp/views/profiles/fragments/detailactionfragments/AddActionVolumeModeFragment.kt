@@ -24,7 +24,7 @@ class AddActionVolumeModeFragment : Fragment(), BaseDetailActionFragment {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { _ ->
+        resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             binding.valueDropdown.setSelection(AudioHandler.VolumeModes.MODE_NORMAL.ordinal)
         }
     }

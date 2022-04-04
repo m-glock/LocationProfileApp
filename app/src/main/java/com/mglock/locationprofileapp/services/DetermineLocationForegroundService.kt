@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.IBinder
 import android.os.Looper
 import android.widget.Toast
+import androidx.core.app.NotificationCompat
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationCallback
@@ -51,7 +52,7 @@ class DetermineLocationForegroundService: Service() {
         createNotificationChannel()
         val notificationIntent = Intent(this, MainActivity::class.java)
         val pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE)
-        val notification = Notification.Builder(this, mChannelId)
+        val notification = NotificationCompat.Builder(this, mChannelId)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setContentTitle(getText(R.string.app_name))
             .setContentText("The App is currently tracking you location to create a new place.")

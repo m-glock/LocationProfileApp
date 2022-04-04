@@ -11,25 +11,40 @@ enum class DetailActionOption(val title: String){
         override fun getRequiredPermissions(): List<String> {
             return emptyList()
         }
+        override fun getInfoText(): String {
+            return "You can set the Volume of media, system or ringtone to a specific volume."
+        }
     },
     CHANGE_RINGTONE("Change Ringtone"){
         override fun getRequiredPermissions(): List<String> {
             return listOf(Manifest.permission.WRITE_SETTINGS)
+        }
+        override fun getInfoText(): String {
+            return "You can change the ringtone of call, notification, or alarm to a specific ringtone."
         }
     },
     CHANGE_VOLUME_MODE("Change Volume Mode"){
         override fun getRequiredPermissions(): List<String> {
             return listOf(Manifest.permission.ACCESS_NOTIFICATION_POLICY)
         }
+        override fun getInfoText(): String {
+            return "You can switch your phone to normal, silent, or vibrate mode."
+        }
     },
     NOTIFY_BLUETOOTH_ENABLED("Check Bluetooth state"){
         override fun getRequiredPermissions(): List<String> {
             return listOf(Manifest.permission.BLUETOOTH)
         }
+        override fun getInfoText(): String {
+            return "You can get a notification whether bluetooth is enabled or disabled."
+        }
     },
     NOTIFY_WIFI_ENABLED("Wi-Fi state notification"){
         override fun getRequiredPermissions(): List<String> {
             return emptyList()
+        }
+        override fun getInfoText(): String {
+            return "You can get a notification whether wifi is enabled or disabled."
         }
     },
     NOTIFY_LOCATION_ENTERED_EXITED("Get notification"){
@@ -39,9 +54,13 @@ enum class DetailActionOption(val title: String){
                 Manifest.permission.ACCESS_FINE_LOCATION
             )
         }
+        override fun getInfoText(): String {
+            return "You can get a notification which a custom text."
+        }
     };
 
     abstract fun getRequiredPermissions(): List<String>
+    abstract fun getInfoText(): String
 
     companion object{
         fun getValueSelectionFragment(enum: DetailActionOption): Fragment{

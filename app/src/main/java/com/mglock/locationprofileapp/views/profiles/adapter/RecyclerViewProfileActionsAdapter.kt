@@ -1,12 +1,10 @@
 package com.mglock.locationprofileapp.views.profiles.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.mglock.locationprofileapp.R
 import com.mglock.locationprofileapp.database.entities.DetailAction
 import com.mglock.locationprofileapp.databinding.ListTileWithSubtitleBinding
 import com.mglock.locationprofileapp.viewmodels.profiles.AddActionsToProfileViewModel
@@ -14,7 +12,6 @@ import com.mglock.locationprofileapp.viewmodels.profiles.AddActionsToProfileView
 class RecyclerViewProfileActionsAdapter(
     private val dataSet: List<DetailAction>,
     private val viewModel: AddActionsToProfileViewModel,
-    private val context: Context
 ) : RecyclerView.Adapter<RecyclerViewProfileActionsAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemBinding: ListTileWithSubtitleBinding) : RecyclerView.ViewHolder(itemBinding.root) {

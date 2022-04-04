@@ -13,9 +13,9 @@ import kotlinx.coroutines.launch
 class AddPlaceManualViewModel(app: Application): AndroidViewModel(app) {
 
     private val _sliderValue: MutableLiveData<Int> = MutableLiveData<Int>()
+    private var mLatitude: Double? = null
+    private var mLongitude: Double? = null
     val sliderValue get(): MutableLiveData<Int> = _sliderValue
-    var mLatitude: Double? = null
-    var mLongitude: Double? = null
     var place: MutableLiveData<Place> = MutableLiveData()
     var buttonText: MutableLiveData<String> = MutableLiveData("Add Place")
 

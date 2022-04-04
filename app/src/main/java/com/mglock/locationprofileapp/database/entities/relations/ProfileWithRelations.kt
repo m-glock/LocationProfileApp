@@ -1,7 +1,6 @@
 package com.mglock.locationprofileapp.database.entities.relations
 
 import androidx.room.Embedded
-import androidx.room.Junction
 import androidx.room.Relation
 import com.mglock.locationprofileapp.database.entities.DetailAction
 import com.mglock.locationprofileapp.database.entities.Place
